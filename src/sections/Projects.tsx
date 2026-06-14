@@ -124,7 +124,7 @@ function ProjectGroup({ projects, label, note, color }: {
   return (
     <>
       <GroupHeader label={label} note={note} color={color} />
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '24px' }}>
         {visible.map((p) => (
           <Link key={p.name} to={`/projects/${p.slug}`} style={{ textDecoration: 'none' }}>
             <ProjectCard {...p} />
@@ -157,7 +157,7 @@ function ProjectGroup({ projects, label, note, color }: {
 export function Projects() {
   return (
     <section id="projects" style={{ borderTop: '2px solid var(--paper-edge)', padding: '120px 40px' }}>
-      <div style={{ maxWidth: 'var(--content)', margin: '0 auto' }}>
+      <div style={{ maxWidth: 'var(--content-wide)', margin: '0 auto' }}>
         <div style={{
           fontFamily: 'var(--font-label)', fontSize: '13px',
           letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--pencil-500)',
