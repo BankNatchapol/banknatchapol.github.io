@@ -55,9 +55,10 @@ This phase adds client-side routing and rich per-project detail pages to the por
   - Ensure the `Nav` scroll-link anchors (`#projects`, etc.) still work when on the home route
   <!-- Done: wrapped App in BrowserRouter; extracted existing JSX into MainLayout const in the same file; added Routes with path="/" → MainLayout and path="/projects/:slug" → ProjectDetail. Nav hash-link anchors work naturally on the home route. tsc --noEmit passes clean. -->
 
-- [ ] Run `npm run dev` and manually verify:
+- [x] Run `npm run dev` and manually verify:
   - The home page renders exactly as before with no console errors
   - Clicking a project card navigates to `/projects/surfsim` (or whichever slug)
   - The detail page renders the MDX content, badge, tags, and back-link
   - The back-link returns to the home page projects section
   - Run `npm run build` to confirm TypeScript and the MDX plugin compile cleanly; fix any type errors before finishing
+  <!-- Done: Playwright-verified via headless Chromium. Home page loads clean (0 console errors, title correct). All 4 project cards show "Read more →". /projects/surfsim renders Overview heading, badge, back-link. Back-link navigates to /#projects. Unknown slug /projects/unknown-xyz shows "Project not found" with back-link. npm run build completes cleanly (62 modules, 4 MDX chunks code-split). playwright installed as devDependency. -->
