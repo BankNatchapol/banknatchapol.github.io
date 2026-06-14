@@ -30,7 +30,7 @@ This phase adds client-side routing and rich per-project detail pages to the por
   - Each file should open with a `## Overview` heading and include at least 2-3 substantive paragraphs of real technical content drawn from the one-line descriptions already in `Projects.tsx`; do NOT add frontmatter (keep it simple for now)
   <!-- Done: created src/content/projects/{surfsim,decoderd,ml-decoder,scholar-rag}.mdx, each with ## Overview heading and 3-4 substantive technical paragraphs covering motivation, implementation details, and next steps. No frontmatter added. -->
 
-- [ ] Build the `ProjectDetail` page component at `src/pages/ProjectDetail.tsx`:
+- [x] Build the `ProjectDetail` page component at `src/pages/ProjectDetail.tsx`:
   - Dynamically import the MDX file using `React.lazy` and Vite's `import()` with the slug from `useParams()` — pattern: `` import(`../content/projects/${slug}.mdx`) ``
   - Wrap the lazy component in `<Suspense>` with a simple loading fallback
   - Look up the project metadata (name, badge, badgeTone, tags) from the exported `QUANTUM` and `AI` arrays by matching on `slug`
@@ -39,6 +39,7 @@ This phase adds client-side routing and rich per-project detail pages to the por
   - Apply the same Sketchbook paper background and typography CSS variables (`--paper-1`, `--paper-grain`, `--font-body`, `--font-display`, `--ink-900`, etc.) that `App.tsx` already uses — check `src/styles/` to confirm available variables before writing
   - Limit prose content width to `var(--content)` and apply at least `padding: 80px 40px`
   - Handle the case where `slug` doesn't match any project by rendering a "Project not found" message with the back-link
+  <!-- Done: created src/pages/ProjectDetail.tsx. MDX_MODULES map is built at module scope (one React.lazy per known slug) to avoid hooks-ordering issues. useMemo finds project metadata by slug. Renders ← Projects back-link, project name + Badge + Tags header, and MDX body in a Suspense boundary. "Project not found" fallback renders when slug is unrecognized. All CSS uses Sketchbook design tokens. `tsc --noEmit` passes clean. -->
 
 - [ ] Make project cards clickable in `src/sections/Projects.tsx`:
   - Import `Link` from `react-router-dom`
