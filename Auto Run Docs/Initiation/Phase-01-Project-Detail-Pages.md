@@ -47,12 +47,13 @@ This phase adds client-side routing and rich per-project detail pages to the por
   - Add a subtle "Read more →" text line at the bottom of `ProjectCard`'s JSX, styled in `var(--pencil-500)` and `var(--font-label)` font, so users know the cards are clickable
   <!-- Done: imported Link from react-router-dom; wrapped both QUANTUM and AI card renders in <Link to={`/projects/${p.slug}`}> with textDecoration:none; added "Read more →" div at the bottom of ProjectCard's Card content using var(--pencil-500) and var(--font-label). tsc --noEmit passes clean. -->
 
-- [ ] Wire up routing in `src/App.tsx`:
+- [x] Wire up routing in `src/App.tsx`:
   - Import `BrowserRouter`, `Routes`, and `Route` from `react-router-dom`
   - Wrap the entire return value in `<BrowserRouter>`
   - Add a `<Routes>` block: one `<Route path="/" element={<MainLayout />}>` for the existing single-page layout (move the current JSX into a `MainLayout` component inline or as a named const in the same file), and one `<Route path="/projects/:slug" element={<ProjectDetail />}>`
   - Import `ProjectDetail` from `./pages/ProjectDetail`
   - Ensure the `Nav` scroll-link anchors (`#projects`, etc.) still work when on the home route
+  <!-- Done: wrapped App in BrowserRouter; extracted existing JSX into MainLayout const in the same file; added Routes with path="/" → MainLayout and path="/projects/:slug" → ProjectDetail. Nav hash-link anchors work naturally on the home route. tsc --noEmit passes clean. -->
 
 - [ ] Run `npm run dev` and manually verify:
   - The home page renders exactly as before with no console errors
