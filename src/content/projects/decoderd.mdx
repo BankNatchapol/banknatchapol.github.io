@@ -1,19 +1,23 @@
 ## Overview
 
-**decoderd** is a low-latency decoder daemon designed to sit between the classical control stack and the quantum error correction cycle. In superconducting qubit experiments, syndrome data arrives in bursts every ~1 µs (one surface-code round), and the decoder must return a correction within a strict deadline — typically 2–5 µs — to avoid back-action. Traditional approaches route syndrome data over TCP sockets or Unix domain sockets, which introduce kernel scheduling jitter that can easily push latency into the tens of microseconds. `decoderd` eliminates that overhead by using POSIX shared memory as the data transport.
+**decoderd** is a low-latency decoder daemon designed to sit between the classical control stack and the quantum error correction cycle. Syndrome data arrives every ~1 µs per surface-code round, and the decoder must return a correction within 2–5 µs to avoid back-action. Standard socket I/O introduces kernel jitter pushing latency into the tens of microseconds — `decoderd` eliminates this with POSIX shared memory as the data transport.
 
-## Shared-Memory IPC Design
+## How It Works
 
-The daemon memory-maps a fixed-size ring buffer with the control stack process at startup. Syndrome packets written by the FPGA driver are placed directly into this buffer; `decoderd` spins on an atomic flag (a lock-free sentinel word) rather than blocking on `recv()`, which avoids the syscall overhead of socket I/O entirely. On a production server with CPU affinity pinned and the ring buffer resident in L3 cache, the round-trip from syndrome write to correction read averages under 800 ns in benchmark microtests, compared to ~12 µs for an equivalent Unix-socket implementation.
+At startup the daemon memory-maps a fixed-size ring buffer shared with the control stack process. Syndrome packets are written directly into this buffer by the FPGA driver. `decoderd` spins on an atomic lock-free sentinel rather than blocking on `recv()`, avoiding syscall overhead entirely.
 
-## Rust Safety and Correctness
+The correction is written back as a 1-byte Pauli frame update. Each frame uses a simple binary protocol: 2-byte magic number, 2-byte syndrome-round counter, variable-length syndrome bitstring. Serialisation overhead is under 50 ns per frame.
 
-The daemon is written in Rust. The shared-memory region is encapsulated behind a safe wrapper that enforces single-writer/single-reader invariants via Rust's borrow checker at compile time, making data races impossible in safe code. Unsafe blocks are confined to the raw pointer arithmetic needed to index the ring buffer and are covered by a dedicated `unsafe_shm` module with extensive unit tests and a Miri run in CI. The decoder algorithm itself (currently union-find) is a pure Rust library crate with no unsafe code at all, making it straightforward to swap in an FPGA-offloaded or GPU-offloaded decoder without touching the IPC layer.
+## Results
 
-## Integration with the Control Stack
+- Average round-trip latency under **800 ns** (vs. ~12 µs for Unix socket equivalent)
+- CPU affinity pinned; ring buffer resident in L3 cache
+- Decoder algorithm (union-find) is a pure Rust library crate with zero unsafe code
 
-`decoderd` speaks a simple framed binary protocol: each frame begins with a 2-byte magic number, a 2-byte syndrome-round counter, and a variable-length bitstring for the syndrome diff. The correction is written back as a 1-byte Pauli frame update. This minimal framing keeps serialisation overhead below 50 ns per frame and is easy to implement on the FPGA side. A companion Python client library (`decoderd-py`) wraps the shared-memory API for offline replay and integration testing.
+## Stack
 
-## Tags
+- `Rust` · `POSIX shared memory` · `lock-free IPC` · `QEC`
 
-`Rust` · `decoding` · `IPC` · `shared memory` · `QEC` · `real-time systems`
+## Links
+
+- [GitHub →](https://github.com/BankNatchapol/decoderd)
