@@ -10,10 +10,11 @@ This phase turns the portfolio into a live public website by wiring up an automa
   - If no remote exists yet, use `Portfolio` as the default base name (can be corrected later when the remote is added)
   - **Result:** Remote is `https://github.com/BankNatchapol/bank-portfolio.git` → repo name is `bank-portfolio` → Vite base path: `/bank-portfolio/`
 
-- [ ] Update `vite.config.ts` to set the correct base path for GitHub Pages:
+- [x] Update `vite.config.ts` to set the correct base path for GitHub Pages:
   - Add `base: '/Portfolio/'` (or the actual repo name discovered above, surrounded by `/` slashes)
   - Read the current `vite.config.ts` first to preserve the MDX plugin configuration added in Phase 01
   - Confirm `npm run build` still succeeds after this change
+  - **Result:** Added `base: '/bank-portfolio/'` to `vite.config.ts`; `npm run build` succeeded and `dist/index.html` asset paths confirmed to start with `/bank-portfolio/`
 
 - [ ] Add a `404.html` SPA redirect file to handle deep links on GitHub Pages:
   - Create `public/404.html` — GitHub Pages serves this for any path that doesn't match a static file
