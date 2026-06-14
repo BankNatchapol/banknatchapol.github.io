@@ -10,10 +10,9 @@
       // restores it with history.replaceState before React Router mounts.
       (function () {
         var l = window.location;
-        var base = '/bank-portfolio';
-        var path = l.pathname.slice(base.length) || '/';
+        var path = l.pathname || '/';
         l.replace(
-          l.origin + base + '/?p=' + encodeURIComponent(path) +
+          l.origin + '/?p=' + encodeURIComponent(path) +
           (l.search ? '&' + l.search.slice(1) : '') +
           l.hash
         );
