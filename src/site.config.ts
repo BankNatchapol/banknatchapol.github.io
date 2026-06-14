@@ -94,6 +94,7 @@ export const PROJECTS_AI = [
     badgeTone: 'amber' as const,
     body: 'ID verification using generative phonetic AI to match spoken names against document data.',
     tags: ['phonetic AI', 'generative'],
+    openSource: true,
   },
 ]
 

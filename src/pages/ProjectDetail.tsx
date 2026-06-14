@@ -139,6 +139,16 @@ export function ProjectDetail() {
 
         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '56px' }}>
           {project.tags.map((t) => <Tag key={t}>{t}</Tag>)}
+          {project.openSource && (
+            <Tag style={{ background: 'var(--sage-100)', color: 'var(--sage-500)', border: 'var(--stroke-fine) solid var(--sage-500)' }}>
+              open source
+            </Tag>
+          )}
+          {project.liveDemo && (
+            <Tag style={{ background: 'var(--terra-100)', color: 'var(--terra-500)', border: 'var(--stroke-fine) solid var(--terra-500)' }}>
+              live demo
+            </Tag>
+          )}
         </div>
 
         <Suspense fallback={

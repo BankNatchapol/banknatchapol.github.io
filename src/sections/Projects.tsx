@@ -14,6 +14,8 @@ interface Project {
   badgeTone: BadgeTone
   body: string
   tags: string[]
+  openSource?: boolean
+  liveDemo?: boolean
   wobble: 0 | 1 | 2
   tilt: number
 }
@@ -42,7 +44,7 @@ function useDrawOnScroll(ref: React.RefObject<HTMLElement | null>) {
   }, [ref])
 }
 
-function ProjectCard({ name, badge, badgeTone, body, tags, wobble, tilt }: Project) {
+function ProjectCard({ name, badge, badgeTone, body, tags, openSource, liveDemo, wobble, tilt }: Project) {
   const ref = useRef<HTMLDivElement>(null)
   useDrawOnScroll(ref)
   return (
@@ -61,6 +63,16 @@ function ProjectCard({ name, badge, badgeTone, body, tags, wobble, tilt }: Proje
         }}>{body}</p>
         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
           {tags.map((t) => <Tag key={t}>{t}</Tag>)}
+          {openSource && (
+            <Tag style={{ background: 'var(--sage-100)', color: 'var(--sage-500)', border: 'var(--stroke-fine) solid var(--sage-500)' }}>
+              open source
+            </Tag>
+          )}
+          {liveDemo && (
+            <Tag style={{ background: 'var(--terra-100)', color: 'var(--terra-500)', border: 'var(--stroke-fine) solid var(--terra-500)' }}>
+              live demo
+            </Tag>
+          )}
         </div>
         <div style={{
           marginTop: '16px',
