@@ -138,22 +138,33 @@ export const PROJECTS_AI = [
 // ------------------------------------------------------------
 
 export const SKILLS_TECH: string[] = [
-  'Python', 'PyTorch', 'Qiskit', 'Cirq', 'TensorFlow',
-  'Docker', 'Kubernetes', 'Git', 'LaTeX', 'Linux',
+  'Python', 'PyTorch', 'Tensorflow', 'Qiskit', 'Cirq', 'Pennylane',
+
+  'Docker', 'Git', 'LaTeX', 'Linux',
 ]
 
 export const SKILLS_CONCEPTS: string[] = [
   'Quantum Algorithms',
-  'Quantum Optimization',
   'Quantum Machine Learning',
+  'Quantum Error Correction',
+  'Quantum Information Theory',
+
+  'Compiler',
+
+  'Data Engineering',
+
   'Probabilistic ML',
-  'Speech Synthesis',
-  'Phonetic AI',
+  'Operation Research',
+  
+  'Speech Processing',
+  'Phonetic',
+
+  'context, Harness, Loop Engineering',
   'Agentic AI',
-  'ZX-Calculus',
-]
+  ]
 
 export const SKILLS_OTHER: string[] = [
+  'Software Engineering',
   'Research Leadership',
   'Technical Writing',
   'Community Organizing',
@@ -188,7 +199,7 @@ export const PUBLICATIONS = [
     tone: 'terra' as const,
     title: 'A Comparison of Quantum Gradient Methods for Quantum Optimization',
     authors: 'N. Patamawisut, R. Sarochawikasit, U. Taetragool',
-    description: 'Benchmarks parameter-shift, finite-difference, and SPSA gradient estimators for variational quantum algorithms on NISQ devices, comparing convergence and noise sensitivity.',
+    description: '',
   },
   {
     year: '2023',
@@ -197,7 +208,7 @@ export const PUBLICATIONS = [
     poster: true,
     title: "Optimization of Grover's Search Algorithm using ZX-calculus",
     authors: 'N. Patamawisut, W. Pijitrojana, R. Bavontaweepanya',
-    description: "Applies ZX-calculus graph rewrites to Grover's oracle and diffusion circuits, achieving reductions in gate count and depth without altering algorithm semantics.",
+    description: "",
   },
 ]
 
