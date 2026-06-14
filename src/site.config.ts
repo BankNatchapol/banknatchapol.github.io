@@ -62,7 +62,7 @@ export const RESEARCH_AREAS = [
 //   'open source'  → sage   (source code is public)
 //   'live demo'    → sage   (demo available even if source is private)
 //   'side project' → amber
-//   'company work' → ink    (built for an employer or client)
+//   'professional' → ink    (built for an employer or client)
 //   'freelance'    → terra  (independent contract work)
 
 export const PROJECTS_QUANTUM = [

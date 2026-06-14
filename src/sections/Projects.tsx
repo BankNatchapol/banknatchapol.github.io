@@ -12,7 +12,7 @@ export const TYPE_TONE: Record<string, BadgeTone> = {
   'open source': 'sage',
   'live demo': 'sage',
   'side project': 'amber',
-  'company work': 'ink',
+  'professional': 'ink',
   'freelance': 'terra',
 }
 
