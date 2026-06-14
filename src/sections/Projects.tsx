@@ -114,6 +114,8 @@ function GroupHeader({ label, note, color }: { label: string; note: string; colo
 
 const DEFAULT_VISIBLE = 3
 
+const COLS = 3
+
 function ProjectGroup({ projects, label, note, color }: {
   projects: Project[]; label: string; note: string; color: string
 }) {
@@ -123,33 +125,39 @@ function ProjectGroup({ projects, label, note, color }: {
 
   return (
     <>
-      <GroupHeader label={label} note={note} color={color} />
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '24px' }}>
-        {visible.map((p) => (
-          <Link key={p.name} to={`/projects/${p.slug}`} style={{ textDecoration: 'none' }}>
-            <ProjectCard {...p} />
-          </Link>
-        ))}
+      {/* Group header stays at content width */}
+      <div style={{ maxWidth: 'var(--content)', margin: '0 auto' }}>
+        <GroupHeader label={label} note={note} color={color} />
       </div>
-      {hiddenCount > 0 && (
-        <button
-          onClick={() => setExpanded(e => !e)}
-          style={{
-            display: 'flex', alignItems: 'center', gap: '14px',
-            width: '100%', background: 'none', border: 'none',
-            cursor: 'pointer', padding: '32px 0 0', marginTop: 0,
-          }}
-        >
-          <div style={{ flex: 1, height: 0, borderTop: '2px dashed var(--paper-edge)' }} />
-          <span style={{
-            fontFamily: 'var(--font-hand)', fontSize: '17px',
-            color: 'var(--pencil-500)', flexShrink: 0,
-          }}>
-            {expanded ? '↑ show less' : `↓ ${hiddenCount} more`}
-          </span>
-          <div style={{ flex: 1, height: 0, borderTop: '2px dashed var(--paper-edge)' }} />
-        </button>
-      )}
+      {/* Cards break out to content-wide; fixed column count so expand never reflows */}
+      <div style={{ maxWidth: 'var(--content-wide)', margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${COLS}, 1fr)`, gap: '24px' }}>
+          {visible.map((p) => (
+            <Link key={p.name} to={`/projects/${p.slug}`} style={{ textDecoration: 'none' }}>
+              <ProjectCard {...p} />
+            </Link>
+          ))}
+        </div>
+        {hiddenCount > 0 && (
+          <button
+            onClick={() => setExpanded(e => !e)}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '14px',
+              width: '100%', background: 'none', border: 'none',
+              cursor: 'pointer', padding: '32px 0 0', marginTop: 0,
+            }}
+          >
+            <div style={{ flex: 1, height: 0, borderTop: '2px dashed var(--paper-edge)' }} />
+            <span style={{
+              fontFamily: 'var(--font-hand)', fontSize: '17px',
+              color: 'var(--pencil-500)', flexShrink: 0,
+            }}>
+              {expanded ? '↑ show less' : `↓ ${hiddenCount} more`}
+            </span>
+            <div style={{ flex: 1, height: 0, borderTop: '2px dashed var(--paper-edge)' }} />
+          </button>
+        )}
+      </div>
     </>
   )
 }
@@ -157,7 +165,8 @@ function ProjectGroup({ projects, label, note, color }: {
 export function Projects() {
   return (
     <section id="projects" style={{ borderTop: '2px solid var(--paper-edge)', padding: '120px 40px' }}>
-      <div style={{ maxWidth: 'var(--content-wide)', margin: '0 auto' }}>
+      {/* Section title at normal content width */}
+      <div style={{ maxWidth: 'var(--content)', margin: '0 auto' }}>
         <div style={{
           fontFamily: 'var(--font-label)', fontSize: '13px',
           letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--pencil-500)',
@@ -167,6 +176,7 @@ export function Projects() {
           fontSize: 'clamp(40px, 6vw, 60px)', lineHeight: 1,
           margin: '8px 0 0', color: 'var(--ink-900)',
         }}>Things I've built</h2>
+      </div>
 
         <ProjectGroup
           projects={QUANTUM}
@@ -181,7 +191,6 @@ export function Projects() {
           note="learned, not hand-tuned ✦"
           color="var(--terra-500)"
         />
-      </div>
     </section>
   )
 }
