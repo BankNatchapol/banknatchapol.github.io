@@ -87,6 +87,14 @@ export const PROJECTS_AI = [
     body: 'A retrieval-augmented assistant over the full quant-ph arXiv corpus.',
     tags: ['LLM', 'RAG'],
   },
+  {
+    name: 'check-id',
+    slug: 'check-id',
+    badge: 'side project',
+    badgeTone: 'amber' as const,
+    body: 'ID verification using generative phonetic AI to match spoken names against document data.',
+    tags: ['phonetic AI', 'generative'],
+  },
 ]
 
 // ------------------------------------------------------------

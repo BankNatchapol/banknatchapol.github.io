@@ -1,0 +1,25 @@
+## Overview
+
+**check-id** is an ID verification system that uses generative phonetic AI to match a spoken name against the name printed on an identity document. Rather than relying on exact string matching (which fails on transliterations, nicknames, and accent variation), the system generates phonetic embeddings for both the spoken input and the document text, then compares them in embedding space.
+
+## System Diagram
+
+<Diagram src="/diagrams/check-id.excalidraw" caption="ID verification pipeline" />
+
+## How It Works
+
+The pipeline has three stages:
+
+1. **Speech-to-text** — the spoken name is transcribed using a fine-tuned ASR model
+2. **Phonetic encoding** — both the transcribed name and the OCR-extracted document name are passed through a generative phonetic encoder that produces a language-agnostic embedding
+3. **Match scoring** — cosine similarity between embeddings determines a match/no-match decision with a calibrated confidence threshold
+
+The phonetic encoder is trained on multilingual name pairs with known equivalences, allowing it to handle transliterations across scripts (e.g., Thai → Latin) without a hand-crafted rules engine.
+
+## Stack
+
+- `Python` · `generative AI` · `phonetic encoding` · `OCR`
+
+## Links
+
+- [GitHub →](https://github.com/BankNatchapol/check-id)

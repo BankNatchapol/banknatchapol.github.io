@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom'
 import { MDXProvider } from '@mdx-js/react'
 import { Badge } from '../components/Badge'
 import { Tag } from '../components/Tag'
+import { Diagram } from '../components/Diagram'
 import { QUANTUM, AI } from '../sections/Projects'
 
 const PROSE: React.ComponentPropsWithoutRef<typeof MDXProvider>['components'] = {
+  Diagram,
   h2: (p) => <h2 style={{
     fontFamily: 'var(--font-display)', fontWeight: 700,
     fontSize: 'clamp(24px, 3vw, 32px)', lineHeight: 1.1,
