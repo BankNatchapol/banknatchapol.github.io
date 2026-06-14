@@ -151,6 +151,13 @@ export function ProjectDetail() {
           <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
             {project.stack.map((s) => <Tag key={s}>{s}</Tag>)}
           </div>
+          {project.concepts && project.concepts.length > 0 && (
+            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+              {project.concepts.map((c) => (
+                <Tag key={c} style={{ color: 'var(--pencil-500)', borderColor: 'var(--paper-edge)' }}>{c}</Tag>
+              ))}
+            </div>
+          )}
         </div>
 
         <Suspense fallback={

@@ -54,8 +54,9 @@ export const RESEARCH_AREAS = [
 // PROJECTS  (Section 02)
 // Each project needs a matching MDX file in src/content/projects/<slug>.mdx
 // ------------------------------------------------------------
-// types: project category labels — multiple allowed per project
-// stack: tech used — these auto-populate the skills section in the hero
+// types    — project category labels, multiple allowed (see badge colors below)
+// stack    — tools/tech used → shown on card + detail + feeds "Tools & Tech" in hero
+// concepts — knowledge areas → shown on detail page + feeds "Concepts" in hero (optional)
 //
 // Supported types → badge color:
 //   'research'     → blue
@@ -71,7 +72,8 @@ export const PROJECTS_QUANTUM = [
     year: 2024,
     types: ['research', 'open source'],
     body: 'A GPU surface-code simulator that runs a distance-21 patch in real time.',
-    stack: ['CUDA', 'C++', 'Python', 'QEC'],
+    stack: ['CUDA', 'C++', 'Python'],
+    concepts: ['Surface Codes', 'QEC', 'Monte Carlo Simulation'],
   },
   {
     name: 'decoderd',
@@ -79,7 +81,8 @@ export const PROJECTS_QUANTUM = [
     year: 2023,
     types: ['research'],
     body: 'Low-latency decoder daemon that talks to the control stack over shared memory.',
-    stack: ['Rust', 'decoding'],
+    stack: ['Rust'],
+    concepts: ['QEC', 'Real-time Decoding', 'Lock-free IPC'],
   },
 ]
 
@@ -91,6 +94,7 @@ export const PROJECTS_AI = [
     types: ['research'],
     body: 'A neural decoder for the surface code that beats MWPM at high noise.',
     stack: ['Python', 'PyTorch', 'GNN'],
+    concepts: ['QEC', 'Graph Neural Networks', 'Noise Modelling'],
   },
   {
     name: 'scholar-rag',
@@ -110,33 +114,29 @@ export const PROJECTS_AI = [
   },
 ]
 
-// Extra tech items added to the auto-derived stack pool from projects
+// ------------------------------------------------------------
+// SKILLS  (hero section)
+// ------------------------------------------------------------
+// Each group appears as a labeled column in the hero skills block.
+// Per-project `stack` auto-feeds "Tools & Tech"; `concepts` auto-feeds "Concepts".
+// Use the *_EXTRA lists to add items not tied to any specific project.
+
 export const SKILLS_TECH_EXTRA: string[] = [
   'Qiskit', 'LaTeX', 'Linux', 'Git',
 ]
 
-// Additional skill categories shown in the hero alongside Tools & Tech
-// Add, remove, or rename categories freely — each appears as its own group
-export const SKILL_GROUPS: { label: string; skills: string[] }[] = [
-  {
-    label: 'Concepts',
-    skills: [
-      'Quantum Error Correction',
-      'Quantum Information',
-      'Surface Codes',
-      'Randomized Benchmarking',
-      'Noise Tomography',
-      'Superconducting Qubits',
-    ],
-  },
-  {
-    label: 'Other',
-    skills: [
-      'Technical Writing',
-      'Research Mentoring',
-      'Project Management',
-    ],
-  },
+export const SKILLS_CONCEPTS_EXTRA: string[] = [
+  'Quantum Error Correction',
+  'Quantum Information',
+  'Randomized Benchmarking',
+  'Noise Tomography',
+  'Superconducting Qubits',
+]
+
+export const SKILLS_OTHER: string[] = [
+  'Technical Writing',
+  'Research Mentoring',
+  'Project Management',
 ]
 
 // ------------------------------------------------------------

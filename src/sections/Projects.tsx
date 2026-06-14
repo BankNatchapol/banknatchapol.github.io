@@ -22,6 +22,7 @@ interface Project {
   types: string[]
   body: string
   stack: string[]
+  concepts?: string[]
   wobble: 0 | 1 | 2
   tilt: number
 }
