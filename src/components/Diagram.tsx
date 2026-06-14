@@ -40,10 +40,12 @@ export function Diagram({ src, caption, height = 480 }: DiagramProps) {
 
   useEffect(() => {
     if (!api || !data) return
-    const id = requestAnimationFrame(() => {
+    // initialData is loaded asynchronously inside Excalidraw; wait for it to
+    // settle before scrolling, otherwise getSceneElements() returns empty.
+    const id = setTimeout(() => {
       api.scrollToContent(undefined, { fitToViewport: true, animate: false })
-    })
-    return () => cancelAnimationFrame(id)
+    }, 300)
+    return () => clearTimeout(id)
   }, [api, data])
 
   useEffect(() => {
