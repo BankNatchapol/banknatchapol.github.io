@@ -77,6 +77,7 @@ export const PROJECTS_QUANTUM = [
     types: ['research', 'open source'],
     body: 'Quantum circuit implementation of Decoded Quantum Interferometry with BPQM, Gauss-Jordan, and lookup-table decoders — benchmarked across Qiskit and Cirq.',
     stack: ['Python', 'Qiskit', 'Cirq', 'NumPy'],
+    award: 'Best Paper · 2nd Place — IEEE Quantum Week 2025 (QALG)',
   },
   {
     name: 'QIMX',
