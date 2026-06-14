@@ -139,8 +139,7 @@ export const PROJECTS_AI = [
 // ------------------------------------------------------------
 
 export const SKILLS_TECH: string[] = [
-  'Python', 'PyTorch', 'Tensorflow', 'Qiskit', 'Cirq', 'Pennylane',
-
+  'PyTorch', 'Tensorflow', 'Qiskit', 'Cirq', 'Pennylane',
   'Docker', 'Git', 'LaTeX', 'Linux',
 ]
 
@@ -154,19 +153,20 @@ export const SKILLS_CONCEPTS: string[] = [
 
   'Data Engineering',
   'Vector Databases',
-  
+
   'Probabilistic ML',
   'Operation Research',
   
   'Speech Processing',
   'Phonetic',
 
-  'context, Harness, Loop Engineering',
+  'context Engineering',
+  'Harness Engineering',
+  'Loop Engineering',
   'Agentic AI',
   ]
 
 export const SKILLS_OTHER: string[] = [
-  'Software Engineering',
   'Research Leadership',
   'Technical Writing',
   'Community Organizing',
