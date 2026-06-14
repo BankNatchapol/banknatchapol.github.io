@@ -106,8 +106,8 @@ export const PROJECTS_AI = [
     slug: 'check-id',
     year: 2026,
     types: ['professional', 'live demo'],
-    body: 'ID verification using generative phonetic AI to match spoken names against document data.',
-    stack: ['Python', 'Generative AI'],
+    body: 'Thai/English name verification system for a government registration authority — rule filtering, cross-lingual phonetic analysis, and LLM decision with natural-language reasoning.',
+    stack: ['Python', 'Streamlit', 'Gemini', 'Docker', 'Kubernetes'],
   },
 ]
 
