@@ -6,7 +6,6 @@ type DiagramJson = { elements: any[]; appState: Record<string, any>; files: Reco
 interface DiagramProps {
   src: string
   caption?: string
-  height?: number
 }
 
 function resolvePublicAsset(src: string) {
@@ -22,7 +21,7 @@ function resolvePublicAsset(src: string) {
   return `${baseUrl}${assetPath}`
 }
 
-export function Diagram({ src, caption, height = 480 }: DiagramProps) {
+export function Diagram({ src, caption }: DiagramProps) {
   const [svgUrl, setSvgUrl] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const assetSrc = resolvePublicAsset(src)
@@ -42,9 +41,8 @@ export function Diagram({ src, caption, height = 480 }: DiagramProps) {
         const svg = await exportToSvg({
           elements: json.elements ?? [],
           appState: {
-            exportBackground: true,
-            viewBackgroundColor: '#ffffff',
             ...json.appState,
+            exportBackground: false,
           },
           files: json.files ?? {},
         })
@@ -82,25 +80,20 @@ export function Diagram({ src, caption, height = 480 }: DiagramProps) {
   }
 
   return (
-    <figure style={{ margin: '32px 0' }}>
-      <div style={{
-        height, border: '2px solid var(--paper-edge)',
-        borderRadius: '12px', overflow: 'hidden', background: '#fff',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-      }}>
-        {svgUrl ? (
-          <img
-            src={svgUrl}
-            alt={caption ?? 'diagram'}
-            style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
-          />
-        ) : loadingDiv}
-      </div>
+    <figure style={{ margin: '40px 0' }}>
+      {svgUrl ? (
+        <img
+          src={svgUrl}
+          alt={caption ?? 'diagram'}
+          style={{ width: '100%', height: 'auto', display: 'block' }}
+        />
+      ) : loadingDiv}
       {caption && (
         <figcaption style={{
-          fontFamily: 'var(--font-body)', fontSize: '14px',
+          fontFamily: 'var(--font-mono)', fontSize: '13px',
           color: 'var(--ink-500)', textAlign: 'center',
-          marginTop: '10px', fontStyle: 'italic',
+          marginTop: '14px', fontStyle: 'italic',
+          letterSpacing: '0.04em',
         }}>
           {caption}
         </figcaption>
