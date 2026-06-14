@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from '../components/Card'
 import { Badge } from '../components/Badge'
@@ -104,6 +104,48 @@ function GroupHeader({ label, note, color }: { label: string; note: string; colo
   )
 }
 
+const DEFAULT_VISIBLE = 3
+
+function ProjectGroup({ projects, label, note, color }: {
+  projects: Project[]; label: string; note: string; color: string
+}) {
+  const [expanded, setExpanded] = useState(false)
+  const visible = expanded ? projects : projects.slice(0, DEFAULT_VISIBLE)
+  const hiddenCount = projects.length - DEFAULT_VISIBLE
+
+  return (
+    <>
+      <GroupHeader label={label} note={note} color={color} />
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }}>
+        {visible.map((p) => (
+          <Link key={p.name} to={`/projects/${p.slug}`} style={{ textDecoration: 'none' }}>
+            <ProjectCard {...p} />
+          </Link>
+        ))}
+      </div>
+      {hiddenCount > 0 && (
+        <button
+          onClick={() => setExpanded(e => !e)}
+          style={{
+            display: 'flex', alignItems: 'center', gap: '14px',
+            width: '100%', background: 'none', border: 'none',
+            cursor: 'pointer', padding: '32px 0 0', marginTop: 0,
+          }}
+        >
+          <div style={{ flex: 1, height: 0, borderTop: '2px dashed var(--paper-edge)' }} />
+          <span style={{
+            fontFamily: 'var(--font-hand)', fontSize: '17px',
+            color: 'var(--pencil-500)', flexShrink: 0,
+          }}>
+            {expanded ? '↑ show less' : `↓ ${hiddenCount} more`}
+          </span>
+          <div style={{ flex: 1, height: 0, borderTop: '2px dashed var(--paper-edge)' }} />
+        </button>
+      )}
+    </>
+  )
+}
+
 export function Projects() {
   return (
     <section id="projects" style={{ borderTop: '2px solid var(--paper-edge)', padding: '120px 40px' }}>
@@ -118,23 +160,19 @@ export function Projects() {
           margin: '8px 0 0', color: 'var(--ink-900)',
         }}>Things I've built</h2>
 
-        <GroupHeader label="Quantum" note="fridge-tested ❄" color="var(--blue-500)" />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }}>
-          {QUANTUM.map((p) => (
-            <Link key={p.name} to={`/projects/${p.slug}`} style={{ textDecoration: 'none' }}>
-              <ProjectCard {...p} />
-            </Link>
-          ))}
-        </div>
+        <ProjectGroup
+          projects={QUANTUM}
+          label="Quantum"
+          note="fridge-tested ❄"
+          color="var(--blue-500)"
+        />
 
-        <GroupHeader label="AI" note="learned, not hand-tuned ✦" color="var(--terra-500)" />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }}>
-          {AI.map((p) => (
-            <Link key={p.name} to={`/projects/${p.slug}`} style={{ textDecoration: 'none' }}>
-              <ProjectCard {...p} />
-            </Link>
-          ))}
-        </div>
+        <ProjectGroup
+          projects={AI}
+          label="AI"
+          note="learned, not hand-tuned ✦"
+          color="var(--terra-500)"
+        />
       </div>
     </section>
   )

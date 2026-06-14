@@ -8,13 +8,12 @@
 // ------------------------------------------------------------
 export const PERSONAL = {
   name: 'Natchapol Patamawisut',
-  title: 'Researcher & Software Engineer',
+  title: 'AI Engineer & Quantum Researcher',
 
   // One-paragraph bio shown in the hero section
-  bio: 'I build the error-correction software that keeps fragile qubits honest — real-time decoders, pulse-level calibration, and the unglamorous plumbing between a dilution fridge and a laptop.',
+  bio: 'Quantum algorithms at Keio, speech AI at DeepCapital, now ML Engineering at Finema. I like problems at the edge of theory and production — from phonetic models and TTS systems to quantum circuit implementations.',
 
   // Profile photo — put your image in public/ and set the path below.
-  // Example: if you add public/photo.jpg, set photo to '/bank-portfolio/photo.jpg'
   // Leave as '' to show initials instead.
   photo: '/profile.JPG',
   photoAlt: 'Natchapol Patamawisut',
@@ -34,19 +33,19 @@ export const PERSONAL = {
 // ------------------------------------------------------------
 export const RESEARCH_AREAS = [
   {
-    title: 'Quantum Error Correction',
-    body: 'Surface codes and the real-time decoders that have to keep up with them.',
-    tags: ['surface codes', 'decoders'],
+    title: 'Quantum Algorithms',
+    body: 'Circuit design and benchmarking for quantum interferometry, optimization, and variational algorithms on real devices.',
+    tags: ['DQI', 'optimization', 'benchmarking'],
   },
   {
-    title: 'Superconducting Control',
-    body: 'Pulse-level calibration for fixed-frequency transmons, and chasing down crosstalk.',
-    tags: ['transmons', 'crosstalk'],
+    title: 'Quantum Machine Learning',
+    body: 'Probabilistic ML for quantum systems, continuous-variable quantum neural networks for photonic architectures.',
+    tags: ['CV-QNN', 'probabilistic ML', 'photonics'],
   },
   {
-    title: 'Noise & Benchmarking',
-    body: 'Honest numbers for noisy machines: randomized benchmarking and tomography.',
-    tags: ['benchmarking', 'tomography'],
+    title: 'Circuit Optimization',
+    body: 'Reducing gate counts and depth via ZX-calculus rewrites and noise-adaptive transpilation across hardware targets.',
+    tags: ['ZX-calculus', 'transpilation', 'noise'],
   },
 ]
 
@@ -75,47 +74,55 @@ export const PROJECTS_QUANTUM = [
     stack: ['Python', 'Qiskit', 'Cirq', 'NumPy'],
   },
   {
-    name: 'surfsim',
-    slug: 'surfsim',
-    year: 2024,
-    types: ['research', 'open source'],
-    body: 'A GPU surface-code simulator that runs a distance-21 patch in real time.',
-    stack: ['CUDA', 'C++', 'Python'],
-  },
-  {
-    name: 'decoderd',
-    slug: 'decoderd',
+    name: 'ZX-Grover',
+    slug: 'zx-grover',
     year: 2023,
-    types: ['research'],
-    body: 'Low-latency decoder daemon that talks to the control stack over shared memory.',
-    stack: ['Rust'],
+    types: ['research', 'open source'],
+    body: "Circuit optimization of Grover's search algorithm via ZX-calculus rewrites, achieving gate count and depth reductions without changing algorithm semantics.",
+    stack: ['Python', 'Qiskit', 'ZX-Calculus'],
   },
 ]
 
 export const PROJECTS_AI = [
-  {
-    name: 'ml-decoder',
-    slug: 'ml-decoder',
-    year: 2024,
-    types: ['research'],
-    body: 'A neural decoder for the surface code that beats MWPM at high noise.',
-    stack: ['Python', 'PyTorch', 'GNN'],
-  },
-  {
-    name: 'scholar-rag',
-    slug: 'scholar-rag',
-    year: 2023,
-    types: ['side project'],
-    body: 'A retrieval-augmented assistant over the full quant-ph arXiv corpus.',
-    stack: ['Python', 'LLM', 'RAG'],
-  },
   {
     name: 'ID Checker',
     slug: 'check-id',
     year: 2026,
     types: ['professional', 'live demo'],
     body: 'Thai/English name verification system for a government registration authority — rule filtering, cross-lingual phonetic analysis, and LLM decision with natural-language reasoning.',
-    stack: ['Phonetic', "RAG", 'Context Engineering', "Agentic AI"],
+    stack: ['Python', 'Docker', 'Phonetic', 'RAG', 'Context Engineering', 'Agentic AI'],
+  },
+  {
+    name: 'Thai G2P',
+    slug: 'thai-g2p',
+    year: 2024,
+    types: ['professional'],
+    body: 'End-to-end Thai grapheme-to-phoneme model and phonetic data pipeline — covering tokenization, IPA conversion, and alignment for downstream TTS and ASR.',
+    stack: ['Python', 'PyTorch', 'Thai NLP', 'Phonetics'],
+  },
+  {
+    name: 'Thai TTS',
+    slug: 'thai-tts',
+    year: 2024,
+    types: ['professional'],
+    body: 'High-quality Thai text-to-speech system with voice cloning — trained from proprietary data, deployed in production.',
+    stack: ['Python', 'PyTorch', 'TTS', 'Voice Cloning'],
+  },
+  {
+    name: 'Agentic Chatbot',
+    slug: 'agentic-chatbot',
+    year: 2023,
+    types: ['freelance'],
+    body: 'Real-time character speech chatbot integrated with live streaming platforms — agentic conversation loop with sub-second latency TTS, down from minutes.',
+    stack: ['Python', 'LLM', 'TTS', 'Agentic AI'],
+  },
+  {
+    name: 'Resume LLM',
+    slug: 'resume-llm',
+    year: 2022,
+    types: ['freelance'],
+    body: 'LLM pipeline that extracts structured data from unstructured resume documents for automated candidate screening and analysis.',
+    stack: ['Python', 'LLM'],
   },
 ]
 
@@ -124,22 +131,26 @@ export const PROJECTS_AI = [
 // ------------------------------------------------------------
 
 export const SKILLS_TECH: string[] = [
-  'Python', 'CUDA', 'C++', 'Rust', 'PyTorch', 'Qiskit', 'LaTeX', 'Linux', 'Git',
+  'Python', 'PyTorch', 'Qiskit', 'Cirq', 'TensorFlow',
+  'Docker', 'Kubernetes', 'Git', 'LaTeX', 'Linux',
 ]
 
 export const SKILLS_CONCEPTS: string[] = [
-  'Quantum Error Correction',
-  'Quantum Information',
-  'Surface Codes',
-  'Randomized Benchmarking',
-  'Noise Tomography',
-  'Superconducting Qubits',
+  'Quantum Algorithms',
+  'Quantum Optimization',
+  'Quantum Machine Learning',
+  'Probabilistic ML',
+  'Speech Synthesis',
+  'Phonetic AI',
+  'Agentic AI',
+  'ZX-Calculus',
 ]
 
 export const SKILLS_OTHER: string[] = [
+  'Research Leadership',
   'Technical Writing',
-  'Research Mentoring',
-  'Project Management',
+  'Community Organizing',
+  'Mentoring',
 ]
 
 // ------------------------------------------------------------
@@ -147,18 +158,32 @@ export const SKILLS_OTHER: string[] = [
 // ------------------------------------------------------------
 export const PUBLICATIONS = [
   {
-    year: '2024',
-    venue: 'Nature Physics',
+    year: '2025',
+    venue: 'QCE 2025',
     tone: 'blue' as const,
-    title: 'Real-time decoding of the surface code on a 100-qubit processor',
-    authors: 'N. Patamawisut, R. Okafor, L. Demir, et al.',
+    title: 'Quantum Circuit Design for Decoded Quantum Interferometry',
+    authors: 'N. Patamawisut, N. Benchasattabuse, M. Hajdušek, R. Van Meter',
+  },
+  {
+    year: '2025',
+    venue: 'IEEE QCNC',
+    tone: 'sage' as const,
+    title: 'Understanding Noise-Adaptive Transpilation Techniques Using the SupermarQ Benchmark',
+    authors: 'S. Vorathammathorn, M. Binhar, R. Sarochawikasit, S. Chanchuphol, N. Patamawisut',
   },
   {
     year: '2023',
-    venue: 'Quantum',
+    venue: 'ANSCSE 26',
     tone: 'terra' as const,
-    title: 'Benchmarking logical error rates under realistic noise',
-    authors: 'L. Demir, N. Patamawisut, A. Bianchi',
+    title: 'A Comparison of Quantum Gradient Methods for Quantum Optimization',
+    authors: 'N. Patamawisut, R. Sarochawikasit, U. Taetragool',
+  },
+  {
+    year: '2023',
+    venue: 'AQIS 2023',
+    tone: 'amber' as const,
+    title: "Optimization of Grover's Search Algorithm using ZX-calculus",
+    authors: 'N. Patamawisut, W. Pijitrojana, R. Bavontaweepanya',
   },
 ]
 
@@ -167,13 +192,38 @@ export const PUBLICATIONS = [
 // ------------------------------------------------------------
 export const EXPERIENCE = [
   {
-    period: '2021 — now',
-    role: 'PhD Candidate, Quantum Information',
-    org: 'Institute for Quantum Computing',
+    period: '2026 — now',
+    role: 'ML Engineer',
+    org: 'Finema Co., Ltd',
   },
   {
-    period: '2021',
-    role: 'MSc Physics',
-    org: 'ETH Zürich',
+    period: '2024 — 2026',
+    role: 'MS · Research Assistant',
+    org: 'Keio University — Advancing Quantum Architecture Group',
+  },
+  {
+    period: '2024 — 2025',
+    role: 'AI Engineer',
+    org: 'DeepCapital Thailand',
+  },
+  {
+    period: '2022 — 2024',
+    role: 'AI Engineer',
+    org: 'Freelance',
+  },
+  {
+    period: '2021 — 2024',
+    role: 'Research Assistant',
+    org: 'Quantum Optics Lab, Thammasat University',
+  },
+  {
+    period: '2020 — 2023',
+    role: 'Research Assistant',
+    org: 'Quantum Computing & Information Research Centre, KMUTT',
+  },
+  {
+    period: '2018 — 2022',
+    role: 'BS, Computer Engineering · GPA 3.80 · Ranked 2nd',
+    org: 'KMUTT, Thailand',
   },
 ]
