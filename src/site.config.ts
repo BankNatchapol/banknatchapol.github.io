@@ -75,8 +75,17 @@ export const PROJECTS_QUANTUM = [
     slug: 'dqi-circuit',
     year: 2025,
     types: ['research', 'open source'],
-    body: 'Quantum circuit implementation of Decoded Quantum Interferometry with BPQM, Gauss-Jordan, and USD decoders — benchmarked across Qiskit and Cirq.',
+    body: 'Quantum circuit implementation of Decoded Quantum Interferometry with BPQM, Gauss-Jordan, and lookup-table decoders — benchmarked across Qiskit and Cirq.',
     stack: ['Python', 'Qiskit', 'Cirq', 'NumPy'],
+  },
+  {
+    name: 'QIMX',
+    slug: 'qimx',
+    year: 2024,
+    types: ['research', 'open source'],
+    body: 'Enhanced quantum image encoding using a quantum information mixer, improving ML model convergence on quantum-encoded image data.',
+    stack: ['Python', 'Qiskit', 'Quantum ML'],
+    award: 'Industry Prize — Qiskit Quantum Hackathon 2024 Taiwan',
   },
   {
     name: 'ZX-Grover',

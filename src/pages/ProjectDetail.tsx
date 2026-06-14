@@ -151,6 +151,12 @@ export function ProjectDetail() {
           <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
             {project.stack.map((s) => <Tag key={s}>{s}</Tag>)}
           </div>
+          {'award' in project && project.award && (
+            <div style={{
+              fontFamily: 'var(--font-hand)', fontSize: '18px',
+              color: 'var(--amber-600)',
+            }}>✦ {project.award}</div>
+          )}
         </div>
 
         <Suspense fallback={

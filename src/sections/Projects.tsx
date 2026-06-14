@@ -23,6 +23,7 @@ interface Project {
   types: string[]
   body: string
   stack: string[]
+  award?: string
   wobble: 0 | 1 | 2
   tilt: number
 }
@@ -51,7 +52,7 @@ function useDrawOnScroll(ref: React.RefObject<HTMLElement | null>) {
   }, [ref])
 }
 
-function ProjectCard({ name, slug: _slug, year, types, body, stack, wobble, tilt }: Project) {
+function ProjectCard({ name, slug: _slug, year, types, body, stack, award, wobble, tilt }: Project) {
   const ref = useRef<HTMLDivElement>(null)
   useDrawOnScroll(ref)
   return (
@@ -79,6 +80,13 @@ function ProjectCard({ name, slug: _slug, year, types, body, stack, wobble, tilt
         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
           {stack.map((s) => <Tag key={s}>{s}</Tag>)}
         </div>
+        {award && (
+          <div style={{
+            marginTop: '12px',
+            fontFamily: 'var(--font-hand)', fontSize: '15px',
+            color: 'var(--amber-600)',
+          }}>✦ {award}</div>
+        )}
         <div style={{
           marginTop: '16px',
           fontFamily: 'var(--font-label)', fontSize: '13px',
