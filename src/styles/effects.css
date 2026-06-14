@@ -1,0 +1,58 @@
+:root {
+  --sketch-radius-1:    255px 15px 225px 15px / 15px 225px 15px 255px;
+  --sketch-radius-2:    15px 225px 15px 255px / 255px 15px 225px 15px;
+  --sketch-radius-3:    125px 18px 200px 22px / 22px 180px 18px 220px;
+  --sketch-radius-blob: 38% 62% 63% 37% / 41% 44% 56% 59%;
+
+  --stroke-fine: 1.5px;
+  --stroke:      2px;
+  --stroke-bold: 3px;
+
+  --shadow-sketch-sm: 2px 2px 0 rgba(27, 34, 48, 0.16);
+  --shadow-sketch:    3px 4px 0 rgba(27, 34, 48, 0.18);
+  --shadow-sketch-lg: 6px 7px 0 rgba(27, 34, 48, 0.16);
+  --shadow-lift:      3px 4px 0 rgba(27, 34, 48, 0.20), 0 10px 24px rgba(27, 34, 48, 0.08);
+
+  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+
+  --ease-hand: cubic-bezier(0.34, 1.32, 0.64, 1);
+  --ease-ink:  cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-quick: 140ms;
+  --dur:       260ms;
+  --dur-slow:  620ms;
+}
+
+.sk-btn {
+  transition: transform var(--dur-quick) var(--ease-hand),
+              box-shadow var(--dur-quick) var(--ease-hand),
+              background-color var(--dur-quick) ease;
+}
+.sk-btn:hover:not(:disabled) { transform: translate(-1px, -1px) rotate(-0.6deg); }
+.sk-btn:active:not(:disabled) { transform: translate(1px, 2px) rotate(0.3deg); box-shadow: var(--shadow-sketch-sm) !important; }
+.sk-btn:focus-visible { outline: 2px dashed var(--focus-ring); outline-offset: 3px; }
+.sk-btn--primary:hover:not(:disabled)   { background-color: var(--blue-700); }
+.sk-btn--secondary:hover:not(:disabled) { background-color: var(--paper-2); }
+.sk-btn--ghost:hover:not(:disabled)     { background-color: var(--blue-100); }
+
+.sk-input {
+  transition: border-color var(--dur-quick) ease, box-shadow var(--dur-quick) ease;
+}
+.sk-input::placeholder { color: var(--pencil-300); font-style: italic; }
+.sk-input:focus {
+  outline: none;
+  border-color: var(--blue-500);
+  box-shadow: 2px 3px 0 var(--blue-100);
+}
+.sk-input:disabled { opacity: 0.5; cursor: not-allowed; }
+
+@keyframes sketch-in {
+  from { opacity: 0; transform: translateY(16px) rotate(-0.5deg); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .draw-on-scroll { opacity: 0; }
+  .draw-on-scroll[data-drawn] {
+    animation: sketch-in var(--dur-slow) var(--ease-hand) forwards;
+  }
+}
