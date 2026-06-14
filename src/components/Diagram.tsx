@@ -59,8 +59,7 @@ export function Diagram({ src, caption }: DiagramProps) {
 
   const loadingDiv = (
     <div style={{
-      height: '100%', display: 'flex', alignItems: 'center',
-      justifyContent: 'center', color: 'var(--pencil-500)',
+      padding: '48px', textAlign: 'center', color: 'var(--pencil-500)',
       fontFamily: 'var(--font-body)', fontSize: '15px',
     }}>
       Loading diagram…
@@ -80,7 +79,15 @@ export function Diagram({ src, caption }: DiagramProps) {
   }
 
   return (
-    <figure style={{ margin: '40px 0' }}>
+    <figure style={{
+      marginTop: '40px',
+      marginBottom: '40px',
+      position: 'relative',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      width: '90vw',
+      maxWidth: '1400px',
+    }}>
       {svgUrl ? (
         <img
           src={svgUrl}
