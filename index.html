@@ -6,21 +6,23 @@
     <title>Natchapol Patamawisut — Quantum Computing Researcher</title>
     <script>
       // Restore the URL encoded by public/404.html into ?p= before React Router mounts.
+      // Must prepend the Vite base so BrowserRouter (basename=BASE_URL) finds its root.
       (function () {
         var params = new URLSearchParams(window.location.search);
         var path = params.get('p');
         if (path) {
           params.delete('p');
           var qs = params.toString();
+          var base = '/bank-portfolio/'.replace(/\/$/, '');
           window.history.replaceState(
             null, null,
-            decodeURIComponent(path) + (qs ? '?' + qs : '') + window.location.hash
+            base + decodeURIComponent(path) + (qs ? '?' + qs : '') + window.location.hash
           );
         }
       })();
     </script>
-    <script type="module" crossorigin src="/assets/index-3R311Nt9.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-1oghJ5fN.css">
+    <script type="module" crossorigin src="/bank-portfolio/assets/index-Ba36zmeE.js"></script>
+    <link rel="stylesheet" crossorigin href="/bank-portfolio/assets/index-1oghJ5fN.css">
   </head>
   <body>
     <div id="root"></div>
