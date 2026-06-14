@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <script>
+      // SPA redirect for GitHub Pages (spa-github-pages pattern)
+      // When GH Pages returns this 404.html for a deep link, strip the repo
+      // base from the pathname and pass the path via ?p= to index.html, which
+      // restores it with history.replaceState before React Router mounts.
+      (function () {
+        var l = window.location;
+        var base = '/bank-portfolio';
+        var path = l.pathname.slice(base.length) || '/';
+        l.replace(
+          l.origin + base + '/?p=' + encodeURIComponent(path) +
+          (l.search ? '&' + l.search.slice(1) : '') +
+          l.hash
+        );
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -16,11 +16,12 @@ This phase turns the portfolio into a live public website by wiring up an automa
   - Confirm `npm run build` still succeeds after this change
   - **Result:** Added `base: '/bank-portfolio/'` to `vite.config.ts`; `npm run build` succeeded and `dist/index.html` asset paths confirmed to start with `/bank-portfolio/`
 
-- [ ] Add a `404.html` SPA redirect file to handle deep links on GitHub Pages:
+- [x] Add a `404.html` SPA redirect file to handle deep links on GitHub Pages:
   - Create `public/404.html` — GitHub Pages serves this for any path that doesn't match a static file
   - The file should contain a script that reads `window.location.pathname` and `window.location.search`, encodes the path into a query string, and redirects to `index.html?p=<encoded-path>`
   - Also add a corresponding script snippet to `index.html` (read it first) that on page load checks for `?p=` in the query string and uses `window.history.replaceState` to restore the original URL before React Router mounts — this makes deep links to `/projects/surfsim` work correctly after the redirect
   - Use the well-known `spa-github-pages` pattern (search the web or use the standard script from the GitHub Pages SPA redirect community solution)
+  - **Result:** Created `public/404.html` with `?p=` redirect script; added restore script to `index.html` `<head>`; also added `basename={import.meta.env.BASE_URL}` to `BrowserRouter` so React Router correctly strips the `/bank-portfolio` prefix on GitHub Pages. Build confirmed with `404.html` in `dist/` and asset paths starting with `/bank-portfolio/`.
 
 - [ ] Create the GitHub Actions deployment workflow at `.github/workflows/deploy.yml`:
   - Trigger: `on: push: branches: [main]`
