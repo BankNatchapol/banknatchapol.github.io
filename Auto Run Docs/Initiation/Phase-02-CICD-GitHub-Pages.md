@@ -41,10 +41,11 @@ This phase turns the portfolio into a live public website by wiring up an automa
   - No script changes are needed if `build` already runs `tsc -b && vite build`
   - **Result:** No changes needed. `package.json` `build` script already runs `tsc -b && vite build`. `.gitignore` already includes `dist`, `dist-ssr`, and `node_modules`. Both files are correctly configured.
 
-- [ ] Commit and verify locally:
+- [x] Commit and verify locally:
   - Run `npm run build` one final time and confirm `dist/` is populated with `index.html`, `404.html`, and hashed JS/CSS assets
   - Check that asset paths in the built `dist/index.html` start with `/Portfolio/` (confirming the base is applied)
   - Stage all new and changed files: `.github/workflows/deploy.yml`, `public/404.html`, `index.html` (if modified), `vite.config.ts`, `package.json`, `.gitignore`
   - Create a git commit with message: `feat: add project detail pages (MDX) and GitHub Pages CI/CD`
   - Do NOT push — leave that for the user to do manually so they can confirm the GitHub remote is set up correctly
   - Print a clear final note: "Run `git push origin main` to trigger the first deployment. After the Actions workflow completes, enable GitHub Pages in the repo Settings → Pages → Source: Deploy from branch → gh-pages."
+  - **Result:** `npm run build` succeeded; `dist/` contains `index.html`, `404.html`, and hashed JS/CSS assets with paths starting `/bank-portfolio/`. CI/CD files (`.github/workflows/deploy.yml`, `public/404.html`, `vite.config.ts`, `index.html`) were already committed in prior MAESTRO runs. Committed remaining portfolio source files (components, sections, styles, tsconfig files, `.gitignore`) in commit `d58517b` with message `feat: add project detail pages (MDX) and GitHub Pages CI/CD`.
