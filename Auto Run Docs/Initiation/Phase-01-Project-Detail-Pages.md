@@ -16,10 +16,11 @@ This phase adds client-side routing and rich per-project detail pages to the por
   - Add a type declaration file `src/mdx.d.ts` that declares `*.mdx` modules as `React.ComponentType<{ components?: Record<string, React.ComponentType> }>`
   <!-- Done: vite.config.ts updated with mdx() plugin before react(); tsconfig.app.json already had jsx:react-jsx and include:["src"] covers .mdx files; src/mdx.d.ts created with *.mdx module declaration. -->
 
-- [ ] Extend the Project type and data in `src/sections/Projects.tsx` to include a `slug` field:
+- [x] Extend the Project type and data in `src/sections/Projects.tsx` to include a `slug` field:
   - Add `slug: string` to the `Project` interface
   - Add `slug` values matching the folder names: `'surfsim'`, `'decoderd'`, `'ml-decoder'`, `'scholar-rag'`
   - Export the `QUANTUM` and `AI` arrays (add `export` keyword) so `ProjectDetail` can look up metadata by slug
+  <!-- Done: added slug field to Project interface and populated slug values on all four projects; exported QUANTUM and AI arrays. -->
 
 - [ ] Create MDX content files for all four projects in `src/content/projects/`:
   - `surfsim.mdx` — GPU surface-code simulator; describe the motivation (real-time distance-21 simulation), implementation highlights (CUDA kernel design, memory layout), current status, and any links
