@@ -20,7 +20,7 @@ export function Nav() {
           N<span style={{ color: 'var(--blue-500)' }}>.</span>Patamawisut
         </a>
         <nav style={{ display: 'flex', gap: '18px', alignItems: 'center' }}>
-          {['Research', 'Projects', 'Publications', 'Experience'].map((label) => (
+          {['Research', 'Projects', 'Publications', 'Awards', 'Experience'].map((label) => (
             <a
               key={label}
               href={`#${label.toLowerCase()}`}

@@ -5,6 +5,7 @@ import { Hero } from './sections/Hero'
 import { Research } from './sections/Research'
 import { Projects } from './sections/Projects'
 import { Publications } from './sections/Publications'
+import { Awards } from './sections/Awards'
 import { Experience } from './sections/Experience'
 import { Contact } from './sections/Contact'
 import { Footer } from './sections/Footer'
@@ -26,6 +27,7 @@ function MainLayout() {
       <Research />
       <Projects />
       <Publications />
+      <Awards />
       <Experience />
       <Contact />
       <Footer />

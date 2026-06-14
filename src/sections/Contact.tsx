@@ -29,7 +29,7 @@ export function Contact() {
         <div style={{
           fontFamily: 'var(--font-label)', fontSize: '13px',
           letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--pencil-500)',
-        }}>05 — Contact</div>
+        }}>06 — Contact</div>
         <h2 style={{
           fontFamily: 'var(--font-display)', fontWeight: 700,
           fontSize: 'clamp(40px, 6vw, 60px)', lineHeight: 1,

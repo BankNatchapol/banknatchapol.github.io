@@ -209,7 +209,29 @@ export const PUBLICATIONS = [
 ]
 
 // ------------------------------------------------------------
-// EXPERIENCE / CV  (Section 04)
+// AWARDS  (Section 04)
+// ------------------------------------------------------------
+export const AWARDS = [
+  {
+    title: 'Best Paper Award · 2nd Place',
+    event: 'IEEE Quantum Week 2025',
+    note: 'QALG track — "Quantum Circuit Design for Decoded Quantum Interferometry." Co-authors: Naphan Benchasattabuse, Michal Hajdušek, Rodney Van Meter.',
+    year: '2025',
+    tone: 'blue' as const,
+    link: 'https://www.keio.ac.jp/en/sfc-pem/news/20251024/',
+  },
+  {
+    title: 'Industry Prize',
+    event: 'Qiskit Quantum Hackathon 2024 Taiwan',
+    note: 'For QIMX — enhanced quantum image encoding using a quantum information mixer, demonstrating improved ML performance with faster convergence.',
+    year: '2024',
+    tone: 'amber' as const,
+    link: 'https://www.keio.ac.jp/ja/sfc-pem/news/20241017-1/',
+  },
+]
+
+// ------------------------------------------------------------
+// EXPERIENCE / CV  (Section 05)
 // Three separate lists — rendered as labelled groups in the timeline.
 // ------------------------------------------------------------
 export const EXPERIENCE_PROFESSIONAL = [
