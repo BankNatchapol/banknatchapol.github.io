@@ -2,8 +2,7 @@ import { Avatar } from '../components/Avatar'
 import { Tag } from '../components/Tag'
 import { PERSONAL, SKILLS_TECH, SKILLS_CONCEPTS, SKILLS_OTHER } from '../site.config'
 
-const [firstName, ...rest] = PERSONAL.name.split(' ')
-const lastName = rest.join(' ')
+const lastName = PERSONAL.name.split(' ').slice(1).join(' ')
 
 const ALL_GROUPS = [
   { label: 'Tools & Tech', skills: SKILLS_TECH },
@@ -37,9 +36,15 @@ export function Hero() {
             fontSize: 'clamp(64px, 10vw, 120px)',
             lineHeight: 0.92, margin: '10px 0 0', color: 'var(--ink-900)',
           }}>
-            {firstName}<br />
+            {PERSONAL.nickname}<br />
             <span style={{ color: 'var(--blue-500)' }}>{lastName}</span>
           </h1>
+          <div style={{
+            fontFamily: 'var(--font-hand)', fontSize: '18px',
+            color: 'var(--pencil-500)', marginTop: '8px',
+          }}>
+            {PERSONAL.name}
+          </div>
           <p style={{
             fontFamily: 'var(--font-body)', fontSize: '19px',
             lineHeight: 1.75, color: 'var(--ink-700)',

@@ -17,7 +17,7 @@ export function Nav() {
           fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '30px',
           color: 'var(--ink-900)', textDecoration: 'none', lineHeight: 1,
         }}>
-          N<span style={{ color: 'var(--blue-500)' }}>.</span>Patamawisut
+          B<span style={{ color: 'var(--blue-500)' }}>.</span>Patamawisut
         </a>
         <nav style={{ display: 'flex', gap: '18px', alignItems: 'center' }}>
           {['Research', 'Projects', 'Publications', 'Awards', 'Experience'].map((label) => (

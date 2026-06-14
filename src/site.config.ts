@@ -8,6 +8,7 @@
 // ------------------------------------------------------------
 export const PERSONAL = {
   name: 'Natchapol Patamawisut',
+  nickname: 'Bank',
   title: 'AI Engineer & Quantum Researcher',
 
   // One-paragraph bio shown in the hero section
@@ -152,7 +153,8 @@ export const SKILLS_CONCEPTS: string[] = [
   'Compiler',
 
   'Data Engineering',
-
+  'Vector Databases',
+  
   'Probabilistic ML',
   'Operation Research',
   
