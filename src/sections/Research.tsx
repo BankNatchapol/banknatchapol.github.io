@@ -1,27 +1,16 @@
 import React, { useEffect, useRef } from 'react'
 import { Card } from '../components/Card'
 import { Tag } from '../components/Tag'
+import { RESEARCH_AREAS } from '../site.config'
 
-const AREAS = [
-  {
-    title: 'Quantum Error Correction',
-    body: 'Surface codes and the real-time decoders that have to keep up with them.',
-    tags: ['surface codes', 'decoders'],
-    wobble: 0 as 0, tilt: -1.4,
-  },
-  {
-    title: 'Superconducting Control',
-    body: 'Pulse-level calibration for fixed-frequency transmons, and chasing down crosstalk.',
-    tags: ['transmons', 'crosstalk'],
-    wobble: 1 as 1, tilt: 1.2,
-  },
-  {
-    title: 'Noise & Benchmarking',
-    body: 'Honest numbers for noisy machines: randomized benchmarking and tomography.',
-    tags: ['benchmarking', 'tomography'],
-    wobble: 2 as 2, tilt: -0.8,
-  },
-]
+const WOBBLES = [0, 1, 2] as const
+const TILTS = [-1.4, 1.2, -0.8]
+
+const AREAS = RESEARCH_AREAS.map((a, i) => ({
+  ...a,
+  wobble: WOBBLES[i % 3],
+  tilt: TILTS[i % 3],
+}))
 
 function useDrawOnScroll(ref: React.RefObject<HTMLElement | null>) {
   useEffect(() => {

@@ -1,31 +1,5 @@
 import { Badge } from '../components/Badge'
-
-type BadgeTone = 'ink' | 'blue' | 'terra' | 'sage' | 'amber'
-
-interface Paper {
-  year: string
-  venue: string
-  tone: BadgeTone
-  title: string
-  authors: string
-}
-
-const PAPERS: Paper[] = [
-  {
-    year: '2024',
-    venue: 'Nature Physics',
-    tone: 'blue',
-    title: 'Real-time decoding of the surface code on a 100-qubit processor',
-    authors: 'N. Patamawisut, R. Okafor, L. Demir, et al.',
-  },
-  {
-    year: '2023',
-    venue: 'Quantum',
-    tone: 'terra',
-    title: 'Benchmarking logical error rates under realistic noise',
-    authors: 'L. Demir, N. Patamawisut, A. Bianchi',
-  },
-]
+import { PUBLICATIONS as PAPERS } from '../site.config'
 
 export function Publications() {
   return (

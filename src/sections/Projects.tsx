@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Card } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { Tag } from '../components/Tag'
+import { PROJECTS_QUANTUM, PROJECTS_AI } from '../site.config'
 
 type BadgeTone = 'ink' | 'blue' | 'terra' | 'sage' | 'amber'
 
@@ -17,35 +18,16 @@ interface Project {
   tilt: number
 }
 
-export const QUANTUM: Project[] = [
-  {
-    name: 'surfsim', slug: 'surfsim',
-    badge: 'maintained', badgeTone: 'sage',
-    body: 'A GPU surface-code simulator that runs a distance-21 patch in real time.',
-    tags: ['CUDA', 'QEC'], wobble: 0, tilt: -1,
-  },
-  {
-    name: 'decoderd', slug: 'decoderd',
-    badge: 'research', badgeTone: 'blue',
-    body: 'Low-latency decoder daemon that talks to the control stack over shared memory.',
-    tags: ['Rust', 'decoding'], wobble: 1, tilt: 1,
-  },
-]
+const WOBBLES: (0 | 1 | 2)[] = [0, 1, 2]
+const TILTS = [-1, 1]
 
-export const AI: Project[] = [
-  {
-    name: 'ml-decoder', slug: 'ml-decoder',
-    badge: 'research', badgeTone: 'blue',
-    body: 'A neural decoder for the surface code that beats MWPM at high noise.',
-    tags: ['PyTorch', 'GNN'], wobble: 0, tilt: -1,
-  },
-  {
-    name: 'scholar-rag', slug: 'scholar-rag',
-    badge: 'side project', badgeTone: 'terra',
-    body: 'A retrieval-augmented assistant over the full quant-ph arXiv corpus.',
-    tags: ['LLM', 'RAG'], wobble: 2, tilt: 1,
-  },
-]
+export const QUANTUM: Project[] = PROJECTS_QUANTUM.map((p, i) => ({
+  ...p, wobble: WOBBLES[i % 3], tilt: TILTS[i % 2],
+}))
+
+export const AI: Project[] = PROJECTS_AI.map((p, i) => ({
+  ...p, wobble: WOBBLES[i % 3], tilt: TILTS[i % 2],
+}))
 
 function useDrawOnScroll(ref: React.RefObject<HTMLElement | null>) {
   useEffect(() => {

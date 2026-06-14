@@ -1,8 +1,10 @@
+import { PERSONAL } from '../site.config'
+
 export function Footer() {
   return (
     <footer style={{ borderTop: '2px solid var(--ink-900)', padding: '48px 40px', textAlign: 'center' }}>
       <div style={{ fontFamily: 'var(--font-hand)', fontSize: '26px', color: 'var(--ink-700)' }}>
-        drawn &amp; written by Natchapol
+        {PERSONAL.footerCredit}
       </div>
       <div style={{
         fontFamily: 'var(--font-label)', fontSize: '11px',

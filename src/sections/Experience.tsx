@@ -1,21 +1,16 @@
-const ENTRIES = [
-  {
-    period: '2021 — now',
-    role: 'PhD Candidate, Quantum Information',
-    org: 'Institute for Quantum Computing',
-    color: 'var(--blue-300)',
-    orgColor: 'var(--blue-500)',
-    last: false,
-  },
-  {
-    period: '2021',
-    role: 'MSc Physics',
-    org: 'ETH Zürich',
-    color: 'var(--terra-300)',
-    orgColor: 'var(--terra-500)',
-    last: true,
-  },
+import { EXPERIENCE } from '../site.config'
+
+const COLORS = [
+  { color: 'var(--blue-300)', orgColor: 'var(--blue-500)' },
+  { color: 'var(--terra-300)', orgColor: 'var(--terra-500)' },
+  { color: 'var(--sage-300)', orgColor: 'var(--sage-500)' },
 ]
+
+const ENTRIES = EXPERIENCE.map((e, i) => ({
+  ...e,
+  ...COLORS[i % COLORS.length],
+  last: i === EXPERIENCE.length - 1,
+}))
 
 export function Experience() {
   return (
