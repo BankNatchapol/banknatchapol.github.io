@@ -87,14 +87,6 @@ export const PROJECTS_QUANTUM = [
     stack: ['Python', 'Qiskit', 'Quantum ML'],
     award: 'Industry Prize — Qiskit Quantum Hackathon 2024 Taiwan',
   },
-  {
-    name: 'ZX-Grover',
-    slug: 'zx-grover',
-    year: 2023,
-    types: ['research', 'open source'],
-    body: "Circuit optimization of Grover's search algorithm via ZX-calculus rewrites, achieving gate count and depth reductions without changing algorithm semantics.",
-    stack: ['Python', 'Qiskit', 'ZX-Calculus'],
-  },
 ]
 
 export const PROJECTS_AI = [
