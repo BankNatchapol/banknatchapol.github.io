@@ -23,7 +23,7 @@ This phase turns the portfolio into a live public website by wiring up an automa
   - Use the well-known `spa-github-pages` pattern (search the web or use the standard script from the GitHub Pages SPA redirect community solution)
   - **Result:** Created `public/404.html` with `?p=` redirect script; added restore script to `index.html` `<head>`; also added `basename={import.meta.env.BASE_URL}` to `BrowserRouter` so React Router correctly strips the `/bank-portfolio` prefix on GitHub Pages. Build confirmed with `404.html` in `dist/` and asset paths starting with `/bank-portfolio/`.
 
-- [ ] Create the GitHub Actions deployment workflow at `.github/workflows/deploy.yml`:
+- [x] Create the GitHub Actions deployment workflow at `.github/workflows/deploy.yml`:
   - Trigger: `on: push: branches: [main]`
   - Permissions block: `contents: write` (needed to push to gh-pages branch)
   - Single job `deploy` running on `ubuntu-latest` with these steps:
@@ -33,6 +33,7 @@ This phase turns the portfolio into a live public website by wiring up an automa
     4. `npm run build`
     5. `peaceiris/actions-gh-pages@v4` with `github_token: ${{ secrets.GITHUB_TOKEN }}`, `publish_dir: ./dist`, and `cname:` left empty (no custom domain)
   - Make sure the YAML indentation is valid (2-space indent throughout)
+  - **Result:** Created `.github/workflows/deploy.yml` with `on: push: branches: [main]`, `permissions: contents: write`, and steps: checkout@v4, setup-node@v4 (node 20, npm cache), `npm ci`, `npm run build`, and `peaceiris/actions-gh-pages@v4` deploying `./dist`.
 
 - [ ] Update `package.json` scripts and add a `.gitignore` if missing:
   - Read the current `package.json` and `.gitignore` (if it exists at the repo root)
