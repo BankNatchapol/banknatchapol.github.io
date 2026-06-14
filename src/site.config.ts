@@ -16,7 +16,7 @@ export const PERSONAL = {
   // Profile photo — put your image in public/ and set the path below.
   // Example: if you add public/photo.jpg, set photo to '/bank-portfolio/photo.jpg'
   // Leave as '' to show initials instead.
-  photo: 'public/profile.JPG',
+  photo: '/bank-portfolio/profile.JPG',
   photoAlt: 'Natchapol Patamawisut',
 
   // Initials shown when no photo is set
