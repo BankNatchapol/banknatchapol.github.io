@@ -30,16 +30,47 @@ export function Publications() {
                 fontSize: '34px', lineHeight: 1, color: 'var(--ink-900)',
               }}>{p.year}</span>
               <Badge tone={p.tone}>{p.venue}</Badge>
+              {'poster' in p && p.poster && (
+                <Badge tone="ink">poster</Badge>
+              )}
             </div>
             <div>
-              <h3 style={{
-                fontFamily: 'var(--font-body)', fontWeight: 700,
-                fontSize: '22px', lineHeight: 1.4, margin: 0, color: 'var(--ink-900)',
-              }}>{p.title}</h3>
+              {'link' in p && p.link ? (
+                <a
+                  href={p.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
+                  <h3 style={{
+                    fontFamily: 'var(--font-body)', fontWeight: 700,
+                    fontSize: '22px', lineHeight: 1.4, margin: 0, color: 'var(--ink-900)',
+                  }}>
+                    {p.title}
+                    <span style={{
+                      fontFamily: 'var(--font-label)', fontSize: '13px',
+                      letterSpacing: '0.08em', color: 'var(--pencil-500)',
+                      marginLeft: '8px', fontWeight: 400,
+                    }}>↗</span>
+                  </h3>
+                </a>
+              ) : (
+                <h3 style={{
+                  fontFamily: 'var(--font-body)', fontWeight: 700,
+                  fontSize: '22px', lineHeight: 1.4, margin: 0, color: 'var(--ink-900)',
+                }}>{p.title}</h3>
+              )}
               <p style={{
                 fontFamily: 'var(--font-body)', fontSize: '15px',
                 color: 'var(--ink-500)', margin: '6px 0 0',
               }}>{p.authors}</p>
+              {'description' in p && p.description && (
+                <p style={{
+                  fontFamily: 'var(--font-body)', fontSize: '15px',
+                  color: 'var(--pencil-500)', margin: '8px 0 0',
+                  lineHeight: 1.6,
+                }}>{p.description}</p>
+              )}
             </div>
           </article>
         ))}

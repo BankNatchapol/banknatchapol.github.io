@@ -90,7 +90,7 @@ export const PROJECTS_AI = [
     year: 2026,
     types: ['professional', 'live demo'],
     body: 'Thai/English name verification system for a government registration authority — rule filtering, cross-lingual phonetic analysis, and LLM decision with natural-language reasoning.',
-    stack: ['Python', 'Docker', 'Phonetic', 'RAG', 'Context Engineering', 'Agentic AI'],
+    stack: ['Phonetic', 'RAG', 'Context Engineering', 'Agentic AI'],
   },
   {
     name: 'Thai G2P',
@@ -163,6 +163,8 @@ export const PUBLICATIONS = [
     tone: 'blue' as const,
     title: 'Quantum Circuit Design for Decoded Quantum Interferometry',
     authors: 'N. Patamawisut, N. Benchasattabuse, M. Hajdušek, R. Van Meter',
+    description: 'Full circuit implementation of the DQI algorithm with BPQM, Gauss-Jordan, and USD decoders, benchmarked across Qiskit and Cirq on IBM and Google gate sets.',
+    link: 'https://ieeexplore.ieee.org/document/11250226',
   },
   {
     year: '2025',
@@ -170,6 +172,8 @@ export const PUBLICATIONS = [
     tone: 'sage' as const,
     title: 'Understanding Noise-Adaptive Transpilation Techniques Using the SupermarQ Benchmark',
     authors: 'S. Vorathammathorn, M. Binhar, R. Sarochawikasit, S. Chanchuphol, N. Patamawisut',
+    description: 'Analyzes noise-adaptive transpilation strategies on IBM hardware using the SupermarQ feature-based benchmark, revealing how device characteristics interact with optimization passes.',
+    link: 'https://ieeexplore.ieee.org/document/11000169',
   },
   {
     year: '2023',
@@ -177,13 +181,16 @@ export const PUBLICATIONS = [
     tone: 'terra' as const,
     title: 'A Comparison of Quantum Gradient Methods for Quantum Optimization',
     authors: 'N. Patamawisut, R. Sarochawikasit, U. Taetragool',
+    description: 'Benchmarks parameter-shift, finite-difference, and SPSA gradient estimators for variational quantum algorithms on NISQ devices, comparing convergence and noise sensitivity.',
   },
   {
     year: '2023',
     venue: 'AQIS 2023',
     tone: 'amber' as const,
+    poster: true,
     title: "Optimization of Grover's Search Algorithm using ZX-calculus",
     authors: 'N. Patamawisut, W. Pijitrojana, R. Bavontaweepanya',
+    description: "Applies ZX-calculus graph rewrites to Grover's oracle and diffusion circuits, achieving reductions in gate count and depth without altering algorithm semantics.",
   },
 ]
 
