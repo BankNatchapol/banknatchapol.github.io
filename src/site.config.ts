@@ -196,17 +196,13 @@ export const PUBLICATIONS = [
 
 // ------------------------------------------------------------
 // EXPERIENCE / CV  (Section 04)
+// Three separate lists — rendered as labelled groups in the timeline.
 // ------------------------------------------------------------
-export const EXPERIENCE = [
+export const EXPERIENCE_PROFESSIONAL = [
   {
     period: '2026 — now',
     role: 'ML Engineer',
     org: 'Finema Co., Ltd',
-  },
-  {
-    period: '2024 — 2026',
-    role: 'MS · Research Assistant',
-    org: 'Keio University — Advancing Quantum Architecture Group',
   },
   {
     period: '2024 — 2025',
@@ -218,6 +214,27 @@ export const EXPERIENCE = [
     role: 'AI Engineer',
     org: 'Freelance',
   },
+]
+
+export const EXPERIENCE_EDUCATION = [
+  {
+    period: '2024 — 2026',
+    role: 'MS, Media and Government',
+    org: 'Keio University, Japan',
+  },
+  {
+    period: '2018 — 2022',
+    role: 'BS, Computer Engineering · GPA 3.80 · Ranked 2nd',
+    org: 'KMUTT, Thailand',
+  },
+]
+
+export const EXPERIENCE_RESEARCH = [
+  {
+    period: '2024 — 2026',
+    role: 'Research Assistant',
+    org: 'Advancing Quantum Architecture Group, Keio University',
+  },
   {
     period: '2021 — 2024',
     role: 'Research Assistant',
@@ -227,10 +244,5 @@ export const EXPERIENCE = [
     period: '2020 — 2023',
     role: 'Research Assistant',
     org: 'Quantum Computing & Information Research Centre, KMUTT',
-  },
-  {
-    period: '2018 — 2022',
-    role: 'BS, Computer Engineering · GPA 3.80 · Ranked 2nd',
-    org: 'KMUTT, Thailand',
   },
 ]
