@@ -1,35 +1,15 @@
 import { Button } from '../components/Button'
 import { Avatar } from '../components/Avatar'
 import { Tag } from '../components/Tag'
-import {
-  PERSONAL, PROJECTS_QUANTUM, PROJECTS_AI,
-  SKILLS_TECH_EXTRA, SKILLS_CONCEPTS_EXTRA, SKILLS_OTHER,
-} from '../site.config'
+import { PERSONAL, SKILLS_TECH, SKILLS_CONCEPTS, SKILLS_OTHER } from '../site.config'
 
 const [firstName, ...rest] = PERSONAL.name.split(' ')
 const lastName = rest.join(' ')
 
-const ALL_PROJECTS = [...PROJECTS_QUANTUM, ...PROJECTS_AI]
-
 const ALL_GROUPS = [
-  {
-    label: 'Tools & Tech',
-    skills: [...new Set([
-      ...ALL_PROJECTS.flatMap((p) => p.stack),
-      ...SKILLS_TECH_EXTRA,
-    ])],
-  },
-  {
-    label: 'Concepts',
-    skills: [...new Set([
-      ...ALL_PROJECTS.flatMap((p) => p.concepts ?? []),
-      ...SKILLS_CONCEPTS_EXTRA,
-    ])],
-  },
-  {
-    label: 'Other',
-    skills: SKILLS_OTHER,
-  },
+  { label: 'Tools & Tech', skills: SKILLS_TECH },
+  { label: 'Concepts', skills: SKILLS_CONCEPTS },
+  { label: 'Other', skills: SKILLS_OTHER },
 ]
 
 export function Hero() {

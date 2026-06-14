@@ -73,7 +73,6 @@ export const PROJECTS_QUANTUM = [
     types: ['research', 'open source'],
     body: 'A GPU surface-code simulator that runs a distance-21 patch in real time.',
     stack: ['CUDA', 'C++', 'Python'],
-    concepts: ['Surface Codes', 'QEC', 'Monte Carlo Simulation'],
   },
   {
     name: 'decoderd',
@@ -82,7 +81,6 @@ export const PROJECTS_QUANTUM = [
     types: ['research'],
     body: 'Low-latency decoder daemon that talks to the control stack over shared memory.',
     stack: ['Rust'],
-    concepts: ['QEC', 'Real-time Decoding', 'Lock-free IPC'],
   },
 ]
 
@@ -94,7 +92,6 @@ export const PROJECTS_AI = [
     types: ['research'],
     body: 'A neural decoder for the surface code that beats MWPM at high noise.',
     stack: ['Python', 'PyTorch', 'GNN'],
-    concepts: ['QEC', 'Graph Neural Networks', 'Noise Modelling'],
   },
   {
     name: 'scholar-rag',
@@ -115,19 +112,17 @@ export const PROJECTS_AI = [
 ]
 
 // ------------------------------------------------------------
-// SKILLS  (hero section)
+// SKILLS  (hero section — edit these directly)
 // ------------------------------------------------------------
-// Each group appears as a labeled column in the hero skills block.
-// Per-project `stack` auto-feeds "Tools & Tech"; `concepts` auto-feeds "Concepts".
-// Use the *_EXTRA lists to add items not tied to any specific project.
 
-export const SKILLS_TECH_EXTRA: string[] = [
-  'Qiskit', 'LaTeX', 'Linux', 'Git',
+export const SKILLS_TECH: string[] = [
+  'Python', 'CUDA', 'C++', 'Rust', 'PyTorch', 'Qiskit', 'LaTeX', 'Linux', 'Git',
 ]
 
-export const SKILLS_CONCEPTS_EXTRA: string[] = [
+export const SKILLS_CONCEPTS: string[] = [
   'Quantum Error Correction',
   'Quantum Information',
+  'Surface Codes',
   'Randomized Benchmarking',
   'Noise Tomography',
   'Superconducting Qubits',
