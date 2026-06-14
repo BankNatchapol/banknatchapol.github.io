@@ -26,6 +26,11 @@ export const PERSONAL = {
 
   // Contact email — used by the "Get in touch" form
   email: 'natchapol.pat@gmail.com',
+
+  // Social / profile links shown in the hero
+  github: 'https://github.com/BankNatchapol',
+  linkedin: 'https://www.linkedin.com/in/natchapol-patamawisut/',
+  scholar: 'https://scholar.google.com/citations?user=2oKwxZ0AAAAJ&hl=en',
 }
 
 // ------------------------------------------------------------
