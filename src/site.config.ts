@@ -102,10 +102,10 @@ export const PROJECTS_AI = [
     stack: ['Python', 'LLM', 'RAG'],
   },
   {
-    name: 'check-id',
+    name: 'ID Checker',
     slug: 'check-id',
     year: 2026,
-    types: ['open source', 'side project'],
+    types: ['professional', 'live demo'],
     body: 'ID verification using generative phonetic AI to match spoken names against document data.',
     stack: ['Python', 'Generative AI'],
   },

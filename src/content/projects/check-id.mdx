@@ -1,6 +1,8 @@
 ## Overview
 
-**check-id** is an ID verification system that uses generative phonetic AI to match a spoken name against the name printed on an identity document. Rather than relying on exact string matching (which fails on transliterations, nicknames, and accent variation), the system generates phonetic embeddings for both the spoken input and the document text, then compares them in embedding space.
+**ID Checker** is an AI-powered name verification system built for a government business registration authority. It automatically validates whether a Thai/English name pair is linguistically consistent, compliant with naming rules, and not a duplicate of existing records — replacing slow, inconsistent manual officer review.
+
+The pipeline combines hard-rule filtering, cross-lingual phonetic analysis, and LLM-based decision-making with natural-language reasoning.
 
 ## System Diagram
 
@@ -8,14 +10,36 @@
 
 ## How It Works
 
-The pipeline has three stages:
+### Stage 1 — Rule Pre-filter
 
-1. **Speech-to-text** — the spoken name is transcribed using a fine-tuned ASR model
-2. **Phonetic encoding** — both the transcribed name and the OCR-extracted document name are passed through a generative phonetic encoder that produces a language-agnostic embedding
-3. **Match scoring** — cosine similarity between embeddings determines a match/no-match decision with a calibrated confidence threshold
+Structurally invalid names are rejected instantly: empty fields, wrong character sets, invalid orthography, forbidden words, and exact duplicates. No AI is invoked for these cases, keeping latency low for the majority of inputs.
 
-The phonetic encoder is trained on multilingual name pairs with known equivalences, allowing it to handle transliterations across scripts (e.g., Thai → Latin) without a hand-crafted rules engine.
+### Stage 2 — Phonetic Analysis
+
+Thai IPA phonemes (via epitran + pythainlp) and English IPA phonemes (via gruut) are independently computed and compared using phoneme edit-distance. The scores surface near-duplicate names from the registry as candidates for rejection.
+
+### Stage 3 — LLM Decision
+
+A Gemini LLM receives the name pair, phonetic context, similarity scores, and a domain-aware system instruction. It outputs an accept/reject decision with natural-language reasoning and correction suggestions in the applicant's language.
+
+## Engineering Challenges
+
+**Phonological rules in prompt** — The LLM must apply a multi-step rule for silent consonant markers (Thai karan ์) to compare sounds rather than characters. Encoding this as an explicit prompt constraint was more reliable than pre-processing.
+
+**Proper noun handling** — Personal names and place names can only match via transliteration, never via semantic translation. A prompt rule enforces this distinction to prevent false positives on cross-language equivalents.
+
+**Cross-script phonology** — Acronym letters written in the target script retain the phonological rules of their source language for final consonants. Separate prompt exceptions handle these cases.
+
+**Tokenization ambiguity** — Multilingual tokenizers produce multi-token outputs for unknown words. The system distinguishes between "unknown transliteration" (acceptable) and "misspelled native word" (reject) to avoid over-rejection.
+
+## Features
+
+- 150+ test cases with pass/fail tracking and result caching
+- Per-request token and cost logging
+- Model and inference level configurable at runtime without restart
+- Public single-tab UI; admin panel (data management, usage dashboard, test suite) behind a secret token
+- Deployable via Docker Compose or Kubernetes
 
 ## Links
 
-- [GitHub →](https://github.com/BankNatchapol/check-id)
+- [Live Demo →](https://github.com/BankNatchapol/check-id)
