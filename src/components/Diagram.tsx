@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from 'react'
-
-const ExcalidrawLib = React.lazy(() =>
-  import('@excalidraw/excalidraw').then((m) => ({ default: m.Excalidraw }))
-)
+import { useEffect, useState } from 'react'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type ExcalidrawAPI = any
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type DiagramData = { elements: any[]; appState: Record<string, any>; files: Record<string, any> }
+type DiagramJson = { elements: any[]; appState: Record<string, any>; files: Record<string, any> }
 
 interface DiagramProps {
   src: string
@@ -20,52 +13,61 @@ function resolvePublicAsset(src: string) {
   if (/^(?:[a-z][a-z\d+\-.]*:)?\/\//i.test(src) || src.startsWith('data:') || src.startsWith('blob:')) {
     return src
   }
-
   const baseUrl = import.meta.env.BASE_URL || '/'
   const basePath = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl
-
   if (src.startsWith('/') && basePath && basePath !== '/' && src.startsWith(`${basePath}/`)) {
     return src
   }
-
   const assetPath = src.startsWith('/') ? src.slice(1) : src
   return `${baseUrl}${assetPath}`
 }
 
 export function Diagram({ src, caption, height = 480 }: DiagramProps) {
-  const [data, setData] = useState<DiagramData | null>(null)
+  const [svgUrl, setSvgUrl] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [api, setApi] = useState<ExcalidrawAPI>(null)
   const assetSrc = resolvePublicAsset(src)
 
   useEffect(() => {
-    if (!api || !data) return
-    // initialData is loaded asynchronously inside Excalidraw; wait for it to
-    // settle before scrolling, otherwise getSceneElements() returns empty.
-    const id = setTimeout(() => {
-      api.scrollToContent(undefined, { fitToViewport: true, animate: false })
-    }, 300)
-    return () => clearTimeout(id)
-  }, [api, data])
-
-  useEffect(() => {
-    setData(null)
+    setSvgUrl(null)
     setError(null)
+    let revoke: (() => void) | null = null
 
     fetch(assetSrc)
       .then((r) => {
         if (!r.ok) throw new Error(`Could not load ${assetSrc}`)
         return r.json()
       })
-      .then((json) =>
-        setData({
+      .then(async (json: DiagramJson) => {
+        const { exportToSvg } = await import('@excalidraw/excalidraw')
+        const svg = await exportToSvg({
           elements: json.elements ?? [],
-          appState: { viewBackgroundColor: '#ffffff', ...json.appState },
+          appState: {
+            exportBackground: true,
+            viewBackgroundColor: '#ffffff',
+            ...json.appState,
+          },
           files: json.files ?? {},
         })
-      )
+        const svgString = new XMLSerializer().serializeToString(svg)
+        const blob = new Blob([svgString], { type: 'image/svg+xml' })
+        const url = URL.createObjectURL(blob)
+        revoke = () => URL.revokeObjectURL(url)
+        setSvgUrl(url)
+      })
       .catch((e) => setError(e.message))
+
+    return () => revoke?.()
   }, [assetSrc])
+
+  const loadingDiv = (
+    <div style={{
+      height: '100%', display: 'flex', alignItems: 'center',
+      justifyContent: 'center', color: 'var(--pencil-500)',
+      fontFamily: 'var(--font-body)', fontSize: '15px',
+    }}>
+      Loading diagram…
+    </div>
+  )
 
   if (error) {
     return (
@@ -84,34 +86,15 @@ export function Diagram({ src, caption, height = 480 }: DiagramProps) {
       <div style={{
         height, border: '2px solid var(--paper-edge)',
         borderRadius: '12px', overflow: 'hidden', background: '#fff',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
-        {data ? (
-          <React.Suspense fallback={
-            <div style={{
-              height: '100%', display: 'flex', alignItems: 'center',
-              justifyContent: 'center', color: 'var(--pencil-500)',
-              fontFamily: 'var(--font-body)', fontSize: '15px',
-            }}>
-              Loading diagram…
-            </div>
-          }>
-            <ExcalidrawLib
-              excalidrawAPI={(a: ExcalidrawAPI) => setApi(a)}
-              initialData={data}
-              viewModeEnabled
-              zenModeEnabled
-              gridModeEnabled={false}
-            />
-          </React.Suspense>
-        ) : (
-          <div style={{
-            height: '100%', display: 'flex', alignItems: 'center',
-            justifyContent: 'center', color: 'var(--pencil-500)',
-            fontFamily: 'var(--font-body)', fontSize: '15px',
-          }}>
-            Loading diagram…
-          </div>
-        )}
+        {svgUrl ? (
+          <img
+            src={svgUrl}
+            alt={caption ?? 'diagram'}
+            style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+          />
+        ) : loadingDiv}
       </div>
       {caption && (
         <figcaption style={{
