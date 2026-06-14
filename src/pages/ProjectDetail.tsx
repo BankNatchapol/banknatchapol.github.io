@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { Badge } from '../components/Badge'
 import { Tag } from '../components/Tag'
 import { Diagram } from '../components/Diagram'
-import { QUANTUM, AI } from '../sections/Projects'
+import { QUANTUM, AI, TYPE_TONE } from '../sections/Projects'
 
 type AnyProps = Record<string, unknown>
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -123,32 +123,26 @@ export function ProjectDetail() {
       <div style={{ maxWidth: 'var(--content)', margin: '0 auto' }}>
         <a href="/#projects" style={backLinkStyle}>← Projects</a>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '16px' }}>
-          <h1 style={{
-            fontFamily: 'var(--font-mono)',
-            fontWeight: 700,
-            fontSize: 'clamp(32px, 5vw, 48px)',
-            lineHeight: 1,
-            margin: 0,
-            color: 'var(--ink-900)',
-          }}>
-            {project.name}
-          </h1>
-          <Badge tone={project.badgeTone}>{project.badge}</Badge>
-        </div>
+        <h1 style={{
+          fontFamily: 'var(--font-mono)',
+          fontWeight: 700,
+          fontSize: 'clamp(32px, 5vw, 48px)',
+          lineHeight: 1,
+          margin: '0 0 16px',
+          color: 'var(--ink-900)',
+        }}>
+          {project.name}
+        </h1>
 
-        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '56px' }}>
-          {project.tags.map((t) => <Tag key={t}>{t}</Tag>)}
-          {project.openSource && (
-            <Tag style={{ background: 'var(--sage-100)', color: 'var(--sage-500)', border: 'var(--stroke-fine) solid var(--sage-500)' }}>
-              open source
-            </Tag>
-          )}
-          {project.liveDemo && (
-            <Tag style={{ background: 'var(--terra-100)', color: 'var(--terra-500)', border: 'var(--stroke-fine) solid var(--terra-500)' }}>
-              live demo
-            </Tag>
-          )}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '56px' }}>
+          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+            {project.types.map((t) => (
+              <Badge key={t} tone={TYPE_TONE[t] ?? 'ink'}>{t}</Badge>
+            ))}
+          </div>
+          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+            {project.stack.map((s) => <Tag key={s}>{s}</Tag>)}
+          </div>
         </div>
 
         <Suspense fallback={

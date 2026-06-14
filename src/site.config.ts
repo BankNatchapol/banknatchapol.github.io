@@ -51,22 +51,30 @@ export const RESEARCH_AREAS = [
 // PROJECTS  (Section 02)
 // Each project needs a matching MDX file in src/content/projects/<slug>.mdx
 // ------------------------------------------------------------
+// types: project category labels — multiple allowed per project
+// stack: tech used — these auto-populate the skills section in the hero
+//
+// Supported types → badge color:
+//   'research'     → blue
+//   'open source'  → sage
+//   'side project' → amber
+//   'company work' → ink
+//   'freelance'    → terra
+
 export const PROJECTS_QUANTUM = [
   {
     name: 'surfsim',
     slug: 'surfsim',
-    badge: 'maintained',
-    badgeTone: 'sage' as const,
+    types: ['research', 'open source'],
     body: 'A GPU surface-code simulator that runs a distance-21 patch in real time.',
-    tags: ['CUDA', 'QEC'],
+    stack: ['CUDA', 'C++', 'Python', 'QEC'],
   },
   {
     name: 'decoderd',
     slug: 'decoderd',
-    badge: 'research',
-    badgeTone: 'blue' as const,
+    types: ['research'],
     body: 'Low-latency decoder daemon that talks to the control stack over shared memory.',
-    tags: ['Rust', 'decoding'],
+    stack: ['Rust', 'decoding'],
   },
 ]
 
@@ -74,28 +82,29 @@ export const PROJECTS_AI = [
   {
     name: 'ml-decoder',
     slug: 'ml-decoder',
-    badge: 'research',
-    badgeTone: 'blue' as const,
+    types: ['research'],
     body: 'A neural decoder for the surface code that beats MWPM at high noise.',
-    tags: ['PyTorch', 'GNN'],
+    stack: ['Python', 'PyTorch', 'GNN'],
   },
   {
     name: 'scholar-rag',
     slug: 'scholar-rag',
-    badge: 'side project',
-    badgeTone: 'terra' as const,
+    types: ['side project'],
     body: 'A retrieval-augmented assistant over the full quant-ph arXiv corpus.',
-    tags: ['LLM', 'RAG'],
+    stack: ['Python', 'LLM', 'RAG'],
   },
   {
     name: 'check-id',
     slug: 'check-id',
-    badge: 'side project',
-    badgeTone: 'amber' as const,
+    types: ['open source', 'side project'],
     body: 'ID verification using generative phonetic AI to match spoken names against document data.',
-    tags: ['phonetic AI', 'generative'],
-    openSource: true,
+    stack: ['Python', 'Generative AI'],
   },
+]
+
+// Skills that appear in the hero but aren't tied to a specific project
+export const SKILLS_EXTRA: string[] = [
+  'Qiskit', 'LaTeX', 'Linux',
 ]
 
 // ------------------------------------------------------------

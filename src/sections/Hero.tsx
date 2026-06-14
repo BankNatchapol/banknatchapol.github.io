@@ -1,6 +1,13 @@
 import { Button } from '../components/Button'
 import { Avatar } from '../components/Avatar'
-import { PERSONAL } from '../site.config'
+import { Tag } from '../components/Tag'
+import { PERSONAL, PROJECTS_QUANTUM, PROJECTS_AI, SKILLS_EXTRA } from '../site.config'
+
+const ALL_SKILLS = [...new Set([
+  ...PROJECTS_QUANTUM.flatMap((p) => p.stack),
+  ...PROJECTS_AI.flatMap((p) => p.stack),
+  ...SKILLS_EXTRA,
+])]
 
 const [firstName, ...rest] = PERSONAL.name.split(' ')
 const lastName = rest.join(' ')
@@ -41,6 +48,18 @@ export function Hero() {
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '32px' }}>
           <Button variant="primary">Read my work →</Button>
           <Button variant="secondary" wobble={1}>Download CV</Button>
+        </div>
+        <div style={{ marginTop: '36px' }}>
+          <div style={{
+            fontFamily: 'var(--font-label)', fontSize: '12px',
+            letterSpacing: '0.16em', textTransform: 'uppercase',
+            color: 'var(--pencil-500)', marginBottom: '10px',
+          }}>
+            Tools & Tech
+          </div>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            {ALL_SKILLS.map((skill) => <Tag key={skill}>{skill}</Tag>)}
+          </div>
         </div>
       </div>
       <div style={{ position: 'relative' }}>

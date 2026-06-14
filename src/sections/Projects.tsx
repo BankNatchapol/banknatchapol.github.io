@@ -7,15 +7,20 @@ import { PROJECTS_QUANTUM, PROJECTS_AI } from '../site.config'
 
 type BadgeTone = 'ink' | 'blue' | 'terra' | 'sage' | 'amber'
 
+export const TYPE_TONE: Record<string, BadgeTone> = {
+  'research': 'blue',
+  'open source': 'sage',
+  'side project': 'amber',
+  'company work': 'ink',
+  'freelance': 'terra',
+}
+
 interface Project {
   name: string
   slug: string
-  badge: string
-  badgeTone: BadgeTone
+  types: string[]
   body: string
-  tags: string[]
-  openSource?: boolean
-  liveDemo?: boolean
+  stack: string[]
   wobble: 0 | 1 | 2
   tilt: number
 }
@@ -44,35 +49,28 @@ function useDrawOnScroll(ref: React.RefObject<HTMLElement | null>) {
   }, [ref])
 }
 
-function ProjectCard({ name, badge, badgeTone, body, tags, openSource, liveDemo, wobble, tilt }: Project) {
+function ProjectCard({ name, slug: _slug, types, body, stack, wobble, tilt }: Project) {
   const ref = useRef<HTMLDivElement>(null)
   useDrawOnScroll(ref)
   return (
     <div ref={ref} className="draw-on-scroll">
       <Card wobble={wobble} tilt={tilt}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
-          <span style={{
-            fontFamily: 'var(--font-mono)', fontWeight: 700,
-            fontSize: '20px', color: 'var(--ink-900)',
-          }}>{name}</span>
-          <Badge tone={badgeTone}>{badge}</Badge>
+        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '10px' }}>
+          {types.map((t) => (
+            <Badge key={t} tone={TYPE_TONE[t] ?? 'ink'}>{t}</Badge>
+          ))}
         </div>
+        <span style={{
+          fontFamily: 'var(--font-mono)', fontWeight: 700,
+          fontSize: '20px', color: 'var(--ink-900)',
+          display: 'block', marginBottom: '8px',
+        }}>{name}</span>
         <p style={{
           fontFamily: 'var(--font-body)', fontSize: '17px', lineHeight: 1.65,
-          color: 'var(--ink-700)', margin: '12px 0 16px',
+          color: 'var(--ink-700)', margin: '0 0 14px',
         }}>{body}</p>
         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-          {tags.map((t) => <Tag key={t}>{t}</Tag>)}
-          {openSource && (
-            <Tag style={{ background: 'var(--sage-100)', color: 'var(--sage-500)', border: 'var(--stroke-fine) solid var(--sage-500)' }}>
-              open source
-            </Tag>
-          )}
-          {liveDemo && (
-            <Tag style={{ background: 'var(--terra-100)', color: 'var(--terra-500)', border: 'var(--stroke-fine) solid var(--terra-500)' }}>
-              live demo
-            </Tag>
-          )}
+          {stack.map((s) => <Tag key={s}>{s}</Tag>)}
         </div>
         <div style={{
           marginTop: '16px',
