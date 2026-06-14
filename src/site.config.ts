@@ -102,9 +102,33 @@ export const PROJECTS_AI = [
   },
 ]
 
-// Skills that appear in the hero but aren't tied to a specific project
-export const SKILLS_EXTRA: string[] = [
-  'Qiskit', 'LaTeX', 'Linux',
+// Extra tech items added to the auto-derived stack pool from projects
+export const SKILLS_TECH_EXTRA: string[] = [
+  'Qiskit', 'LaTeX', 'Linux', 'Git',
+]
+
+// Additional skill categories shown in the hero alongside Tools & Tech
+// Add, remove, or rename categories freely — each appears as its own group
+export const SKILL_GROUPS: { label: string; skills: string[] }[] = [
+  {
+    label: 'Knowledge',
+    skills: [
+      'Quantum Error Correction',
+      'Quantum Information',
+      'Surface Codes',
+      'Randomized Benchmarking',
+      'Noise Tomography',
+      'Superconducting Qubits',
+    ],
+  },
+  {
+    label: 'Other',
+    skills: [
+      'Technical Writing',
+      'Research Mentoring',
+      'Project Management',
+    ],
+  },
 ]
 
 // ------------------------------------------------------------
