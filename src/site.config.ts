@@ -111,7 +111,7 @@ export const SKILLS_TECH_EXTRA: string[] = [
 // Add, remove, or rename categories freely — each appears as its own group
 export const SKILL_GROUPS: { label: string; skills: string[] }[] = [
   {
-    label: 'Knowledge',
+    label: 'Concepts',
     skills: [
       'Quantum Error Correction',
       'Quantum Information',
