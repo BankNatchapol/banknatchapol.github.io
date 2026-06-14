@@ -5,6 +5,9 @@ const ExcalidrawLib = React.lazy(() =>
 )
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ExcalidrawAPI = any
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DiagramData = { elements: any[]; appState: Record<string, any>; files: Record<string, any> }
 
 interface DiagramProps {
@@ -13,14 +16,43 @@ interface DiagramProps {
   height?: number
 }
 
+function resolvePublicAsset(src: string) {
+  if (/^(?:[a-z][a-z\d+\-.]*:)?\/\//i.test(src) || src.startsWith('data:') || src.startsWith('blob:')) {
+    return src
+  }
+
+  const baseUrl = import.meta.env.BASE_URL || '/'
+  const basePath = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl
+
+  if (src.startsWith('/') && basePath && basePath !== '/' && src.startsWith(`${basePath}/`)) {
+    return src
+  }
+
+  const assetPath = src.startsWith('/') ? src.slice(1) : src
+  return `${baseUrl}${assetPath}`
+}
+
 export function Diagram({ src, caption, height = 480 }: DiagramProps) {
   const [data, setData] = useState<DiagramData | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [api, setApi] = useState<ExcalidrawAPI>(null)
+  const assetSrc = resolvePublicAsset(src)
 
   useEffect(() => {
-    fetch(src)
+    if (!api || !data) return
+    const id = requestAnimationFrame(() => {
+      api.scrollToContent(undefined, { fitToViewport: true, animate: false })
+    })
+    return () => cancelAnimationFrame(id)
+  }, [api, data])
+
+  useEffect(() => {
+    setData(null)
+    setError(null)
+
+    fetch(assetSrc)
       .then((r) => {
-        if (!r.ok) throw new Error(`Could not load ${src}`)
+        if (!r.ok) throw new Error(`Could not load ${assetSrc}`)
         return r.json()
       })
       .then((json) =>
@@ -31,7 +63,7 @@ export function Diagram({ src, caption, height = 480 }: DiagramProps) {
         })
       )
       .catch((e) => setError(e.message))
-  }, [src])
+  }, [assetSrc])
 
   if (error) {
     return (
@@ -62,6 +94,7 @@ export function Diagram({ src, caption, height = 480 }: DiagramProps) {
             </div>
           }>
             <ExcalidrawLib
+              excalidrawAPI={(a: ExcalidrawAPI) => setApi(a)}
               initialData={data}
               viewModeEnabled
               zenModeEnabled
