@@ -22,12 +22,13 @@ This phase adds client-side routing and rich per-project detail pages to the por
   - Export the `QUANTUM` and `AI` arrays (add `export` keyword) so `ProjectDetail` can look up metadata by slug
   <!-- Done: added slug field to Project interface and populated slug values on all four projects; exported QUANTUM and AI arrays. -->
 
-- [ ] Create MDX content files for all four projects in `src/content/projects/`:
+- [x] Create MDX content files for all four projects in `src/content/projects/`:
   - `surfsim.mdx` — GPU surface-code simulator; describe the motivation (real-time distance-21 simulation), implementation highlights (CUDA kernel design, memory layout), current status, and any links
   - `decoderd.mdx` — Low-latency decoder daemon; describe the shared-memory IPC design, Rust safety guarantees, benchmarks vs. socket-based approaches, and integration with the control stack
   - `ml-decoder.mdx` — Neural decoder; describe the GNN architecture, training regime, comparison to MWPM at various noise levels, and next steps
   - `scholar-rag.mdx` — RAG assistant over quant-ph arXiv; describe the ingestion pipeline, embedding strategy, retrieval design, and usage
   - Each file should open with a `## Overview` heading and include at least 2-3 substantive paragraphs of real technical content drawn from the one-line descriptions already in `Projects.tsx`; do NOT add frontmatter (keep it simple for now)
+  <!-- Done: created src/content/projects/{surfsim,decoderd,ml-decoder,scholar-rag}.mdx, each with ## Overview heading and 3-4 substantive technical paragraphs covering motivation, implementation details, and next steps. No frontmatter added. -->
 
 - [ ] Build the `ProjectDetail` page component at `src/pages/ProjectDetail.tsx`:
   - Dynamically import the MDX file using `React.lazy` and Vite's `import()` with the slug from `useParams()` — pattern: `` import(`../content/projects/${slug}.mdx`) ``

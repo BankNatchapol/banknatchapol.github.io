@@ -1,0 +1,17 @@
+## Overview
+
+**surfsim** is a GPU-accelerated simulator for the surface code, a leading candidate for fault-tolerant quantum error correction. The primary motivation was enabling real-time simulation of a distance-21 surface code patch — a lattice of 441 data qubits and 440 ancilla qubits — at the syndrome-extraction cycle rates demanded by actual hardware. Existing CPU simulators fall short at this scale; a single Pauli noise step over a d=21 patch takes tens of milliseconds on a modern CPU, far too slow for closed-loop experiments.
+
+## CUDA Kernel Design
+
+The core insight driving the GPU implementation is that syndrome extraction on a planar patch is embarrassingly parallel: each stabilizer measurement is independent of all others in the same round, so every ancilla qubit can be processed by its own CUDA thread in a single kernel launch. Error propagation across rounds is encoded as a sparse binary matrix-vector product over GF(2), which maps cleanly onto warp-level ballot instructions. Memory layout follows a Z-order (Morton) curve over the qubit grid so that threads in the same warp access neighbouring qubits in nearby cache lines, cutting shared-memory bank conflicts by roughly 4× compared to row-major ordering.
+
+Pauli channel noise is applied via a lookup-table kernel that reads a compact noise parameter tensor (px, py, pz per qubit per layer) and uses cuRAND in-place to stochastically flip qubit states. The entire syndrome history for one Monte Carlo trial — typically 3 · d rounds for a full quantum memory experiment — lives in a contiguous ring buffer in device memory, allowing the subsequent decoder call to receive syndrome diffs without a host round-trip.
+
+## Status and Integration
+
+The simulator currently runs at approximately 10⁷ Monte Carlo trials per second for d=7 on an NVIDIA A100, and around 3 × 10⁵ trials per second at d=21. It exposes a thin Python binding (via pybind11) so that training loops for the `ml-decoder` project can generate batches of labelled syndrome/error pairs entirely on-device. A longer-term goal is tight integration with the `decoderd` daemon so that the simulator can act as a hardware-in-the-loop emulator for latency benchmarking.
+
+## Tags
+
+`CUDA` · `QEC` · `C++` · `surface code` · `fault-tolerant quantum computing`

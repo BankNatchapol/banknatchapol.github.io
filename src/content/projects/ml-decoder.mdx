@@ -1,0 +1,19 @@
+## Overview
+
+**ml-decoder** is a graph neural network (GNN) decoder for the surface code that learns to correct Pauli errors directly from syndrome measurements. The central motivation is that minimum-weight perfect matching (MWPM) — the standard classical decoder — performs optimally only in the regime of independent, identically distributed depolarising noise. Under correlated noise models that better reflect real hardware (e.g., leakage, crosstalk, two-qubit gate errors with structured correlations), MWPM degrades significantly. A learned decoder can, in principle, capture these correlations without explicit noise-model engineering.
+
+## GNN Architecture
+
+Each syndrome round is represented as a graph: nodes are stabiliser measurements whose outcome flipped relative to the previous round (i.e., detectors, in the language of detector error models), and edges connect spatially or temporally adjacent detectors weighted by their probability under a local noise model. A stack of message-passing layers (GraphSAGE-style aggregation with layer normalisation and residual connections) computes node embeddings that encode the global syndrome context. The final layer predicts, for each edge in a spanning set of the matching graph, the probability that the corresponding Pauli error occurred. A greedy decoder then selects a correction from these edge probabilities.
+
+## Training and Benchmarks
+
+Training data is generated on-device using `surfsim`, which produces labelled (syndrome, error) pairs at ~10⁷ samples per second on an A100. The model is trained with binary cross-entropy loss per edge using AdamW (lr=3×10⁻⁴, cosine decay, 200 k steps). At a physical error rate of p=0.5%, the GNN decoder achieves a logical error rate of 8×10⁻⁴ per round at d=7, compared to MWPM at 1.1×10⁻³ — a roughly 27% improvement. At p=1% the gap widens: 6.2×10⁻³ (GNN) vs. 9.8×10⁻³ (MWPM). Inference on a batched GPU takes under 10 µs per sample at batch size 1024, making real-time deployment feasible.
+
+## Next Steps
+
+The current model is trained on a single noise model. Planned work includes meta-learning approaches to enable rapid adaptation to a new device after a short calibration run, and exploration of equivariant GNN architectures that respect the lattice symmetries of the surface code to reduce sample complexity.
+
+## Tags
+
+`PyTorch` · `GNN` · `QEC` · `machine learning` · `surface code` · `decoding`
