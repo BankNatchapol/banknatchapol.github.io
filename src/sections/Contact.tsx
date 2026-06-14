@@ -3,11 +3,22 @@ import { Card } from '../components/Card'
 import { Input } from '../components/Input'
 import { Textarea } from '../components/Textarea'
 import { Button } from '../components/Button'
+import { PERSONAL } from '../site.config'
 
 export function Contact() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+
+  function handleSubmit() {
+    const subject = encodeURIComponent(`Message from ${name || 'your portfolio'}`)
+    const body = encodeURIComponent(
+      `From: ${name}${email ? ` <${email}>` : ''}\n\n${message}`
+    )
+    window.open(`mailto:${PERSONAL.email}?subject=${subject}&body=${body}`)
+  }
+
+  const canSubmit = name.trim() !== '' && message.trim() !== ''
 
   return (
     <section id="contact" style={{
@@ -52,9 +63,29 @@ export function Contact() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
-            <Button variant="primary">Send it</Button>
+            <Button
+              variant="primary"
+              onClick={handleSubmit}
+              disabled={!canSubmit}
+            >
+              Send it
+            </Button>
           </div>
         </Card>
+        <p style={{
+          fontFamily: 'var(--font-body)', fontSize: '14px',
+          color: 'var(--pencil-500)', textAlign: 'center',
+          marginTop: '16px',
+        }}>
+          Opens your mail client with the message pre-filled.{' '}
+          Or write directly to{' '}
+          <a
+            href={`mailto:${PERSONAL.email}`}
+            style={{ color: 'var(--blue-500)', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+          >
+            {PERSONAL.email}
+          </a>
+        </p>
       </div>
     </section>
   )

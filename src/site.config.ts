@@ -24,6 +24,9 @@ export const PERSONAL = {
 
   // Footer credit line
   footerCredit: 'drawn & written by Natchapol',
+
+  // Contact email — used by the "Get in touch" form
+  email: 'natchapol.pat@gmail.com',
 }
 
 // ------------------------------------------------------------
