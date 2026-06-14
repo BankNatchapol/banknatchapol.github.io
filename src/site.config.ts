@@ -8,7 +8,7 @@
 // ------------------------------------------------------------
 export const PERSONAL = {
   name: 'Natchapol Patamawisut',
-  title: 'Quantum Computing Researcher',
+  title: 'Researcher & Software Engineer',
 
   // One-paragraph bio shown in the hero section
   bio: 'I build the error-correction software that keeps fragile qubits honest — real-time decoders, pulse-level calibration, and the unglamorous plumbing between a dilution fridge and a laptop.',
@@ -16,7 +16,7 @@ export const PERSONAL = {
   // Profile photo — put your image in public/ and set the path below.
   // Example: if you add public/photo.jpg, set photo to '/bank-portfolio/photo.jpg'
   // Leave as '' to show initials instead.
-  photo: '',
+  photo: 'public/profile.JPG',
   photoAlt: 'Natchapol Patamawisut',
 
   // Initials shown when no photo is set
