@@ -54,16 +54,16 @@ export const RESEARCH_AREAS = [
 // PROJECTS  (Section 02)
 // Each project needs a matching MDX file in src/content/projects/<slug>.mdx
 // ------------------------------------------------------------
-// types    — project category labels, multiple allowed (see badge colors below)
-// stack    — tools/tech used → shown on card + detail + feeds "Tools & Tech" in hero
-// concepts — knowledge areas → shown on detail page + feeds "Concepts" in hero (optional)
+// types — project category labels, multiple allowed (see badge colors below)
+// stack — tools/tech used, shown on card + detail page
 //
 // Supported types → badge color:
 //   'research'     → blue
-//   'open source'  → sage
+//   'open source'  → sage   (source code is public)
+//   'live demo'    → sage   (demo available even if source is private)
 //   'side project' → amber
-//   'company work' → ink
-//   'freelance'    → terra
+//   'company work' → ink    (built for an employer or client)
+//   'freelance'    → terra  (independent contract work)
 
 export const PROJECTS_QUANTUM = [
   {
@@ -104,7 +104,7 @@ export const PROJECTS_AI = [
   {
     name: 'check-id',
     slug: 'check-id',
-    year: 2024,
+    year: 2026,
     types: ['open source', 'side project'],
     body: 'ID verification using generative phonetic AI to match spoken names against document data.',
     stack: ['Python', 'Generative AI'],

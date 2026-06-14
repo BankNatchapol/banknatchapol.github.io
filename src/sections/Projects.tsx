@@ -10,6 +10,7 @@ type BadgeTone = 'ink' | 'blue' | 'terra' | 'sage' | 'amber'
 export const TYPE_TONE: Record<string, BadgeTone> = {
   'research': 'blue',
   'open source': 'sage',
+  'live demo': 'sage',
   'side project': 'amber',
   'company work': 'ink',
   'freelance': 'terra',
