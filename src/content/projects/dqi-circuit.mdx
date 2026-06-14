@@ -12,7 +12,7 @@ Three decoding strategies are implemented with full circuit support:
 
 **Gauss-Jordan Elimination (GJE)** — Deterministic algebraic decoder that row-reduces the parity check matrix to find the correction. Produces shallower circuits than BP at the cost of adaptivity.
 
-**Unambiguous State Discrimination (USD)** — Quantum state discrimination approach; useful as a baseline for comparing interferometric advantage.
+**Lookup Table** — Classical decoder that maps each syndrome to the most likely error pattern via a precomputed table. Optimal for small codes and used as the accuracy baseline against which BPQM and GJE are compared.
 
 ## Framework Support
 

@@ -33,7 +33,9 @@ export function Nav() {
               {label}
             </a>
           ))}
-          <Button size="sm" variant="primary">Say hello</Button>
+          <a href="#contact" style={{ textDecoration: 'none' }}>
+            <Button size="sm" variant="primary">Say hello</Button>
+          </a>
         </nav>
       </div>
     </header>

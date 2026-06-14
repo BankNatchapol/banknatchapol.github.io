@@ -168,7 +168,7 @@ export const PUBLICATIONS = [
     tone: 'blue' as const,
     title: 'Quantum Circuit Design for Decoded Quantum Interferometry',
     authors: 'N. Patamawisut, N. Benchasattabuse, M. Hajdušek, R. Van Meter',
-    description: 'Full circuit implementation of the DQI algorithm with BPQM, Gauss-Jordan, and USD decoders, benchmarked across Qiskit and Cirq on IBM and Google gate sets.',
+    description: 'Full circuit implementation of the DQI algorithm with BPQM, Gauss-Jordan, and lookup-table decoders, benchmarked across Qiskit and Cirq on IBM and Google gate sets.',
     link: 'https://ieeexplore.ieee.org/document/11250226',
   },
   {
@@ -224,12 +224,12 @@ export const EXPERIENCE_PROFESSIONAL = [
 export const EXPERIENCE_EDUCATION = [
   {
     period: '2024 — 2026',
-    role: 'MS, Media and Government',
+    role: 'MS, Quantum Computing',
     org: 'Keio University, Japan',
   },
   {
     period: '2018 — 2022',
-    role: 'BS, Computer Engineering · GPA 3.80 · Ranked 2nd',
+    role: 'BS, Computer Engineering',
     org: 'KMUTT, Thailand',
   },
 ]
