@@ -35,10 +35,11 @@ This phase turns the portfolio into a live public website by wiring up an automa
   - Make sure the YAML indentation is valid (2-space indent throughout)
   - **Result:** Created `.github/workflows/deploy.yml` with `on: push: branches: [main]`, `permissions: contents: write`, and steps: checkout@v4, setup-node@v4 (node 20, npm cache), `npm ci`, `npm run build`, and `peaceiris/actions-gh-pages@v4` deploying `./dist`.
 
-- [ ] Update `package.json` scripts and add a `.gitignore` if missing:
+- [x] Update `package.json` scripts and add a `.gitignore` if missing:
   - Read the current `package.json` and `.gitignore` (if it exists at the repo root)
   - Ensure `dist/` and `node_modules/` are in `.gitignore`
   - No script changes are needed if `build` already runs `tsc -b && vite build`
+  - **Result:** No changes needed. `package.json` `build` script already runs `tsc -b && vite build`. `.gitignore` already includes `dist`, `dist-ssr`, and `node_modules`. Both files are correctly configured.
 
 - [ ] Commit and verify locally:
   - Run `npm run build` one final time and confirm `dist/` is populated with `index.html`, `404.html`, and hashed JS/CSS assets
