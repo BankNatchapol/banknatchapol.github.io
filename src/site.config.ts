@@ -107,7 +107,7 @@ export const PROJECTS_AI = [
     year: 2026,
     types: ['professional', 'live demo'],
     body: 'Thai/English name verification system for a government registration authority — rule filtering, cross-lingual phonetic analysis, and LLM decision with natural-language reasoning.',
-    stack: ['Python', 'Docker', 'Phonetic Analysis', 'Thai NLP', 'LLM Reasoning', 'Agentic AI'],
+    stack: ['Python', 'Docker', 'Phonetic', "RAG", 'Context Engineering', "Agentic AI"],
   },
 ]
 
