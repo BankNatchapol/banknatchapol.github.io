@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { Card } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { Tag } from '../components/Tag'
@@ -79,6 +80,11 @@ function ProjectCard({ name, badge, badgeTone, body, tags, wobble, tilt }: Proje
         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
           {tags.map((t) => <Tag key={t}>{t}</Tag>)}
         </div>
+        <div style={{
+          marginTop: '16px',
+          fontFamily: 'var(--font-label)', fontSize: '13px',
+          letterSpacing: '0.1em', color: 'var(--pencil-500)',
+        }}>Read more →</div>
       </Card>
     </div>
   )
@@ -115,12 +121,20 @@ export function Projects() {
 
         <GroupHeader label="Quantum" note="fridge-tested ❄" color="var(--blue-500)" />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }}>
-          {QUANTUM.map((p) => <ProjectCard key={p.name} {...p} />)}
+          {QUANTUM.map((p) => (
+            <Link key={p.name} to={`/projects/${p.slug}`} style={{ textDecoration: 'none' }}>
+              <ProjectCard {...p} />
+            </Link>
+          ))}
         </div>
 
         <GroupHeader label="AI" note="learned, not hand-tuned ✦" color="var(--terra-500)" />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }}>
-          {AI.map((p) => <ProjectCard key={p.name} {...p} />)}
+          {AI.map((p) => (
+            <Link key={p.name} to={`/projects/${p.slug}`} style={{ textDecoration: 'none' }}>
+              <ProjectCard {...p} />
+            </Link>
+          ))}
         </div>
       </div>
     </section>

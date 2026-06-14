@@ -41,10 +41,11 @@ This phase adds client-side routing and rich per-project detail pages to the por
   - Handle the case where `slug` doesn't match any project by rendering a "Project not found" message with the back-link
   <!-- Done: created src/pages/ProjectDetail.tsx. MDX_MODULES map is built at module scope (one React.lazy per known slug) to avoid hooks-ordering issues. useMemo finds project metadata by slug. Renders ← Projects back-link, project name + Badge + Tags header, and MDX body in a Suspense boundary. "Project not found" fallback renders when slug is unrecognized. All CSS uses Sketchbook design tokens. `tsc --noEmit` passes clean. -->
 
-- [ ] Make project cards clickable in `src/sections/Projects.tsx`:
+- [x] Make project cards clickable in `src/sections/Projects.tsx`:
   - Import `Link` from `react-router-dom`
   - Wrap each `<ProjectCard>` render in `<Link to={`/projects/${p.slug}`}>` with `style={{ textDecoration: 'none' }}` so the card's visual style is unchanged
   - Add a subtle "Read more →" text line at the bottom of `ProjectCard`'s JSX, styled in `var(--pencil-500)` and `var(--font-label)` font, so users know the cards are clickable
+  <!-- Done: imported Link from react-router-dom; wrapped both QUANTUM and AI card renders in <Link to={`/projects/${p.slug}`}> with textDecoration:none; added "Read more →" div at the bottom of ProjectCard's Card content using var(--pencil-500) and var(--font-label). tsc --noEmit passes clean. -->
 
 - [ ] Wire up routing in `src/App.tsx`:
   - Import `BrowserRouter`, `Routes`, and `Route` from `react-router-dom`
