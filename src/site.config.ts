@@ -67,6 +67,14 @@ export const RESEARCH_AREAS = [
 
 export const PROJECTS_QUANTUM = [
   {
+    name: 'DQI-Circuit',
+    slug: 'dqi-circuit',
+    year: 2025,
+    types: ['research', 'open source'],
+    body: 'Quantum circuit implementation of Decoded Quantum Interferometry with BPQM, Gauss-Jordan, and USD decoders — benchmarked across Qiskit and Cirq.',
+    stack: ['Python', 'Qiskit', 'Cirq', 'NumPy'],
+  },
+  {
     name: 'surfsim',
     slug: 'surfsim',
     year: 2024,
@@ -107,7 +115,7 @@ export const PROJECTS_AI = [
     year: 2026,
     types: ['professional', 'live demo'],
     body: 'Thai/English name verification system for a government registration authority — rule filtering, cross-lingual phonetic analysis, and LLM decision with natural-language reasoning.',
-    stack: ['Python', 'Docker', 'Phonetic', "RAG", 'Context Engineering', "Agentic AI"],
+    stack: ['Phonetic', "RAG", 'Context Engineering', "Agentic AI"],
   },
 ]
 

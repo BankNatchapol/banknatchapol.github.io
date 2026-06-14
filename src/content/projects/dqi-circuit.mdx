@@ -1,0 +1,51 @@
+## Overview
+
+**DQI-Circuit** is a full quantum circuit implementation of the Decoded Quantum Interferometry (DQI) algorithm, accompanying the paper [*Quantum Circuit Design for Decoded Quantum Interferometry*](https://arxiv.org/abs/2504.18334) (arXiv:2504.18334).
+
+DQI, originally introduced in [arXiv:2408.08292](https://arxiv.org/abs/2408.08292), is a quantum algorithm that exploits interferometry combined with classical decoding to solve structured search problems. This repository provides circuits for three decoding methods across two quantum computing frameworks, with comprehensive benchmarking tools.
+
+## Decoding Methods
+
+Three decoding strategies are implemented with full circuit support:
+
+**Belief Propagation Quantum Matching (BPQM)** — Probabilistic message-passing over the factor graph of the parity check matrix. Configurable rotation angle θ and unrolling depth allow tuning the trade-off between circuit depth and decoding quality.
+
+**Gauss-Jordan Elimination (GJE)** — Deterministic algebraic decoder that row-reduces the parity check matrix to find the correction. Produces shallower circuits than BP at the cost of adaptivity.
+
+**Unambiguous State Discrimination (USD)** — Quantum state discrimination approach; useful as a baseline for comparing interferometric advantage.
+
+## Framework Support
+
+The codebase provides feature-complete implementations in both **Qiskit** (IBM) and **Cirq** (Google), with identical circuit generation interfaces:
+
+- Qiskit targets IBM hardware gate sets `{ECR, ID, RZ, SX, X}` with optimization level 3
+- Cirq supports universal, IBM-like, and Google-like `{PhasedXPowGate, CZ}` gate sets
+- Generated circuits are serialised to QPY (Qiskit) and QASM (Cirq) for downstream use
+
+Both frameworks support the same BP and GJE methods, enabling fair cross-framework benchmarking of circuit depth, qubit count, and two-qubit gate overhead.
+
+## Circuit Generation
+
+Circuits are generated from a parity check matrix H (random or user-supplied). The pipeline handles:
+
+1. Matrix generation with guaranteed density constraints and no all-zero rows/columns
+2. Optimal weight calculation for state preparation
+3. Dicke state preparation circuits
+4. Decoder circuit construction (BP or GJE)
+5. Transpilation and optimisation to the target gate set
+6. Structured output with full metadata (depth, gate counts, two-qubit gates, timestamps)
+
+Matrix sizes from 4×4 up to 25×25 are covered in the batch generation scripts.
+
+## Results
+
+Benchmarking across frameworks and decoding methods reveals:
+
+- GJE consistently produces shallower circuits; BP achieves better decoding fidelity under structured noise
+- Cirq circuits run deeper than equivalent Qiskit circuits due to gate set differences
+- Two-qubit gate count scales approximately linearly with matrix density at fixed size
+
+## Links
+
+- [GitHub →](https://github.com/BankNatchapol/DQI-Circuit)
+- [arXiv paper →](https://arxiv.org/abs/2504.18334)
