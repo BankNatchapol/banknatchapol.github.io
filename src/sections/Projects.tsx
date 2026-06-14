@@ -18,6 +18,7 @@ export const TYPE_TONE: Record<string, BadgeTone> = {
 interface Project {
   name: string
   slug: string
+  year: number
   types: string[]
   body: string
   stack: string[]
@@ -28,13 +29,13 @@ interface Project {
 const WOBBLES: (0 | 1 | 2)[] = [0, 1, 2]
 const TILTS = [-1, 1]
 
-export const QUANTUM: Project[] = PROJECTS_QUANTUM.map((p, i) => ({
-  ...p, wobble: WOBBLES[i % 3], tilt: TILTS[i % 2],
-}))
+export const QUANTUM: Project[] = [...PROJECTS_QUANTUM]
+  .sort((a, b) => b.year - a.year)
+  .map((p, i) => ({ ...p, wobble: WOBBLES[i % 3], tilt: TILTS[i % 2] }))
 
-export const AI: Project[] = PROJECTS_AI.map((p, i) => ({
-  ...p, wobble: WOBBLES[i % 3], tilt: TILTS[i % 2],
-}))
+export const AI: Project[] = [...PROJECTS_AI]
+  .sort((a, b) => b.year - a.year)
+  .map((p, i) => ({ ...p, wobble: WOBBLES[i % 3], tilt: TILTS[i % 2] }))
 
 function useDrawOnScroll(ref: React.RefObject<HTMLElement | null>) {
   useEffect(() => {
@@ -49,7 +50,7 @@ function useDrawOnScroll(ref: React.RefObject<HTMLElement | null>) {
   }, [ref])
 }
 
-function ProjectCard({ name, slug: _slug, types, body, stack, wobble, tilt }: Project) {
+function ProjectCard({ name, slug: _slug, year, types, body, stack, wobble, tilt }: Project) {
   const ref = useRef<HTMLDivElement>(null)
   useDrawOnScroll(ref)
   return (
@@ -60,11 +61,16 @@ function ProjectCard({ name, slug: _slug, types, body, stack, wobble, tilt }: Pr
             <Badge key={t} tone={TYPE_TONE[t] ?? 'ink'}>{t}</Badge>
           ))}
         </div>
-        <span style={{
-          fontFamily: 'var(--font-mono)', fontWeight: 700,
-          fontSize: '20px', color: 'var(--ink-900)',
-          display: 'block', marginBottom: '8px',
-        }}>{name}</span>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '8px' }}>
+          <span style={{
+            fontFamily: 'var(--font-mono)', fontWeight: 700,
+            fontSize: '20px', color: 'var(--ink-900)',
+          }}>{name}</span>
+          <span style={{
+            fontFamily: 'var(--font-mono)', fontSize: '13px',
+            color: 'var(--pencil-500)',
+          }}>{year}</span>
+        </div>
         <p style={{
           fontFamily: 'var(--font-body)', fontSize: '17px', lineHeight: 1.65,
           color: 'var(--ink-700)', margin: '0 0 14px',

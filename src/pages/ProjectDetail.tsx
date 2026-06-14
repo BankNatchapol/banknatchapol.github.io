@@ -123,16 +123,24 @@ export function ProjectDetail() {
       <div style={{ maxWidth: 'var(--content)', margin: '0 auto' }}>
         <a href="/#projects" style={backLinkStyle}>← Projects</a>
 
-        <h1 style={{
-          fontFamily: 'var(--font-mono)',
-          fontWeight: 700,
-          fontSize: 'clamp(32px, 5vw, 48px)',
-          lineHeight: 1,
-          margin: '0 0 16px',
-          color: 'var(--ink-900)',
-        }}>
-          {project.name}
-        </h1>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px', marginBottom: '16px' }}>
+          <h1 style={{
+            fontFamily: 'var(--font-mono)',
+            fontWeight: 700,
+            fontSize: 'clamp(32px, 5vw, 48px)',
+            lineHeight: 1,
+            margin: 0,
+            color: 'var(--ink-900)',
+          }}>
+            {project.name}
+          </h1>
+          <span style={{
+            fontFamily: 'var(--font-mono)', fontSize: '18px',
+            color: 'var(--pencil-500)', flexShrink: 0,
+          }}>
+            {project.year}
+          </span>
+        </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '56px' }}>
           <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>

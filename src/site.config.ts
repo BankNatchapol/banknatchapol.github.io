@@ -68,6 +68,7 @@ export const PROJECTS_QUANTUM = [
   {
     name: 'surfsim',
     slug: 'surfsim',
+    year: 2024,
     types: ['research', 'open source'],
     body: 'A GPU surface-code simulator that runs a distance-21 patch in real time.',
     stack: ['CUDA', 'C++', 'Python', 'QEC'],
@@ -75,6 +76,7 @@ export const PROJECTS_QUANTUM = [
   {
     name: 'decoderd',
     slug: 'decoderd',
+    year: 2023,
     types: ['research'],
     body: 'Low-latency decoder daemon that talks to the control stack over shared memory.',
     stack: ['Rust', 'decoding'],
@@ -85,6 +87,7 @@ export const PROJECTS_AI = [
   {
     name: 'ml-decoder',
     slug: 'ml-decoder',
+    year: 2024,
     types: ['research'],
     body: 'A neural decoder for the surface code that beats MWPM at high noise.',
     stack: ['Python', 'PyTorch', 'GNN'],
@@ -92,6 +95,7 @@ export const PROJECTS_AI = [
   {
     name: 'scholar-rag',
     slug: 'scholar-rag',
+    year: 2023,
     types: ['side project'],
     body: 'A retrieval-augmented assistant over the full quant-ph arXiv corpus.',
     stack: ['Python', 'LLM', 'RAG'],
@@ -99,6 +103,7 @@ export const PROJECTS_AI = [
   {
     name: 'check-id',
     slug: 'check-id',
+    year: 2024,
     types: ['open source', 'side project'],
     body: 'ID verification using generative phonetic AI to match spoken names against document data.',
     stack: ['Python', 'Generative AI'],
