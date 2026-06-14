@@ -10,10 +10,11 @@ This phase adds client-side routing and rich per-project detail pages to the por
   - Run `npm install --save-dev @types/react-router-dom` (types are bundled in react-router-dom v6+, skip if not needed)
   <!-- Done: installed react-router-dom@7.17.0, @mdx-js/rollup, @mdx-js/react. @types/react-router-dom skipped — v7 bundles its own types. -->
 
-- [ ] Configure Vite and TypeScript for MDX support:
+- [x] Configure Vite and TypeScript for MDX support:
   - In `vite.config.ts`, import `mdx` from `@mdx-js/rollup` and add it to the plugins array **before** the react plugin, with options `{ remarkPlugins: [], rehypePlugins: [] }`
   - In `tsconfig.app.json`, add `"mdx"` to `compilerOptions.include` if not already covered, and ensure `"jsx": "react-jsx"` is set
   - Add a type declaration file `src/mdx.d.ts` that declares `*.mdx` modules as `React.ComponentType<{ components?: Record<string, React.ComponentType> }>`
+  <!-- Done: vite.config.ts updated with mdx() plugin before react(); tsconfig.app.json already had jsx:react-jsx and include:["src"] covers .mdx files; src/mdx.d.ts created with *.mdx module declaration. -->
 
 - [ ] Extend the Project type and data in `src/sections/Projects.tsx` to include a `slug` field:
   - Add `slug: string` to the `Project` interface
