@@ -1,0 +1,36 @@
+## Overview
+
+**Phonetic Alignment** is a Thai forced-alignment pipeline built on top of MFA (Montreal Forced Aligner). The standard MFA pipeline for Thai relies on Phonetisaurus for grapheme-to-phoneme conversion and was trained on limited Thai data — producing alignment boundaries only accurate to ~100ms. This project replaces both the phonemizer and the acoustic model to achieve sub-millisecond precision.
+
+---
+
+## What Was Improved
+
+### Phonemizer: Phonetisaurus → Transformers
+
+Phonetisaurus uses a weighted finite-state transducer approach to G2P conversion. For Thai — a tonal, scriptio continua language with complex syllable structure — this produces frequent misreadings of edge cases.
+
+We replaced it with a fine-tuned Transformer-based G2P model trained on curated Thai lexicon data, yielding more accurate phoneme sequences as input to the aligner.
+
+### Acoustic Model: Fine-Tuned on Refined Thai Data
+
+The MFA acoustic model was retrained from scratch on a curated Thai speech corpus with cleaned transcriptions and verified alignments. This substantially improves the model's ability to locate phoneme boundaries precisely within the audio signal.
+
+---
+
+## Results
+
+| | Boundary Precision |
+|---|---|
+| MFA baseline (Phonetisaurus) | ~100ms |
+| This pipeline | sub-millisecond |
+
+A **~100× improvement** in temporal precision — alignment boundaries are now accurate to under a millisecond, enabling reliable phoneme-level supervision for downstream TTS and ASR training.
+
+---
+
+## Applications
+
+- Phoneme-level forced alignment for Thai TTS training data
+- Boundary supervision for Thai ASR fine-tuning
+- Phonetic analysis and linguistic research on Thai speech

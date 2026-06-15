@@ -98,6 +98,14 @@ export const PROJECTS_AI = [
     stack: ['Phonetic', 'RAG', 'Context Engineering', 'Agentic AI'],
   },
   {
+    name: 'Phonetic Alignment',
+    slug: 'phonetic-alignment',
+    year: 2024,
+    types: ['professional'],
+    body: 'Thai forced-alignment pipeline built on MFA — replacing Phonetisaurus with a fine-tuned Transformers phonemizer and retraining the acoustic model on curated Thai data. Improved boundary precision from ~100ms to sub-millisecond, a 100× gain over the vanilla MFA baseline.',
+    stack: ['Python', 'MFA', 'Transformers', 'Thai NLP', 'Phonetics'],
+  },
+  {
     name: 'Thai G2P',
     slug: 'thai-g2p',
     year: 2024,
