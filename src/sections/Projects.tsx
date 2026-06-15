@@ -114,7 +114,6 @@ function GroupHeader({ label, note, color }: { label: string; note: string; colo
 
 const DEFAULT_VISIBLE = 3
 
-const COLS = 3
 
 function ProjectGroup({ projects, label, note, color }: {
   projects: Project[]; label: string; note: string; color: string
@@ -131,12 +130,7 @@ function ProjectGroup({ projects, label, note, color }: {
       </div>
       {/* Cards break out to content-wide; fixed column count so expand never reflows */}
       <div style={{ maxWidth: 'var(--content-wide)', margin: '0 auto' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: `repeat(${Math.min(projects.length, COLS)}, minmax(0, 380px))`,
-          justifyContent: 'center',
-          gap: '24px',
-        }}>
+        <div className="project-grid">
           {visible.map((p) => (
             <Link key={p.name} to={`/projects/${p.slug}`} style={{ textDecoration: 'none' }}>
               <ProjectCard {...p} />
