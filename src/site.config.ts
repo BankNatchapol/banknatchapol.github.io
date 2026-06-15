@@ -12,7 +12,7 @@ export const PERSONAL = {
   title: 'AI Engineer & Quantum Researcher',
 
   // One-paragraph bio shown in the hero section
-  bio: 'Deep technology enthusiast — AI by day, quantum by night. Passionate about bridging the gap between theory and real-world implementation, from published quantum algorithms and circuit design to production speech AI and LLM systems.',
+  bio: 'Deep technology enthusiast — AI by day, quantum by night. Passionate about bridging the gap between theory and real-world implementation.',
 
   // Profile photo — put your image in public/ and set the path below.
   // Leave as '' to show initials instead.
@@ -120,9 +120,10 @@ export const PROJECTS_AI = [
     name: 'Thai G2P',
     slug: 'thai-g2p',
     year: 2025,
-    types: ['professional'],
-    body: 'End-to-end Thai grapheme-to-phoneme model and phonetic data pipeline — covering tokenization, IPA conversion, and alignment for downstream TTS and ASR.',
-    stack: ['Python', 'PyTorch', 'Thai NLP', 'Phonetics'],
+    types: ['professional', 'research', 'live demo'],
+    body: 'Thai grapheme-to-phoneme model built on MarianMT — solving two core failures of existing phonemizers: Thai tokenization errors and poor out-of-vocabulary handling. Custom OOV phoneme data labeling enabled the seq2seq model to generalize to unseen words beyond what rule-based approaches could handle.',
+    stack: ['Python', 'PyTorch', 'MarianMT', 'Thai NLP', 'Phonetics'],
+    demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20Thai%20G2P',
   },
   {
     name: 'Agentic Chatbot',

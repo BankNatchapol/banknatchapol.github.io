@@ -1,7 +1,37 @@
 ## Overview
 
-**Thai G2P** is an end-to-end Thai grapheme-to-phoneme system and phonetic data pipeline built at DeepCapital Thailand, designed to support downstream TTS and ASR workloads at production quality.
+**Thai G2P** is a Thai grapheme-to-phoneme system built on MarianMT, a state-of-the-art neural sequence-to-sequence model. Existing phonemizers fail on Thai for two structural reasons — this project addresses both with a data-driven approach that generalizes to unseen words far beyond what rule-based or finite-state methods can handle.
 
 ---
 
-*Content coming soon.*
+## The Two Problems
+
+### 1. Thai Tokenization
+
+Thai is written without spaces between words. Phonemizers that assume whitespace-delimited tokens produce systematic errors on Thai text — a word boundary mistake at the input propagates directly into wrong phoneme output. Handling this correctly requires a tokenizer that understands Thai syllable and word structure before phonemization begins.
+
+### 2. Out-of-Vocabulary (OOV) Handling
+
+Rule-based and lookup-table G2P approaches (Phonetisaurus and similar FST-based tools) rely on a fixed lexicon. Any word not in the dictionary — loanwords, proper nouns, technical terms, newly coined words — either gets dropped or falls back to a heuristic that often fails for Thai phonology.
+
+---
+
+## The Approach
+
+Rather than patch a rule-based system, G2P is framed as a **sequence-to-sequence translation problem**: grapheme sequence → phoneme sequence. MarianMT, originally designed for neural machine translation, is well-suited for this — it learns character-level phonological patterns from data and applies them generatively to sequences it has never seen.
+
+**Data labeling for OOV:** A custom dataset of out-of-vocabulary Thai words was annotated with correct phoneme transcriptions. This gave the model explicit supervision on the hard cases that break lookup-based approaches — loanwords, rare terms, and edge-case syllable patterns.
+
+**Result:** The trained model handles OOV words that were entirely outside the reach of contemporary Thai phonemizers, enabling reliable phonemization for downstream TTS and ASR pipelines.
+
+---
+
+## Applications
+
+- Front-end phonemizer for the Thai High-Naturalness TTS system
+- Phoneme input for the Phonetic Alignment pipeline
+- Any Thai NLP pipeline requiring reliable phoneme sequences
+
+## Links
+
+- [Request a demo →](mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20Thai%20G2P)
