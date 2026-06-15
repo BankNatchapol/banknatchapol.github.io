@@ -2,13 +2,23 @@
    RESPONSIVE OVERRIDES
    ============================================================ */
 
-/* Project card grid — auto-fit with min 280px so cards drop to
-   2 columns on tablet and 1 on mobile rather than squishing */
+/* Project card grid — explicit 3 columns, responsive breakpoints */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 380px));
-  justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+}
+
+@media (max-width: 860px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Nav — hide section anchor links on narrow viewports */
