@@ -138,9 +138,10 @@ export const PROJECTS_AI = [
     name: 'Deep Speech Data Pipeline',
     slug: 'deep-asr-pipeline',
     year: 2024,
-    types: ['professional', 'research'],
+    types: ['professional', 'research', 'live demo'],
     body: 'Fully automated pipeline from YouTube video URLs to labeled speech segments — yt-dlp download, loudness normalization, NISQA quality pre-filtering, Bandit denoising, speaker diarization and verification, inaSpeechSegmentor silence-aware chunking, Gemini/Whisper ASR, and forced alignment — outputting clean wav files with paired transcripts.',
     stack: ['Python', 'yt-dlp', 'NISQA', 'ModelScope', 'Whisper', 'Gemini API', 'Forced Alignment', 'Data Engineering', 'Multiprocessing'],
+    demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20Deep%20Speech%20Data%20Pipeline',
   },
   {
     name: 'Agentic Chatbot',

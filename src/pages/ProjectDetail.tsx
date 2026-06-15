@@ -65,6 +65,24 @@ const PROSE: MDXComponents = {
     margin: '48px 0',
   }} />,
   strong: (p: AnyProps) => <strong style={{ color: 'var(--ink-900)', fontWeight: 700 }} {...p} />,
+  table: (p: AnyProps) => <table style={{
+    width: '100%', borderCollapse: 'collapse',
+    fontFamily: 'var(--font-body)', fontSize: '16px',
+    margin: '0 0 24px',
+  }} {...p} />,
+  thead: (p: AnyProps) => <thead style={{ borderBottom: '2px solid var(--paper-edge)' }} {...p} />,
+  tbody: (p: AnyProps) => <tbody {...p} />,
+  tr: (p: AnyProps) => <tr style={{ borderBottom: '1px solid var(--paper-edge)' }} {...p} />,
+  th: (p: AnyProps) => <th style={{
+    fontFamily: 'var(--font-label)', fontSize: '12px',
+    letterSpacing: '0.14em', textTransform: 'uppercase',
+    color: 'var(--pencil-500)', padding: '8px 12px 8px 0',
+    textAlign: 'left', fontWeight: 600,
+  }} {...p} />,
+  td: (p: AnyProps) => <td style={{
+    color: 'var(--ink-700)', padding: '10px 12px 10px 0',
+    lineHeight: 1.6,
+  }} {...p} />,
 }
 
 const ALL_PROJECTS = [...QUANTUM, ...AI]
