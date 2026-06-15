@@ -99,6 +99,15 @@ export const PROJECTS_AI = [
     demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20ID%20Checker',
   },
   {
+    name: 'Deep Speech Data Pipeline',
+    slug: 'deep-asr-pipeline',
+    year: 2025,
+    types: ['professional', 'live demo'],
+    body: 'Fully automated pipeline from YouTube video URLs to labeled speech segments — yt-dlp download, loudness normalization, NISQA quality pre-filtering, Bandit denoising, speaker diarization and verification, inaSpeechSegmentor silence-aware chunking, Gemini/Whisper ASR, and forced alignment — outputting clean wav files with paired transcripts.',
+    stack: ['Web Scraping', 'Data Validation', 'Whisper', 'ASR', 'Phonetics', 'Data Engineering', 'Multiprocessing'],
+    demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20Deep%20Speech%20Data%20Pipeline',
+  },
+  {
     name: 'Phonetic Alignment',
     slug: 'phonetic-alignment',
     year: 2025,
@@ -133,15 +142,6 @@ export const PROJECTS_AI = [
     body: 'Thai grapheme-to-phoneme model built on MarianMT — solving two core failures of existing phonemizers: Thai tokenization errors and poor out-of-vocabulary handling. Custom OOV phoneme data labeling enabled the seq2seq model to generalize to unseen words beyond what rule-based approaches could handle.',
     stack: ['Phonetics', 'Transformers', 'G2P', 'Data Labeling'],
     demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20Thai%20G2P',
-  },
-  {
-    name: 'Deep Speech Data Pipeline',
-    slug: 'deep-asr-pipeline',
-    year: 2024,
-    types: ['professional', 'research', 'live demo'],
-    body: 'Fully automated pipeline from YouTube video URLs to labeled speech segments — yt-dlp download, loudness normalization, NISQA quality pre-filtering, Bandit denoising, speaker diarization and verification, inaSpeechSegmentor silence-aware chunking, Gemini/Whisper ASR, and forced alignment — outputting clean wav files with paired transcripts.',
-    stack: ['Python', 'yt-dlp', 'NISQA', 'ModelScope', 'Whisper', 'Gemini API', 'Forced Alignment', 'Data Engineering', 'Multiprocessing'],
-    demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20Deep%20Speech%20Data%20Pipeline',
   },
   {
     name: 'Agentic Chatbot',
