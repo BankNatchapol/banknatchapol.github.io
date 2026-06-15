@@ -1,3 +1,8 @@
+<figure style={{ margin: '0 0 48px', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--paper-edge)' }}>
+  <img src="/images/nekoai.png" alt="VirtualSoul — Neko-Chan live on YouTube playing Gartic drawing game" style={{ width: '100%', display: 'block' }} />
+  <figcaption style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: 'var(--ink-500)', textAlign: 'center', padding: '10px 12px', fontStyle: 'italic', letterSpacing: '0.03em' }}>Neko-Chan live on YouTube — drawing game stream (Gartic.io)</figcaption>
+</figure>
+
 ## Overview
 
 **VirtualSoul** is an autonomous AI VTuber desktop application — a character avatar that streams live on YouTube and Twitch 24 hours a day without a human behind the keyboard. It reads incoming chat messages, generates in-character responses via LLM, speaks them in Thai with sub-second latency TTS, and drives a VTube Studio avatar with synchronized animations. When chat goes silent, it generates its own monologue to keep the stream alive.
@@ -129,6 +134,24 @@ A desktop UI (Electron + WebSocket) gives the streamer full control without stop
 - Pause and resume the agent loop
 
 All changes propagate to the running harness in real time via WebSocket messages.
+
+---
+
+## Game Integration
+
+Beyond conversation, the character can actively participate in games — giving it something to *do* on stream rather than just reacting to chat.
+
+### Drawing Game (Gartic.io)
+
+A custom drawing engine controls the mouse to draw on the Gartic canvas. The character receives a word prompt, generates a drawing plan, and executes it through programmatic mouse movements — producing recognizable (if imperfect) drawings that the audience can guess. The drawing behavior is part of the character's persona, not a generic bot.
+
+### GeoGuessr
+
+A vision pipeline takes screenshots of the game's street view, passes them to GPT-4V for scene analysis — reading signs, vegetation, road markings, architecture — and generates a location guess with reasoning. The character narrates its thought process live in Thai as it looks for clues, making the reasoning part of the entertainment.
+
+### Architecture
+
+Both integrations share the same harness loop — game state is just another input type, and the character's response (speech + action) flows through the same LLM → TTS → avatar pipeline. Each game has its own module that translates game state into prompts and translates LLM output back into physical actions (mouse draw, map click).
 
 ---
 
