@@ -283,7 +283,7 @@ export const EXPERIENCE_RESEARCH = [
     org: 'Quantum Optics Lab, Thammasat University',
   },
   {
-    period: '2020 — 2023',
+    period: '2020 — 2023, 2026 — now',
     role: 'Research Assistant',
     org: 'Quantum Computing & Information Research Centre, KMUTT',
   },

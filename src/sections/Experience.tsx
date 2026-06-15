@@ -77,14 +77,14 @@ export function Experience() {
           accentColor="var(--terra-500)"
         />
         <TimelineGroup
-          label="Education"
-          entries={EXPERIENCE_EDUCATION}
-          accentColor="var(--blue-500)"
-        />
-        <TimelineGroup
           label="Research"
           entries={EXPERIENCE_RESEARCH}
           accentColor="var(--sage-500)"
+        />
+        <TimelineGroup
+          label="Education"
+          entries={EXPERIENCE_EDUCATION}
+          accentColor="var(--blue-500)"
         />
       </div>
     </section>
