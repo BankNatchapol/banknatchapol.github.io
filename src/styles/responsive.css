@@ -11,9 +11,9 @@
 }
 
 .project-grid > * {
-  flex: 1 1 280px;
-  max-width: 360px;
-  min-width: 240px;
+  flex: 1 1 320px;
+  max-width: 420px;
+  min-width: 260px;
 }
 
 @media (max-width: 860px) {

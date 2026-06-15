@@ -46,7 +46,7 @@ function DrawCard({ wobble, tilt, title, body }: typeof AREAS[number]) {
 export function Research() {
   return (
     <section id="research" style={{ borderTop: '2px solid var(--paper-edge)', padding: '120px 40px' }}>
-      <div style={{ maxWidth: 'var(--content)', margin: '0 auto' }}>
+      <div style={{ maxWidth: 'var(--content-wide)', margin: '0 auto' }}>
         <div style={{
           fontFamily: 'var(--font-label)', fontSize: '13px',
           letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--pencil-500)',
@@ -58,7 +58,7 @@ export function Research() {
         }}>What I work on</h2>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
           gap: '32px', marginTop: '48px',
         }}>
           {AREAS.map((area) => <DrawCard key={area.title} {...area} />)}
