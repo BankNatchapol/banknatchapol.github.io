@@ -141,8 +141,8 @@ function ProjectGroup({ projects, label, note, color }: {
       <div style={{ maxWidth: 'var(--content)', margin: '0 auto' }}>
         <GroupHeader label={label} note={note} color={color} />
       </div>
-      {/* Cards break out to content-wide; fixed column count so expand never reflows */}
-      <div style={{ maxWidth: 'var(--content-wide)', margin: '0 auto' }}>
+      {/* Cards break out wider than content; fixed column count so expand never reflows */}
+      <div style={{ maxWidth: '1520px', margin: '0 auto' }}>
         <div className="project-grid">
           {visible.map((p) => (
             <Link key={p.name} to={`/projects/${p.slug}`} style={{ textDecoration: 'none' }}>
