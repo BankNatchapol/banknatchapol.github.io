@@ -139,8 +139,13 @@ export const PROJECTS_AI = [
 // ------------------------------------------------------------
 
 export const SKILLS_TECH: string[] = [
-  'PyTorch', 'Tensorflow', 'Qiskit', 'Cirq', 'Pennylane',
-  'Docker', 'Git', 'LaTeX', 'Linux',
+  'Python', 'PyTorch', 'Tensorflow',
+  'Qiskit', 'Cirq', 'PennyLane',
+  'HuggingFace', 'FastAPI',
+  'LangChain', 'RAG', 'Vector Databases',
+  'TTS', 'ASR', 'G2P',
+  'Docker', 'Git', 'LaTeX', 'Linux', 'CI/CD',
+  'AWS', 'GCP', 'Azure'
 ]
 
 export const SKILLS_CONCEPTS: string[] = [
@@ -148,30 +153,39 @@ export const SKILLS_CONCEPTS: string[] = [
   'Quantum Machine Learning',
   'Quantum Error Correction',
   'Quantum Information Theory',
-
+  'Benchmarking Quantum Systems',
+  
   'Compiler',
 
-  'Data Engineering',
-  'Vector Databases',
-
+  'Natural Language Processing',
   'Probabilistic ML',
   'Operation Research',
-  
-  'Speech Processing',
-  'Phonetic',
 
-  'context Engineering',
-  'Harness Engineering',
+  'Speech Processing',
+  'Phonetics',
+  'Voice Cloning',
+
+  'Data Engineering',
+  'MLOps',
+
   'Loop Engineering',
+  'Context Engineering',
+  'Prompt Engineering',
   'Agentic AI',
-  ]
+]
+
 
 export const SKILLS_OTHER: string[] = [
   'Research Leadership',
   'Technical Writing',
+  'Academic Writing',
+  'Public Speaking',
+  'Project Management',
   'Community Organizing',
+  'Cross-cultural Collaboration',
   'Mentoring',
 ]
+
 
 // ------------------------------------------------------------
 // PUBLICATIONS  (Section 03)
