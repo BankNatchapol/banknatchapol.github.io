@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { Badge } from '../components/Badge'
 import { Tag } from '../components/Tag'
 import { Diagram } from '../components/Diagram'
+import { HandwrittenLineChart } from '../components/HandwrittenLineChart'
 import { QUANTUM, AI, TYPE_TONE } from '../sections/Projects'
 
 type AnyProps = Record<string, unknown>
@@ -12,6 +13,7 @@ type MDXComponents = Record<string, React.ComponentType<any>>
 
 const PROSE: MDXComponents = {
   Diagram,
+  HandwrittenLineChart,
   h2: (p: AnyProps) => <h2 style={{
     fontFamily: 'var(--font-display)', fontWeight: 700,
     fontSize: 'clamp(24px, 3vw, 32px)', lineHeight: 1.1,

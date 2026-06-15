@@ -2,22 +2,31 @@
    RESPONSIVE OVERRIDES
    ============================================================ */
 
-/* Project card grid — explicit 3 columns, responsive breakpoints */
+/* Project card grid — flexbox so partial rows stay centered */
 .project-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 24px;
 }
 
+.project-grid > * {
+  flex: 1 1 280px;
+  max-width: 360px;
+  min-width: 240px;
+}
+
 @media (max-width: 860px) {
-  .project-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .project-grid > * {
+    flex: 1 1 240px;
+    max-width: calc(50% - 12px);
   }
 }
 
 @media (max-width: 540px) {
-  .project-grid {
-    grid-template-columns: 1fr;
+  .project-grid > * {
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 }
 

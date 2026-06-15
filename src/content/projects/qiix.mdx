@@ -1,0 +1,102 @@
+import { neqrTestLoss } from '../../data/qiix-results'
+
+## Overview
+
+**Qiix** stands for improved **Q**uantum **i**mage encoding for quantum machine learning with **i**nformation mi**x**er. The project proposes adding an information mixer layer — built from QFT and QSVT — after FRQI image encoding, enabling the quantum state to carry globally-mixed pixel information rather than per-pixel local amplitude values.
+
+Built at **Qiskit Quantum Hackathon 2024 Taiwan** (Group 12) and awarded the **Industry Prize**.
+
+**Team:** Natchapol Patamawisut, Chih-Hao, Zih-Chao Hong, Aninda Astuti, Xiang-Yu Wen
+**Mentor:** Yen Jui Chang
+
+---
+
+## Background
+
+### FRQI — Flexible Representation of Quantum Images
+
+FRQI encodes a 2ⁿ × 2ⁿ grayscale image into a single quantum state by mapping each pixel's intensity to a rotation angle. The position is stored in the computational basis and the pixel value in the amplitude:
+
+```
+|I(θ)⟩ = (1/2ⁿ) Σᵢ (sin θᵢ |0⟩ + cos θᵢ |1⟩) ⊗ |i⟩
+```
+
+The result is a superposition of the form `PixelValue₀|00⟩ + PixelValue₁|01⟩ + …` — compact but local: each basis state encodes exactly one pixel.
+
+### NEQR — Novel Enhanced Quantum Representation
+
+NEQR uses the basis state of a qubit sequence to store grayscale values directly:
+
+```
+|I⟩ = (1/2ⁿ) Σᵧ Σₓ |f(y,x)⟩ |yx⟩
+```
+
+Both FRQI and NEQR were implemented and verified by reconstructing images from quantum state measurements.
+
+---
+
+## The Mixer Concept
+
+Classical convolution only aggregates **neighboring** pixels. Attention mechanisms (transformers) aggregate **all** positions — but at quadratic cost. **FNet** showed that replacing attention with a fixed Fourier transform (a "mixer") achieves comparable performance while being much more efficient.
+
+Inspired by FNet and the quantum transformer model **Quixer** (QUantum mIXER — using LCU + QSVT as building blocks), we apply the same principle to quantum image encoding: after FRQI, apply a quantum mixer so that each component of the resulting state contains information from all pixels, not just one.
+
+---
+
+## Proposed Method
+
+<Diagram src="/diagrams/QIIX.excalidraw" caption="FRQI → Mixer (QFT + QSVT) pipeline" maxWidth="700px" />
+
+- **FRQI**: encodes image pixels into quantum amplitudes
+- **QFT**: mixes pixel values across all positions (analogous to Fourier mixing in FNet)
+- **QSVT**: applies a non-linear transformation on the singular values, further enriching the representation
+
+The mixer is a drop-in module that sits between encoding and the downstream quantum ML circuit.
+
+---
+
+## Full Workflow
+
+```
+Input image → FRQI → Mixer (QFT + QSVT) → Feed Forward → Measurement → Cost function → Update
+```
+
+- **Optimizer:** Adam
+- **Gradient method:** Finite difference gradient
+- **Cost function:** Binary cross entropy
+
+We compared two settings:
+1. `FRQI → Feed Forward` (baseline)
+2. `FRQI + Mixer → Feed Forward` (Qiix)
+
+Both on an ideal simulator and on a noisy simulator (IBM Nazca noise model).
+
+---
+
+## Results
+
+Test loss on NEQR-encoded images, measured every 10 training iterations (140 total).
+
+<HandwrittenLineChart
+  title="NEQR — Test Loss"
+  xLabels={neqrTestLoss.labels}
+  yLabel="test loss"
+  series={neqrTestLoss.series}
+/>
+
+Adding the QFT information mixer consistently reduces test loss throughout training. Both models converge, but the QFT mixer reaches a lower final loss (~0.464 vs ~0.483 at iteration 140).
+
+---
+
+## Discussion & Future Work
+
+- Mixer consistently improves convergence in the noise-free regime
+- Noise sensitivity is the main barrier on current hardware — addressable via parameter-shift gradients or noise-aware compilation
+- Potential extensions: incorporating the mixer into NEQR, QPIE, or other encoding schemes; exploring linear or LCU-based mixer implementations; reducing circuit depth
+
+---
+
+## Links
+
+- [GitHub →](https://github.com/BankNatchapol/QIMX)
+- [Hackathon Award (Keio news) ↗](https://www.keio.ac.jp/ja/sfc-pem/news/20241017-1/)

@@ -6,6 +6,8 @@ type DiagramJson = { elements: any[]; appState: Record<string, any>; files: Reco
 interface DiagramProps {
   src: string
   caption?: string
+  maxWidth?: string
+  maxHeight?: string
 }
 
 function resolvePublicAsset(src: string) {
@@ -21,7 +23,7 @@ function resolvePublicAsset(src: string) {
   return `${baseUrl}${assetPath}`
 }
 
-export function Diagram({ src, caption }: DiagramProps) {
+export function Diagram({ src, caption, maxWidth = '1400px', maxHeight }: DiagramProps) {
   const [svgUrl, setSvgUrl] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const assetSrc = resolvePublicAsset(src)
@@ -33,6 +35,7 @@ export function Diagram({ src, caption }: DiagramProps) {
 
     fetch(assetSrc)
       .then((r) => {
+        if (r.status === 404) throw new Error('__missing__')
         if (!r.ok) throw new Error(`Could not load ${assetSrc}`)
         return r.json()
       })
@@ -67,13 +70,22 @@ export function Diagram({ src, caption }: DiagramProps) {
   )
 
   if (error) {
+    const isMissing = error === '__missing__'
     return (
       <div style={{
         border: '2px dashed var(--paper-edge)', borderRadius: '8px',
-        padding: '24px', color: 'var(--pencil-500)', fontFamily: 'var(--font-mono)',
-        fontSize: '13px', margin: '24px 0',
+        padding: '32px', textAlign: 'center',
+        color: 'var(--pencil-500)', margin: '32px 0',
       }}>
-        Could not load diagram: {error}
+        {isMissing ? (
+          <span style={{ fontFamily: 'var(--font-hand)', fontSize: '18px' }}>
+            ✏️ diagram coming soon
+          </span>
+        ) : (
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '13px' }}>
+            Could not load diagram: {error}
+          </span>
+        )}
       </div>
     )
   }
@@ -86,13 +98,13 @@ export function Diagram({ src, caption }: DiagramProps) {
       left: '50%',
       transform: 'translateX(-50%)',
       width: '90vw',
-      maxWidth: '1400px',
+      maxWidth: maxWidth,
     }}>
       {svgUrl ? (
         <img
           src={svgUrl}
           alt={caption ?? 'diagram'}
-          style={{ width: '100%', height: 'auto', display: 'block' }}
+          style={{ width: '100%', height: 'auto', display: 'block', maxHeight: maxHeight ?? undefined, objectFit: 'contain' }}
         />
       ) : loadingDiv}
       {caption && (

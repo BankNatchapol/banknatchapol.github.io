@@ -16,7 +16,7 @@ export const PERSONAL = {
 
   // Profile photo — put your image in public/ and set the path below.
   // Leave as '' to show initials instead.
-  photo: '/profile.JPG',
+  photo: '/profile.jpg',
   photoAlt: 'Natchapol Patamawisut',
 
   // Initials shown when no photo is set
@@ -77,16 +77,16 @@ export const PROJECTS_QUANTUM = [
     year: 2025,
     types: ['research', 'open source'],
     body: 'Quantum circuit implementation of Decoded Quantum Interferometry with BPQM, Gauss-Jordan, and lookup-table decoders — benchmarked across Qiskit and Cirq.',
-    stack: ['Python', 'Qiskit', 'Cirq', 'NumPy'],
+    stack: ['Qiskit', 'Cirq', 'Operation Research', 'DQI', 'Syndrome Decoding'],
     award: 'Best Paper · 2nd Place — IEEE Quantum Week 2025 (QALG)',
   },
   {
-    name: 'QIMX',
-    slug: 'qimx',
+    name: 'Qiix',
+    slug: 'qiix',
     year: 2024,
     types: ['research', 'open source'],
-    body: 'Enhanced quantum image encoding using a quantum information mixer, improving ML model convergence on quantum-encoded image data.',
-    stack: ['Python', 'Qiskit', 'Quantum ML'],
+    body: 'Improved quantum image encoding for QML using a quantum information mixer (QFT + QSVT) — faster convergence than standard FRQI on ideal simulators.',
+    stack: ['PennyLane', 'QFT', 'QSVT', 'Quantum ML', 'Transformers', 'Quantum Image Encoding'],
     award: 'Industry Prize — Qiskit Quantum Hackathon 2024 Taiwan',
   },
 ]
@@ -229,7 +229,7 @@ export const AWARDS = [
   {
     title: 'Industry Prize',
     event: 'Qiskit Quantum Hackathon 2024 Taiwan',
-    note: 'For QIMX — enhanced quantum image encoding using a quantum information mixer, demonstrating improved ML performance with faster convergence.',
+    note: 'For Qiix — improved quantum image encoding for QML with a QFT + QSVT information mixer, demonstrating faster convergence than standard FRQI on ideal simulators.',
     year: '2024',
     tone: 'amber' as const,
     link: 'https://www.keio.ac.jp/ja/sfc-pem/news/20241017-1/',
