@@ -64,10 +64,11 @@ function ProjectCard({ name, slug: _slug, year, types, body, stack, award, demoL
             <Badge key={t} tone={TYPE_TONE[t] ?? 'ink'}>{t}</Badge>
           ))}
         </div>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '8px' }}>
+        <div style={{ marginBottom: '8px' }}>
           <span style={{
             fontFamily: 'var(--font-mono)', fontWeight: 700,
             fontSize: '20px', color: 'var(--ink-900)',
+            display: 'block', whiteSpace: 'nowrap',
           }}>{name}</span>
           <span style={{
             fontFamily: 'var(--font-mono)', fontSize: '13px',
