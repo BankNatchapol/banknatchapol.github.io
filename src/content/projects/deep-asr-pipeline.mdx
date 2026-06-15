@@ -65,15 +65,15 @@ TextGrid boundaries are used to cut the audio into the final small segments, wit
 
 ---
 
-## Links
-
-- [Request a demo →](mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20Deep%20Speech%20Data%20Pipeline)
-
----
-
 ## Design Notes
 
 - **Multiprocessing throughout** — download, denoise, ASR, and alignment stages all run in parallel workers, not serially
 - **Fail-fast quality gates** — NISQA at whole-video level rejects bad recordings before any expensive processing runs
 - **Dual ASR strategy** — Gemini primary, Whisper fallback, so the pipeline never stalls on a single API
 - **Adaptive silence threshold** — guarantees valid segment boundaries even on continuous speech
+
+---
+
+## Links
+
+- [Request a demo →](mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20Deep%20Speech%20Data%20Pipeline)
