@@ -144,12 +144,13 @@ export const PROJECTS_AI = [
     demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20Thai%20G2P',
   },
   {
-    name: 'Agentic Chatbot',
-    slug: 'agentic-chatbot',
+    name: 'VirtualSoul',
+    slug: 'virtual-soul',
     year: 2023,
-    types: ['freelance'],
-    body: 'Real-time character speech chatbot integrated with live streaming platforms — agentic conversation loop with sub-second latency TTS, down from minutes.',
-    stack: ['Python', 'LLM', 'TTS', 'Agentic AI'],
+    types: ['side project', 'live demo'],
+    body: 'Autonomous AI VTuber that streams 24/7 without human intervention — reads live chat, responds in Thai speech with sub-second latency, drives a VTube Studio avatar, and falls back to self-generated monologue when chat is silent. Built in 2023, before agentic AI frameworks existed, with multiple cooperating agents orchestrated by a custom harness.',
+    stack: ['Python', 'Electron', 'GPT-4', 'Azure TTS', 'VTube Studio', 'Twitch', 'YouTube', 'Agentic AI', 'Context Engineering'],
+    demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20VirtualSoul',
   },
   {
     name: 'Resume LLM',

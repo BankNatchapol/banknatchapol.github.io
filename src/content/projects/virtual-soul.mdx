@@ -1,0 +1,95 @@
+## Overview
+
+**VirtualSoul** is an autonomous AI VTuber desktop application — a character avatar that streams live on YouTube and Twitch 24 hours a day without a human behind the keyboard. It reads incoming chat messages, generates in-character responses via LLM, speaks them in Thai with sub-second latency TTS, and drives a VTube Studio avatar with synchronized animations. When chat goes silent, it generates its own monologue to keep the stream alive.
+
+Built in 2023 — before LangChain, before AutoGen, before the term "agentic AI" was widely used. Everything was engineered from scratch: the agent harness, the context system, the memory architecture, the multi-subprocess coordination.
+
+---
+
+## Architecture: Multiple Agents Cooperating
+
+The system runs five concurrent agents, each in its own subprocess, coordinated by a central harness:
+
+| Agent | Role |
+|-------|------|
+| **LLM agent** (GPT-4 via Flask) | Generates character responses |
+| **TTS agent** (Azure Neural TTS) | Synthesizes Thai speech from text |
+| **STT agent** | Converts microphone input to text |
+| **Chat reader** (YouTube / Twitch) | Ingests live chat messages |
+| **Avatar controller** (VTube Studio) | Triggers animations and facial parameters |
+
+The harness (`wAIfu`) monitors all subprocess states, respawns crashed agents, and manages the shared command queue — so the stream never goes down even if a single service fails.
+
+---
+
+## The Main Loop
+
+Every cycle:
+
+1. **Get input** — poll live chat, or fall back to monologue if chat is silent
+2. **Sanitize** — filter bad words, deduplicate repeated messages
+3. **Build prompt** — inject long-term persona + short-term conversation history
+4. **LLM call** — generate in-character response
+5. **TTS** — synthesize Thai speech; interrupt if a higher-priority message arrives
+6. **Avatar** — fire VTube Studio hotkeys for lip sync and emotion animations
+7. **Store** — append exchange to short-term memory
+
+---
+
+## Harness, Context & Memory Engineering
+
+This was the core engineering challenge — getting a consistent, believable, low-latency character without any agent framework to lean on.
+
+### Context Engineering
+
+Each LLM prompt is assembled from three layers:
+
+- **Character persona** — name, gender, personality traits, speaking style, characteristic topics
+- **Language rules** — explicit Thai politeness particles (ครับ / ค่ะ), tone constraints, what the character does and does not talk about
+- **Example dialogues** — few-shot examples that anchor the character voice
+
+### Memory
+
+A dual-tier memory system keeps the character coherent across long streams:
+
+- **Long-term memory**: Character definition, personality, and behavioral rules — constant across the session
+- **Short-term memory**: Last 4 exchanges stored as `[Chatter]: message / [Character]: response` pairs
+
+Before every LLM call, `flattenMemory()` concatenates them: `long_term + recent_context + short_term_exchanges`. This gives the model enough history to maintain conversational continuity without blowing up the context window.
+
+### Monologue Fallback
+
+When no chat arrives, the harness triggers self-generated monologue: the character picks a topic from its configured interest list and produces unprompted commentary — keeping the stream engaging during dead air.
+
+---
+
+## Character Interaction
+
+Responses are shaped by two signals:
+
+- **Watcher input** — direct chat messages, moderator commands, TTS requests
+- **Response semantics** — the character's `craziness` and `creativity` parameters tune how far the LLM drifts from the literal prompt, producing personality variation per response
+
+Moderators can send real-time commands (`!reload`, `!say`, `!pause`) that the harness interprets directly, without going through the LLM.
+
+---
+
+## Control Panel
+
+A desktop UI (Electron + WebSocket) gives the streamer full control without stopping the stream:
+
+- Switch between **text input**, **voice input**, and **live chat** modes
+- Configure character name, persona, language, and speaking style
+- Set TTS pitch, speed, and expressiveness
+- Toggle YouTube and Twitch chat simultaneously
+- Connect / reconnect VTube Studio
+- Pause and resume the agent loop
+
+All changes propagate to the running harness in real time via WebSocket messages.
+
+---
+
+## Links
+
+- [Request a demo →](mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20VirtualSoul)
+- [GitHub →](https://github.com/BankNatchapol/NekoDesktopApp)
