@@ -158,7 +158,7 @@ export const PROJECTS_AI = [
     year: 2023,
     types: ['freelance', 'live demo'],
     body: 'One-shot tool that generates a complete, structured novel with character illustrations from a single JSON config — title, summary, characters, table of contents, chapters, and sections produced in sequence, with a living character state that evolves as the story progresses. Built in 2023 with hand-engineered context management, memory compression, and multi-model orchestration.',
-    stack: ['Python', 'GPT-4', 'Gemini', 'Claude', 'DALL·E', 'Vertex AI', 'Context Engineering', 'Agentic AI'],
+    stack: ['Image Generation', 'Context Engineering', 'Agentic AI'],
     demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20AI%20Novel%20Writer',
   },
 ]
