@@ -8,6 +8,8 @@ interface DiagramProps {
   caption?: string
   maxWidth?: string
   maxHeight?: string
+  scrollable?: boolean
+  scrollHeight?: string
 }
 
 function resolvePublicAsset(src: string) {
@@ -23,7 +25,7 @@ function resolvePublicAsset(src: string) {
   return `${baseUrl}${assetPath}`
 }
 
-export function Diagram({ src, caption, maxWidth = '1400px', maxHeight }: DiagramProps) {
+export function Diagram({ src, caption, maxWidth = '1400px', maxHeight, scrollable, scrollHeight = '600px' }: DiagramProps) {
   const [svgUrl, setSvgUrl] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const assetSrc = resolvePublicAsset(src)
@@ -101,11 +103,26 @@ export function Diagram({ src, caption, maxWidth = '1400px', maxHeight }: Diagra
       maxWidth: maxWidth,
     }}>
       {svgUrl ? (
-        <img
-          src={svgUrl}
-          alt={caption ?? 'diagram'}
-          style={{ width: '100%', height: 'auto', display: 'block', maxHeight: maxHeight ?? undefined, objectFit: 'contain' }}
-        />
+        scrollable ? (
+          <div style={{
+            overflowY: 'auto',
+            maxHeight: scrollHeight,
+            border: '1px solid var(--paper-edge)',
+            borderRadius: '6px',
+          }}>
+            <img
+              src={svgUrl}
+              alt={caption ?? 'diagram'}
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+          </div>
+        ) : (
+          <img
+            src={svgUrl}
+            alt={caption ?? 'diagram'}
+            style={{ width: '100%', height: 'auto', display: 'block', maxHeight: maxHeight ?? undefined, objectFit: 'contain' }}
+          />
+        )
       ) : loadingDiv}
       {caption && (
         <figcaption style={{

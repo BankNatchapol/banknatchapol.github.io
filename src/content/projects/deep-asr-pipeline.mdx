@@ -1,0 +1,73 @@
+## Overview
+
+**Deep Speech Data Pipeline** is a fully automated data collection system that turns a list of YouTube video URLs into a clean, labeled speech dataset. Given a spreadsheet of video links and target speaker names, the pipeline downloads, standardizes, denoises, diarizes, transcribes, aligns, and segments each video — producing ready-to-train wav files paired with transcripts in a metadata CSV.
+
+The pipeline was built to generate high-quality training data for Thai TTS and ASR systems, where no usable public dataset existed.
+
+---
+
+## Pipeline
+
+<Diagram src="/diagrams/Youtube2SplittedAudio-Pipeline.excalidraw" caption="Full pipeline: YouTube video URL → labeled speech segments" scrollable scrollHeight="640px" />
+
+---
+
+## Stages
+
+### 1. Input & Deduplication
+
+An Excel file defines the job queue: each row is a `yt_vdo_url` + `speaker_name`. The pipeline extracts the video ID and skips rows already processed, making re-runs safe.
+
+### 2. Download & Standardization
+
+yt-dlp fetches the best available audio and converts to WAV at 16 kHz. The file then goes through loudness normalization, peak normalization, and format standardization to ensure consistent input for all downstream models.
+
+### 3. Whole-Video Quality Pre-filter (NISQA)
+
+Before spending compute on a bad recording, the pipeline splits the full audio into equal chunks and scores each with NISQA (Non-Intrusive Speech Quality Assessment). If the average score falls below 2, the entire video is rejected early — avoiding wasted processing on recordings that won't produce usable segments.
+
+### 4. Denoising (Bandit)
+
+The standardized audio is split into chunks, each passed through the Bandit denoiser, and reassembled into `denoised_youtube_video.wav`. Bandit separates speech from background noise without access to a clean reference.
+
+### 5. Speaker Diarization
+
+A ModelScope CAM++ diarization model segments the denoised audio by speaker, producing timestamped regions: `speaker_0`, `speaker_1`, ..., `speaker_N`.
+
+### 6. Speaker Verification & Isolation
+
+A CAM++ speaker verification model scores each diarized segment against the target speaker reference. The segment with the highest similarity is identified as the target; all other speakers are silenced → `video_with_best_speaker.wav`.
+
+### 7. Middle-Size Segmentation (inaSpeechSegmentor)
+
+inaSpeechSegmentor labels the audio as speech or non-speech. A loop then cuts at silence boundaries — targeting chunks that are long enough to be useful but short enough to fit in memory. The silence threshold starts at 0.5 s and decreases by 0.1 s per iteration if no valid cut point is found, guaranteeing a result even on dense speech.
+
+### 8. ASR
+
+Each middle-size segment is transcribed with the Gemini API. If the API call fails, Whisper is used as a fallback. Each segment produces a paired `transcript.txt`.
+
+### 9. Forced Alignment
+
+The transcript and audio for each middle-size segment are aligned with the forced aligner (MFA + Deep Thai Phonemizer), producing a TextGrid with word- and phoneme-level timestamps.
+
+### 10. Small Segment Extraction & Final Quality Filter
+
+TextGrid boundaries are used to cut the audio into the final small segments, with an algorithm that ensures each clip stays within a valid duration range. Each clip is scored by NISQA — clips below 2 are rejected. Surviving clips are saved as `final_small_file_segment_n.wav` alongside a `metadata.csv` mapping each filename to its transcript.
+
+---
+
+## Output
+
+| File | Contents |
+|------|----------|
+| `final_small_file_segment_n.wav` | Clean, aligned speech clip |
+| `metadata.csv` | `filepath, transcript` pairs ready for training |
+
+---
+
+## Design Notes
+
+- **Multiprocessing throughout** — download, denoise, ASR, and alignment stages all run in parallel workers, not serially
+- **Fail-fast quality gates** — NISQA at whole-video level rejects bad recordings before any expensive processing runs
+- **Dual ASR strategy** — Gemini primary, Whisper fallback, so the pipeline never stalls on a single API
+- **Adaptive silence threshold** — guarantees valid segment boundaries even on continuous speech
