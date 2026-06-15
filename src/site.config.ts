@@ -96,6 +96,7 @@ export const PROJECTS_AI = [
     types: ['professional', 'live demo'],
     body: 'Thai/English name verification system for a government registration authority — rule filtering, cross-lingual phonetic analysis, and LLM decision with natural-language reasoning.',
     stack: ['Phonetic', 'RAG', 'Context Engineering', 'Agentic AI'],
+    demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20ID%20Checker',
   },
   {
     name: 'Phonetic Alignment',
@@ -104,14 +105,16 @@ export const PROJECTS_AI = [
     types: ['professional', 'research', 'live demo'],
     body: 'Thai forced-alignment pipeline built on MFA — replacing Phonetisaurus with a fine-tuned Transformers phonemizer and retraining the acoustic model on curated Thai data. Improved boundary precision from ~100ms to sub-millisecond, a 100× gain over the vanilla MFA baseline.',
     stack: ['MFA', 'Transformers', 'Phonetics', 'Forced Alignment', 'TextGrid'],
+    demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20Phonetic%20Alignment',
   },
   {
     name: 'Thai High-Naturalness TTS',
     slug: 'thai-tts',
     year: 2025,
     types: ['professional', 'research', 'live demo'],
-    body: 'Pioneered high-naturalness Thai TTS when the technology was brand new — implemented VITS2 from paper, led proprietary data collection and labeller standardization, and customized the architecture with a Thai phonemizer and tone-aware embeddings for production deployment with voice cloning.',
-    stack: ['Python', 'PyTorch', 'VITS2', 'BERT', 'TTS', 'Voice Cloning'],
+    body: 'Pioneered high-naturalness Thai TTS when the technology was brand new — implemented from paper, led proprietary data collection and labeller standardization, and customized the architecture with a Thai phonemizer and tone-aware embeddings for production deployment with voice cloning.',
+    stack: ['VITS2', 'BERT', 'TTS', 'Voice Cloning', 'Data Labeling'],
+    demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20Thai%20TTS',
   },
   {
     name: 'Thai G2P',

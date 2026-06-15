@@ -24,6 +24,7 @@ interface Project {
   body: string
   stack: string[]
   award?: string
+  demoLink?: string
   wobble: 0 | 1 | 2
   tilt: number
 }
@@ -52,7 +53,7 @@ function useDrawOnScroll(ref: React.RefObject<HTMLElement | null>) {
   }, [ref])
 }
 
-function ProjectCard({ name, slug: _slug, year, types, body, stack, award, wobble, tilt }: Project) {
+function ProjectCard({ name, slug: _slug, year, types, body, stack, award, demoLink, wobble, tilt }: Project) {
   const ref = useRef<HTMLDivElement>(null)
   useDrawOnScroll(ref)
   return (
@@ -87,11 +88,23 @@ function ProjectCard({ name, slug: _slug, year, types, body, stack, award, wobbl
             color: 'var(--amber-600)',
           }}>✦ {award}</div>
         )}
-        <div style={{
-          marginTop: '16px',
-          fontFamily: 'var(--font-label)', fontSize: '13px',
-          letterSpacing: '0.1em', color: 'var(--pencil-500)',
-        }}>Read more →</div>
+        <div style={{ marginTop: '16px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <span style={{
+            fontFamily: 'var(--font-label)', fontSize: '13px',
+            letterSpacing: '0.1em', color: 'var(--pencil-500)',
+          }}>Read more →</span>
+          {demoLink && (
+            <a
+              href={demoLink}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                fontFamily: 'var(--font-label)', fontSize: '13px',
+                letterSpacing: '0.1em', color: 'var(--terra-600)',
+                textDecoration: 'none',
+              }}
+            >Request demo ↗</a>
+          )}
+        </div>
       </Card>
     </div>
   )
