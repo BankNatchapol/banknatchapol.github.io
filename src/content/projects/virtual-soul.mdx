@@ -38,28 +38,71 @@ Every cycle:
 
 ## Harness, Context & Memory Engineering
 
-This was the core engineering challenge — getting a consistent, believable, low-latency character without any agent framework to lean on.
+This was the core engineering challenge — getting a consistent, believable, low-latency character without any agent framework to lean on. Every tool that exists in modern agentic stacks had to be built by hand.
+
+### SubProc — Process Manager
+
+Each agent runs as a `SubProc` instance tracking its OS process, API URL, and `running` state. When a subprocess crashes mid-stream, `reinit()` rebuilds the full runtime — reloads config, re-detects devices, respawns all processes with an incremented cycle counter — without touching the ongoing session.
+
+```javascript
+class SubProc {
+  process = null;  api_url = '';  running = false;
+  constructor(port) { this.api_url = port; }
+}
+```
 
 ### Context Engineering
 
-Each LLM prompt is assembled from three layers:
+Each LLM prompt is assembled from three layers before every call:
 
 - **Character persona** — name, gender, personality traits, speaking style, characteristic topics
-- **Language rules** — explicit Thai politeness particles (ครับ / ค่ะ), tone constraints, what the character does and does not talk about
-- **Example dialogues** — few-shot examples that anchor the character voice
+- **Language rules** — explicit Thai politeness particles (ครับ / ค่ะ), tone constraints, hard limits on what the character discusses
+- **Example dialogues** — few-shot examples that anchor the character voice and response format
 
-### Memory
+### flattenMemory() — Context Assembler
 
-A dual-tier memory system keeps the character coherent across long streams:
+A dual-tier memory system keeps the character coherent across long streams. Before every LLM call, a single function assembles the full context window:
 
-- **Long-term memory**: Character definition, personality, and behavioral rules — constant across the session
-- **Short-term memory**: Last 4 exchanges stored as `[Chatter]: message / [Character]: response` pairs
+```javascript
+function flattenMemory(additional) {
+  while (wAIfu.memory.short_term.length > 4) {
+    wAIfu.memory.short_term.shift();
+  }
+  return wAIfu.memory.long_term + additional
+       + wAIfu.memory.short_term.join('');
+}
+```
 
-Before every LLM call, `flattenMemory()` concatenates them: `long_term + recent_context + short_term_exchanges`. This gives the model enough history to maintain conversational continuity without blowing up the context window.
+- **Long-term**: Character definition and behavioral rules — constant across the session
+- **Short-term**: Last 4 `[Chatter]: msg / [Character]: response` exchange pairs — trimmed automatically to keep context within budget
+
+### Chat Sanitizers
+
+`getTwitchChatOrNothing()` and `getYoutubeChatOrNothing()` are identical in contract but different in transport — Twitch uses a live WebSocket feed while YouTube chat is written to `./youtube/msg.txt` and watched with Chokidar. Both apply the same pipeline: blacklist check → deduplication → command-prefix filter → return sanitized `{ text, sender }` or nothing.
+
+### TTS Interrupt
+
+When a higher-priority message arrives while the character is speaking, `wsINTERRUPT` hits the TTS subprocess's `/interrupt` endpoint and immediately clears the live caption file — cutting speech mid-sentence and starting the new response. This was essential for keeping latency low when chat moved fast.
+
+```javascript
+fetch(TTS.api_url + '/interrupt').then(() => {
+  fs.writeFileSync('./captions/transcript.txt', '');
+});
+```
+
+### WebSocket Command Router
+
+`handleSocketMessage` routes 8 command types from the control panel UI to the running harness in real time — no restart needed:
+
+`MSG` · `CONFIG` · `CHARA` · `DEVICE` · `START_VOICE_INPUT` · `STOP_VOICE_INPUT` · `START_LIVE` · `STOP_LIVE` · `VTUBE_CONNECT` · `VTUBE_SET_DEFAULT`
+
+### VTube Studio Bridge
+
+`vtubeTriggerHotkey()` looks up hotkey IDs from a pre-cached `hotkey_map` and fires them via the VTube Studio WebSocket API. During singing, `vtubeDance1()` and `vtubeDance2()` drive real-time facial parameters (`FaceAngleX/Y/Z`) through choreographed step arrays — each loop checks `wAIfu.is_singing` and exits cleanly if the singing mode is cancelled.
 
 ### Monologue Fallback
 
-When no chat arrives, the harness triggers self-generated monologue: the character picks a topic from its configured interest list and produces unprompted commentary — keeping the stream engaging during dead air.
+When no chat arrives, the harness picks a topic from the character's interest list and generates unprompted commentary — keeping the stream from going silent without any human input.
 
 ---
 
@@ -92,4 +135,3 @@ All changes propagate to the running harness in real time via WebSocket messages
 ## Links
 
 - [Request a demo →](mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20VirtualSoul)
-- [GitHub →](https://github.com/BankNatchapol/NekoDesktopApp)
