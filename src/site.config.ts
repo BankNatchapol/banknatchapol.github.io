@@ -243,7 +243,7 @@ export const AWARDS = [
 export const EXPERIENCE_PROFESSIONAL = [
   {
     period: '2026 — now',
-    role: 'ML Engineer',
+    role: 'AI Engineer',
     org: 'Finema Co., Ltd',
   },
   {
