@@ -117,12 +117,20 @@ export const PROJECTS_AI = [
     demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20Thai%20TTS',
   },
   {
-    name: 'Thai G2P',
+    name: 'Deep Thai WordSeg',
+    slug: 'deep-wordseg',
+    year: 2024,
+    types: ['research', 'open source'],
+    body: 'Thai word segmentation for extreme out-of-vocabulary text — uses LLM distillation (VertexAI as teacher) to generate training data for OOV-heavy cases, then trains a compact CNN+Transformer student model. More robust on OOV than dictionary methods, faster than LLM inference at production scale.',
+    stack: ['Python', 'PyTorch', 'Transformers', 'CNN', 'VertexAI', 'Thai NLP', 'Knowledge Distillation'],
+  },
+  {
+    name: 'Deep Thai Phonemizer',
     slug: 'thai-g2p',
-    year: 2025,
+    year: 2024,
     types: ['professional', 'research', 'live demo'],
     body: 'Thai grapheme-to-phoneme model built on MarianMT — solving two core failures of existing phonemizers: Thai tokenization errors and poor out-of-vocabulary handling. Custom OOV phoneme data labeling enabled the seq2seq model to generalize to unseen words beyond what rule-based approaches could handle.',
-    stack: ['Python', 'PyTorch', 'MarianMT', 'Thai NLP', 'Phonetics'],
+    stack: ['Phonetics', 'Transformers', 'G2P', 'Data Labeling'],
     demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20Thai%20G2P',
   },
   {

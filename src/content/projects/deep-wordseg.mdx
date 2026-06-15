@@ -1,0 +1,55 @@
+## Overview
+
+**Deep Thai WordSeg** is a Thai word segmentation model designed specifically for extreme out-of-vocabulary (OOV) text. It uses LLM distillation — a large language model acts as a teacher to generate high-quality labels for hard OOV cases, and a compact CNN+Transformer student model is trained on this data. The result is a model that handles OOV words far better than dictionary-based approaches, while remaining fast enough for production use.
+
+---
+
+## The Problem
+
+### Thai Word Segmentation
+
+Thai is written without spaces. Identifying word boundaries requires understanding morphology and context — a problem that scales well when words are in the dictionary, but breaks down on:
+
+- Loanwords and transliterations
+- Proper nouns (people, brands, places)
+- Technical and domain-specific terms
+- Newly coined words and internet slang
+
+### Why Dictionary Methods Fail on OOV
+
+Standard Thai word segmenters (MaxMatching, Longest Match) rely on a fixed vocabulary. An out-of-vocabulary token either gets split character-by-character or triggers a fallback heuristic — both produce wrong boundaries. Statistical models trained on fixed corpora inherit the same blind spots.
+
+---
+
+## The Approach: LLM Distillation
+
+LLMs understand Thai context well enough to segment OOV text correctly — but they are too slow and expensive for high-throughput production use. The solution is a teacher-student setup:
+
+1. **Teacher (LLM via VertexAI):** Given Thai text with heavy OOV content, the LLM produces correct word boundary labels. This generates a training dataset that no human annotation effort could feasibly cover at scale.
+
+2. **Student (CNN + Transformer):** A compact model trained on the LLM-generated labels. The CNN captures local character patterns; the Transformer captures long-range contextual dependencies across the sequence. Together they approximate the teacher's segmentation quality at a fraction of the inference cost.
+
+This approach — using LLM output as ground truth to train a smaller model — is sometimes called **knowledge distillation from LLM**, or simply **LLM-distilled training**.
+
+---
+
+## Architecture
+
+The student model combines two components:
+
+- **CNN layers:** Extract character-level n-gram features and local boundary signals — fast and parameter-efficient for the low-level pattern recognition
+- **Transformer encoder:** Attends over the full character sequence to resolve ambiguous boundaries using broader context
+
+The model outputs a boundary probability score for each character position, which is thresholded to produce the final segmentation.
+
+---
+
+## Results
+
+The model segments Thai text into pipe-delimited words with per-boundary confidence scores. On OOV-heavy text where dictionary-based segmenters produce systematic errors, the LLM-distilled model correctly identifies boundaries — inheriting the teacher LLM's contextual understanding without the inference overhead.
+
+---
+
+## Links
+
+- [GitHub →](https://github.com/BankNatchapol/Deep-WordSeg)
