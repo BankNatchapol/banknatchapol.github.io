@@ -68,7 +68,7 @@ function ProjectCard({ name, slug: _slug, year, types, body, stack, award, demoL
           <span style={{
             fontFamily: 'var(--font-mono)', fontWeight: 700,
             fontSize: '20px', color: 'var(--ink-900)',
-            display: 'block', whiteSpace: 'nowrap',
+            display: 'block',
           }}>{name}</span>
           <span style={{
             fontFamily: 'var(--font-mono)', fontSize: '13px',
