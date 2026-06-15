@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react'
 import { Card } from '../components/Card'
-import { Tag } from '../components/Tag'
 import { RESEARCH_AREAS } from '../site.config'
 
 const WOBBLES = [0, 1, 2] as const
@@ -25,7 +24,7 @@ function useDrawOnScroll(ref: React.RefObject<HTMLElement | null>) {
   }, [ref])
 }
 
-function DrawCard({ wobble, tilt, title, body, tags }: typeof AREAS[number]) {
+function DrawCard({ wobble, tilt, title, body }: typeof AREAS[number]) {
   const ref = useRef<HTMLDivElement>(null)
   useDrawOnScroll(ref)
   return (
@@ -37,11 +36,8 @@ function DrawCard({ wobble, tilt, title, body, tags }: typeof AREAS[number]) {
         }}>{title}</h3>
         <p style={{
           fontFamily: 'var(--font-body)', fontSize: '17px', lineHeight: 1.7,
-          color: 'var(--ink-700)', margin: '16px 0 20px',
+          color: 'var(--ink-700)', margin: '16px 0 0',
         }}>{body}</p>
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-          {tags.map((t) => <Tag key={t}>{t}</Tag>)}
-        </div>
       </Card>
     </div>
   )

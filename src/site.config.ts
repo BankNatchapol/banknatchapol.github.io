@@ -40,18 +40,15 @@ export const PERSONAL = {
 export const RESEARCH_AREAS = [
   {
     title: 'Quantum Software Systems',
-    body: 'Full-stack quantum software from programming frameworks and simulators through compiler passes, noise-adaptive transpilation, error correction, and classical control — validated end-to-end via benchmarking on real hardware.',
-    tags: ['compiler', 'QEC', 'benchmarking', 'simulation', 'control systems'],
+    body: 'Full-stack quantum software from programming frameworks and simulators through compiler passes, error correction, and classical control — validated end-to-end via benchmarking on real hardware.',
   },
   {
     title: 'Quantum Algorithms',
-    body: 'Algorithm design and circuit implementation for quantum interferometry, combinatorial optimization, and quantum machine learning — from theoretical construction to execution on superconducting devices.',
-    tags: ['DQI', 'optimization', 'QML', 'variational'],
+    body: 'Algorithm design and circuit implementation for quantum algorithms, combinatorial optimization, and quantum machine learning — from theoretical construction to execution on hardware devices.',
   },
   {
     title: 'Machine Learning',
-    body: 'Applied ML for speech systems — TTS, ASR, and G2P pipelines in production — and language model applications built with retrieval, agentic loops, and context engineering.',
-    tags: ['speech AI', 'TTS', 'G2P', 'LLM', 'agentic AI'],
+    body: 'Applied ML for speech systems — TTS, ASR, and production pipeline — and language model applications built with retrieval, agentic loops, and context engineering.',
   },
 ]
 
