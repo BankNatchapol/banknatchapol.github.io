@@ -21,17 +21,20 @@
   }
 }
 
-/* Nav — hide section anchor links on narrow viewports */
+/* Nav — swap desktop links for hamburger on narrow viewports */
 @media (max-width: 860px) {
   .nav-links {
-    display: none;
+    display: none !important;
+  }
+  .nav-mobile {
+    display: flex !important;
   }
 }
 
 /* Nav — shrink the logo on very small screens */
-@media (max-width: 560px) {
+@media (max-width: 480px) {
   .nav-logo {
-    font-size: 20px !important;
+    font-size: 22px !important;
   }
 }
 
