@@ -12,7 +12,7 @@ export const PERSONAL = {
   title: 'AI Engineer & Quantum Researcher',
 
   // One-paragraph bio shown in the hero section
-  bio: 'Quantum algorithms at Keio, speech AI at DeepCapital, now ML Engineering at Finema. I like problems at the edge of theory and production — from phonetic models and TTS systems to quantum circuit implementations.',
+  bio: 'Deep technology enthusiast — AI by day, quantum by night. Passionate about bridging the gap between theory and real-world implementation, from published quantum algorithms and circuit design to production speech AI and LLM systems.',
 
   // Profile photo — put your image in public/ and set the path below.
   // Leave as '' to show initials instead.
