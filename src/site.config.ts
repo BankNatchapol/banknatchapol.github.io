@@ -39,19 +39,19 @@ export const PERSONAL = {
 // ------------------------------------------------------------
 export const RESEARCH_AREAS = [
   {
+    title: 'Quantum Software Systems',
+    body: 'Full-stack quantum software from programming frameworks and simulators through compiler passes, noise-adaptive transpilation, error correction, and classical control — validated end-to-end via benchmarking on real hardware.',
+    tags: ['compiler', 'QEC', 'benchmarking', 'simulation', 'control systems'],
+  },
+  {
     title: 'Quantum Algorithms',
-    body: 'Circuit design and benchmarking for quantum interferometry, optimization, and variational algorithms on real devices.',
-    tags: ['DQI', 'optimization', 'benchmarking'],
+    body: 'Algorithm design and circuit implementation for quantum interferometry, combinatorial optimization, and quantum machine learning — from theoretical construction to execution on superconducting devices.',
+    tags: ['DQI', 'optimization', 'QML', 'variational'],
   },
   {
-    title: 'Quantum Machine Learning',
-    body: 'Probabilistic ML for quantum systems, continuous-variable quantum neural networks for photonic architectures.',
-    tags: ['CV-QNN', 'probabilistic ML', 'photonics'],
-  },
-  {
-    title: 'Circuit Optimization',
-    body: 'Reducing gate counts and depth via ZX-calculus rewrites and noise-adaptive transpilation across hardware targets.',
-    tags: ['ZX-calculus', 'transpilation', 'noise'],
+    title: 'Machine Learning',
+    body: 'Applied ML for speech systems — TTS, ASR, and G2P pipelines in production — and language model applications built with retrieval, agentic loops, and context engineering.',
+    tags: ['speech AI', 'TTS', 'G2P', 'LLM', 'agentic AI'],
   },
 ]
 
@@ -163,7 +163,6 @@ export const SKILLS_CONCEPTS: string[] = [
 
   'Speech Processing',
   'Phonetics',
-  'Voice Cloning',
 
   'Data Engineering',
   'MLOps',
