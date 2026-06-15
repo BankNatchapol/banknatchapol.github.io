@@ -13,11 +13,11 @@ const ALL_GROUPS = [
 export function Hero() {
   return (
     <section style={{
-      maxWidth: 'var(--content-wide)', margin: '0 auto',
       padding: '96px 40px 80px',
       animation: 'sketch-in 0.6s var(--ease-hand) both',
     }}>
       {/* Name + bio + avatar */}
+      <div style={{ maxWidth: 'var(--content-wide)', margin: '0 auto' }}>
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'minmax(0,1fr) auto',
@@ -127,14 +127,16 @@ export function Hero() {
           </span>
         </div>
       </div>
+      </div>
 
-      {/* Skills — full width, multi-category */}
+      {/* Skills — wider than name/bio block */}
+      <div style={{ maxWidth: '1440px', margin: '0 auto' }}>
       <div style={{
         marginTop: '64px',
         paddingTop: '40px',
         borderTop: '2px dashed var(--paper-edge)',
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+        gridTemplateColumns: 'repeat(3, 1fr)',
         gap: '36px 48px',
       }}>
         {ALL_GROUPS.map(({ label, skills }) => (
@@ -151,6 +153,7 @@ export function Hero() {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </section>
   )
