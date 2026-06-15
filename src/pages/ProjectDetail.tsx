@@ -1,4 +1,5 @@
 import React, { Suspense, useMemo } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { MDXProvider } from '@mdx-js/react'
 import { useParams } from 'react-router-dom'
 import { Badge } from '../components/Badge'
@@ -140,6 +141,14 @@ export function ProjectDetail() {
 
   return (
     <div style={pageStyle}>
+      <Helmet>
+        <title>{project.name} — Natchapol Patamawisut</title>
+        <meta name="description" content={project.body} />
+        <link rel="canonical" href={`https://banknatchapol.github.io/projects/${project.slug}`} />
+        <meta property="og:title" content={`${project.name} — Natchapol Patamawisut`} />
+        <meta property="og:description" content={project.body} />
+        <meta property="og:url" content={`https://banknatchapol.github.io/projects/${project.slug}`} />
+      </Helmet>
       <div style={{ maxWidth: 'var(--content)', margin: '0 auto' }}>
         <a href="/#projects" style={backLinkStyle}>← Projects</a>
 

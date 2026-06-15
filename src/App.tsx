@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet-async'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Nav } from './sections/Nav'
 import { Hero } from './sections/Hero'
@@ -22,6 +23,10 @@ const mainLayoutStyle: React.CSSProperties = {
 function MainLayout() {
   return (
     <div style={mainLayoutStyle}>
+      <Helmet>
+        <title>Natchapol Patamawisut — AI Engineer & Quantum Researcher</title>
+        <meta name="description" content="Portfolio of Natchapol Patamawisut — AI Engineer and Quantum Researcher working on quantum algorithms, Thai speech systems, and agentic AI. MSc Quantum Computing, Keio University." />
+      </Helmet>
       <Nav />
       <Hero />
       <Research />
