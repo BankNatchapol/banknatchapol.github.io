@@ -136,7 +136,7 @@ export function Hero() {
         paddingTop: '40px',
         borderTop: '2px dashed var(--paper-edge)',
         display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
+        gridTemplateColumns: '1fr 1.5fr 1fr',
         gap: '36px 48px',
       }}>
         {ALL_GROUPS.map(({ label, skills }) => (
