@@ -1,7 +1,52 @@
 ## Overview
 
-**Thai TTS** is a high-quality Thai text-to-speech system with voice cloning capability, trained on proprietary data and deployed in production at DeepCapital Thailand.
+At the time this project started, VITS2-class high-naturalness TTS was a very new technology with no Thai support. Everything had to be built from scratch — implementing the architecture from paper, collecting and standardizing training data, and customizing the model for Thai linguistic features. The result is a production-deployed Thai TTS system with voice cloning capability.
 
 ---
 
-*Content coming soon.*
+## The Problems
+
+### 1. Cutting-Edge Technology, No Reference Implementation
+
+High-naturalness neural TTS (VITS2 and its derivatives) had only just been published. There was no mature open-source Thai support — the architecture had to be studied from the paper and implemented directly, including adapting the training pipeline, loss functions, and inference stack.
+
+### 2. Thai Has No Open High-Quality Speech Data
+
+Unlike English or Mandarin, Thai lacks the large, clean, annotated speech corpora that modern TTS requires. This meant the data had to be created:
+
+- Designed the labelling schema and transcription standards
+- Led and coordinated a team of labellers
+- Built quality-control pipelines to catch transcription errors and inconsistencies
+- Curated the final training corpus from proprietary recordings
+
+### 3. Thai Linguistic Complexity
+
+Thai is a tonal language written without spaces between words. Standard phonemizers cannot handle it — tone, syllable segmentation, and word boundary detection all require language-specific logic. The entire front-end had to be custom-built.
+
+---
+
+## Architecture
+
+<Diagram src="/diagrams/thai-tts.excalidraw" caption="Thai High-Naturalness TTS — model architecture" maxWidth="700px" />
+
+The synthesis pipeline has two stages:
+
+**Front-end (Phonemizer):** Custom Thai phonemizer converts raw text into three parallel streams — phoneme sequences, tone labels, and word-to-phoneme alignment (word2ph). Each stream is embedded separately: a phoneme embedding, a tone embedding, and a language embedding. These three are summed element-wise. In parallel, word2ph drives a BERT model that produces contextual representations; both streams are fed into the synthesis backend.
+
+**Back-end (VITS2):** A variational inference model with adversarial training generates the waveform end-to-end from the combined embeddings. A reference wav input enables speaker conditioning, which powers the voice cloning capability.
+
+---
+
+## Results
+
+Deployed to production at DeepCapital Thailand with voice cloning enabled. The system produces natural-sounding Thai speech with correct tone rendering across all five Thai tones, and can clone a target speaker from a short reference recording.
+
+---
+
+## My Role
+
+- Implemented the VITS2 architecture and training pipeline from the paper
+- Designed and led the data labelling operation — standardization, QC, and corpus curation
+- Built the custom Thai phonemizer and tone-aware embedding front-end
+- Fine-tuned the model on proprietary Thai speech data
+- Deployed and maintained the system in production
