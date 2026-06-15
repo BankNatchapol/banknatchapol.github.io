@@ -58,7 +58,7 @@ export function Research() {
         }}>What I work on</h2>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gridTemplateColumns: 'repeat(3, 1fr)',
           gap: '32px', marginTop: '48px',
         }}>
           {AREAS.map((area) => <DrawCard key={area.title} {...area} />)}

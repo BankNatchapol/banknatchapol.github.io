@@ -95,7 +95,7 @@ export const PROJECTS_AI = [
     year: 2026,
     types: ['professional', 'live demo'],
     body: 'Thai/English name verification system for a government registration authority — rule filtering, cross-lingual phonetic analysis, and LLM decision with natural-language reasoning.',
-    stack: ['Phonetic', 'RAG', 'Context Engineering', 'Agentic AI'],
+    stack: ['Phonetics', 'RAG', 'Context Engineering', 'Agentic AI'],
     demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20ID%20Checker',
   },
   {
