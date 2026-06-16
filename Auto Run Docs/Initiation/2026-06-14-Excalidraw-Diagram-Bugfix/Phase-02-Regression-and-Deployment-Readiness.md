@@ -18,11 +18,12 @@ This phase turns the diagram fix into a durable portfolio behavior. It adds focu
   - Keep mocks local to the test file or nearest test helper so production code remains simple
   - **Done:** Added `src/__tests__/Diagram.test.tsx` with 6 tests (all local mocks, no production code changes). URL-resolution suite uses `vi.stubEnv('BASE_URL', '/portfolio/')` + a `fetch` spy to assert: (1) root-relative `/diagrams/foo.excalidraw` is fetched as `/portfolio/diagrams/foo.excalidraw`; (2) already-prefixed paths are not double-prefixed; (3) absolute `https://` URLs pass through unchanged. Failure suite asserts: (4) 404 response renders "✏️ diagram coming soon"; (5) network error renders the "Could not load diagram:" inline error span without throwing; (6) non-ok non-404 response renders the same inline error. `@excalidraw/excalidraw` is mocked via `vi.mock`; `URL.createObjectURL/revokeObjectURL` are stubbed at module scope since jsdom omits them. All 8 tests (6 new + 2 existing) pass.
 
-- [ ] Add a lightweight production-route smoke check:
+- [x] Add a lightweight production-route smoke check:
   - Reuse existing scripts or add one minimal script that builds the app, serves `dist`, and checks `/projects/check-id` under the configured base path
   - The smoke check should fail if the route returns a 404, if the built page reports the missing `Diagram` component error, or if the diagram asset cannot be fetched
   - Keep the smoke check deterministic and runnable locally without GitHub credentials
   - Document the command in `package.json` scripts or an existing developer-facing file only if that matches current repo conventions
+  - **Done:** Created `scripts/smoke.mjs` — a standalone Node.js script (no extra deps beyond those already installed). Three checks: (1) static bundle check — scans `dist/assets/*.js` for the `Diagram` symbol to confirm it is wired into the MDX component map; (2) HTTP route check — spawns `vite preview`, fetches `/projects/check-id`, asserts HTTP 200 and SPA shell HTML; (3) diagram asset check — fetches `/diagrams/check-id.excalidraw`, asserts HTTP 200 and valid excalidraw JSON with `elements` array. Added `"smoke": "node scripts/smoke.mjs"` and `"smoke:ci": "npm run build && node scripts/smoke.mjs"` to `package.json`. Also fixed a pre-existing TypeScript error in `Diagram.test.tsx` (`global` → `globalThis`, which is properly typed in both browser and Node environments). All 8 Vitest tests still pass; `npm run smoke` exits 0 with "All smoke checks passed."
 
 - [ ] Verify GitHub Pages configuration matches the fixed asset strategy:
   - Inspect `.github/workflows/`, `public/404.html`, `vite.config.ts`, and any deployment notes before changing deployment behavior

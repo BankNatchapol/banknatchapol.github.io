@@ -10,8 +10,8 @@ vi.mock('@excalidraw/excalidraw', () => ({
 }))
 
 // jsdom has no URL.createObjectURL / revokeObjectURL
-global.URL.createObjectURL = vi.fn().mockReturnValue('blob:test')
-global.URL.revokeObjectURL = vi.fn()
+globalThis.URL.createObjectURL = vi.fn().mockReturnValue('blob:test')
+globalThis.URL.revokeObjectURL = vi.fn()
 
 function fetchOk() {
   return vi.fn().mockResolvedValue({
