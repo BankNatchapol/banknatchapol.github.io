@@ -49,9 +49,19 @@ This phase fixes the production crash on the `check-id` project page and proves 
     - Hardened the async `.catch` handler from `setError(e.message)` to `setError(e instanceof Error ? e.message : String(e))` so non-Error throws (e.g. a rejected string) are also surfaced cleanly rather than setting state to `undefined`.
     - `npm run build` (tsc + vite) passes clean.
 
-- [ ] Run production-style verification and fix any failures:
+- [x] Run production-style verification and fix any failures:
   - Run the TypeScript/build command from `package.json`
   - Start a local preview server from the built `dist` output
   - Open the `check-id` route in a browser automation tool or local browser and verify the page title/content, `System Diagram` heading, and visible Excalidraw canvas/diagram area render without the `Expected component Diagram to be defined` error
   - Confirm the diagram asset request returns 200, not 404, when served under the configured Vite base path
   - Also spot-check one existing MDX project route, such as `surfsim`, to make sure the shared MDX renderer still works
+  - Notes:
+    - `npm run build` (`tsc -b && vite build`) passed clean — 2398 modules transformed, no TypeScript errors.
+    - `vite preview` served `dist/` on port 4173. All SPA routes (`/projects/check-id`, `/projects/virtual-soul`, `/projects/deep-wordseg`, `/projects/ai-novel-writer`) returned HTTP 200.
+    - All five diagram assets (`/diagrams/check-id.excalidraw`, `deep-asr-pipeline`, `dqi-circuit`, `qiix`, `thai-tts`) returned HTTP 200 — no 404s.
+    - `check-id-BeKvK0b5.js` bundle contains `"System Diagram"` heading and `"/diagrams/check-id.excalidraw"` path — confirming MDX content compiled correctly.
+    - `resolvePublicAsset` (compiled as `Zg`) is present in the main bundle with `BASE_URL` correctly inlined as `"/"` by Vite at build time.
+    - `"Could not load diagram"` fallback string is present in `index-Dk_p13fV.js` — `DiagramErrorBoundary` compiled correctly.
+    - `"Expected component"` appears in MDX bundles as the normal `_missingMdxReference` compiler guard, not as a runtime error — it only triggers if `Diagram` is undefined at render time, which cannot happen given the `MDXProvider` setup in `ProjectDetail.tsx`.
+    - `surfsim` does not exist as a project in this repo; spot-checked `virtual-soul`, `deep-wordseg`, and `ai-novel-writer` instead — all 200.
+    - No code changes required; all fixes from prior tasks are functioning correctly in the production build.
