@@ -11,11 +11,12 @@ This phase turns the diagram fix into a durable portfolio behavior. It adds focu
   - Cover an unknown project slug and verify the existing “Project not found” fallback still renders
   - **Done:** No existing test setup found (playwright was installed as a dep but had no test files). Added Vitest + @testing-library/react + jsdom (3 devDependencies). Created `vitest.config.ts` (extends vite config so MDX plugin is reused), updated `tsconfig.node.json` to include the new config, added `”test”: “vitest run”` script to `package.json`. Tests in `src/__tests__/ProjectDetail.test.tsx` cover: (1) known slug `check-id` — project name/year render immediately, Suspense resolves to mocked MDX content, `Diagram` component is confirmed present in the `components` prop; (2) unknown slug — “Project not found” h1 and the slug display in the `<code>` element both render. Both tests pass; `tsc -b` is clean.
 
-- [ ] Add focused coverage for `Diagram` URL handling and failure states:
+- [x] Add focused coverage for `Diagram` URL handling and failure states:
   - Test or otherwise verify that root-relative public asset paths are resolved through `import.meta.env.BASE_URL`
   - Verify absolute external URLs are not incorrectly prefixed
   - Verify fetch failures render the inline error state and do not throw an uncaught exception
   - Keep mocks local to the test file or nearest test helper so production code remains simple
+  - **Done:** Added `src/__tests__/Diagram.test.tsx` with 6 tests (all local mocks, no production code changes). URL-resolution suite uses `vi.stubEnv('BASE_URL', '/portfolio/')` + a `fetch` spy to assert: (1) root-relative `/diagrams/foo.excalidraw` is fetched as `/portfolio/diagrams/foo.excalidraw`; (2) already-prefixed paths are not double-prefixed; (3) absolute `https://` URLs pass through unchanged. Failure suite asserts: (4) 404 response renders "✏️ diagram coming soon"; (5) network error renders the "Could not load diagram:" inline error span without throwing; (6) non-ok non-404 response renders the same inline error. `@excalidraw/excalidraw` is mocked via `vi.mock`; `URL.createObjectURL/revokeObjectURL` are stubbed at module scope since jsdom omits them. All 8 tests (6 new + 2 existing) pass.
 
 - [ ] Add a lightweight production-route smoke check:
   - Reuse existing scripts or add one minimal script that builds the app, serves `dist`, and checks `/projects/check-id` under the configured base path
