@@ -12,7 +12,7 @@ export const PERSONAL = {
   title: 'AI Engineer & Quantum Researcher',
 
   // One-paragraph bio shown in the hero section
-  bio: 'Deep technology enthusiast — AI by day, quantum by night. Passionate about bridging the gap between theory and real-world implementation.',
+  bio: 'Deep technology enthusiast — AI by day, quantum by night. The interesting part is always when it has to run on real hardware.',
 
   // Profile photo — put your image in public/ and set the path below.
   // Leave as '' to show initials instead.
@@ -48,7 +48,7 @@ export const RESEARCH_AREAS = [
   },
   {
     title: 'Machine Learning',
-    body: 'Applied ML for speech systems — TTS, ASR, and production pipeline — and language model applications built with retrieval, agentic loops, and context engineering.',
+    body: 'Applied ML for TTS, ASR, and production speech pipelines — and LLM applications built with retrieval, agentic loops, and context engineering.',
   },
 ]
 
@@ -121,7 +121,7 @@ export const PROJECTS_AI = [
     slug: 'thai-tts',
     year: 2025,
     types: ['professional', 'research', 'live demo'],
-    body: 'Pioneered high-naturalness Thai TTS when the technology was brand new — implemented from paper, led proprietary data collection and labeller standardization, and customized the architecture with a Thai phonemizer and tone-aware embeddings for production deployment with voice cloning.',
+    body: 'Implemented VITS2-class Thai TTS from paper when no Thai support existed — led data collection and labeller standardization, built a custom Thai phonemizer and tone-aware embeddings, and deployed to production with voice cloning.',
     stack: ['VITS2', 'BERT', 'TTS', 'Voice Cloning', 'Data Labeling'],
     demoLink: 'mailto:natchapol.pat@gmail.com?subject=Demo%20request%20%E2%80%94%20Thai%20TTS',
   },

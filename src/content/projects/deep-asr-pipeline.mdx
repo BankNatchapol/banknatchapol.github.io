@@ -65,12 +65,9 @@ TextGrid boundaries are used to cut the audio into the final small segments, wit
 
 ---
 
-## Design Notes
+## Design notes
 
-- **Multiprocessing throughout** — download, denoise, ASR, and alignment stages all run in parallel workers, not serially
-- **Fail-fast quality gates** — NISQA at whole-video level rejects bad recordings before any expensive processing runs
-- **Dual ASR strategy** — Gemini primary, Whisper fallback, so the pipeline never stalls on a single API
-- **Adaptive silence threshold** — guarantees valid segment boundaries even on continuous speech
+All compute-heavy stages (download, denoise, ASR, alignment) run in parallel workers. NISQA gates reject bad recordings at the whole-video level before anything expensive starts. ASR runs Gemini as primary with Whisper as fallback, so the pipeline never stalls on one API. The silence threshold adapts down from 0.5 s if no valid cut point is found, guaranteeing a segment boundary even on dense speech.
 
 ---
 

@@ -4,11 +4,11 @@
 
 DQI was originally introduced as a quantum algorithm that uses interferometry and decoding to approach structured combinatorial optimization problems. Instead of directly searching over the optimization landscape, DQI reduces the problem to a decoding task, where practical decoders such as belief propagation can be applied.
 
-Prior DQI work was mainly theoretical and provided only high-level circuit sketches. This repository addresses that gap by giving an explicit, end-to-end circuit implementation of the DQI pipeline, including state preparation, constraint encoding, coherent decoding, postselection, Hadamard transformation, measurement, simulation, and resource estimation.
+Prior DQI work was mainly theoretical, with only high-level circuit sketches. This repository gives an explicit, end-to-end circuit implementation of the DQI pipeline — state preparation, constraint encoding, coherent decoding, postselection, Hadamard transformation, measurement, simulation, and resource estimation.
 
-## Project Goals
+## Project goals
 
-The goal of this project is to make DQI executable and analyzable at the quantum-circuit level.
+The goal is to make DQI executable and analyzable at the circuit level.
 
 This includes:
 
@@ -18,7 +18,7 @@ This includes:
 4. Simulating small DQI instances to validate the construction
 5. Estimating circuit resources such as qubit count, gate count, and depth
 
-## DQI Circuit Pipeline
+## DQI circuit pipeline
 
 <Diagram
   src="/diagrams/dqi-circuit-pipeline.excalidraw"
@@ -49,7 +49,7 @@ The implemented DQI workflow follows the full algorithmic structure:
 7. **Postselection and Hadamard transform**
    Postselects the required register state, applies the Hadamard transform, and measures the final output distribution.
 
-## Quantum Decoder Circuits
+## Quantum decoder circuits
 
 A central contribution of this project is the design and implementation of quantum decoder circuits for DQI.
 
@@ -80,9 +80,9 @@ Implemented components include:
 * Hadamard transform and measurement
 * Circuit-level resource estimation
 
-The repository is intended to serve both as an implementation of the paper and as a reference codebase for future DQI circuit experiments.
+The repository implements the paper and serves as a reference for future DQI circuit experiments.
 
-## Resource Estimation
+## Resource estimation
 
 The project includes resource-estimation tools for analyzing the cost of DQI circuit components.
 
@@ -97,7 +97,7 @@ The reported metrics include:
 
 In the thesis setting, the matrix size represents the number of optimization variables and constraints, while the polynomial degree is a chosen parameter of the DQI construction.
 
-## Simulation Results
+## Simulation results
 
 Small-instance simulations are included to validate the DQI circuit construction.
 

@@ -1,6 +1,6 @@
 ## Overview
 
-**ID Checker** is an AI-powered name verification system built for a government business registration authority. It automatically validates whether a Thai/English name pair is linguistically consistent, compliant with naming rules, and not a duplicate of existing records — replacing slow, inconsistent manual officer review.
+**ID Checker** is a name verification system built for a government business registration authority. It automatically validates whether a Thai/English name pair is linguistically consistent, compliant with naming rules, and not a duplicate of existing records — replacing slow, inconsistent manual officer review.
 
 The pipeline combines hard-rule filtering, cross-lingual phonetic analysis, and LLM-based decision-making with natural-language reasoning.
 
@@ -8,7 +8,7 @@ The pipeline combines hard-rule filtering, cross-lingual phonetic analysis, and 
 
 <Diagram src="/diagrams/check-id.excalidraw" caption="ID verification pipeline" />
 
-## How It Works
+## How it works
 
 ### Stage 1 — Rule Pre-filter
 
@@ -22,7 +22,7 @@ Thai IPA phonemes (via epitran + pythainlp) and English IPA phonemes (via gruut)
 
 A Gemini LLM receives the name pair, phonetic context, similarity scores, and a domain-aware system instruction. It outputs an accept/reject decision with natural-language reasoning and correction suggestions in the applicant's language.
 
-## Engineering Challenges
+## Engineering challenges
 
 **Phonological rules in prompt** — The LLM must apply a multi-step rule for silent consonant markers (Thai karan ์) to compare sounds rather than characters. Encoding this as an explicit prompt constraint was more reliable than pre-processing.
 

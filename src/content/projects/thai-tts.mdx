@@ -6,11 +6,11 @@ At the time this project started, VITS2-class high-naturalness TTS was a very ne
 
 ## The Problems
 
-### 1. Cutting-Edge Technology, No Reference Implementation
+### 1. Cutting-edge technology, no reference implementation
 
 High-naturalness neural TTS (VITS2 and its derivatives) had only just been published. There was no mature open-source Thai support — the architecture had to be studied from the paper and implemented directly, including adapting the training pipeline, loss functions, and inference stack.
 
-### 2. Thai Has No Open High-Quality Speech Data
+### 2. Thai has no open high-quality speech data
 
 Unlike English or Mandarin, Thai lacks the large, clean, annotated speech corpora that modern TTS requires. This meant the data had to be created:
 
@@ -19,7 +19,7 @@ Unlike English or Mandarin, Thai lacks the large, clean, annotated speech corpor
 - Built quality-control pipelines to catch transcription errors and inconsistencies
 - Curated the final training corpus from proprietary recordings
 
-### 3. Thai Linguistic Complexity
+### 3. Thai linguistic complexity
 
 Thai is a tonal language written without spaces between words. Standard phonemizers cannot handle it — tone, syllable segmentation, and word boundary detection all require language-specific logic. The entire front-end had to be custom-built.
 

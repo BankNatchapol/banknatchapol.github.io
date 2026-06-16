@@ -35,7 +35,7 @@ Both FRQI and NEQR were implemented and verified by reconstructing images from q
 
 ---
 
-## The Mixer Concept
+## The mixer concept
 
 Classical convolution only aggregates **neighboring** pixels. Attention mechanisms (transformers) aggregate **all** positions — but at quadratic cost. **FNet** showed that replacing attention with a fixed Fourier transform (a "mixer") achieves comparable performance while being much more efficient.
 
@@ -43,7 +43,7 @@ Inspired by FNet and the quantum transformer model **Quixer** (QUantum mIXER —
 
 ---
 
-## Proposed Method
+## Proposed method
 
 <Diagram src="/diagrams/QIIX.excalidraw" caption="FRQI → Mixer (QFT + QSVT) pipeline" maxWidth="700px" />
 
@@ -55,7 +55,7 @@ The mixer is a drop-in module that sits between encoding and the downstream quan
 
 ---
 
-## Full Workflow
+## Full workflow
 
 ```
 Input image → FRQI → Mixer (QFT + QSVT) → Feed Forward → Measurement → Cost function → Update
@@ -88,7 +88,7 @@ Adding the QFT information mixer consistently reduces test loss throughout train
 
 ---
 
-## Discussion & Future Work
+## Discussion and future work
 
 - Mixer consistently improves convergence in the noise-free regime
 - Noise sensitivity is the main barrier on current hardware — addressable via parameter-shift gradients or noise-aware compilation

@@ -11,7 +11,7 @@ Built in 2023 — before LangChain, before AutoGen, before the term "agentic AI"
 
 ---
 
-## Architecture: Multiple Agents Cooperating
+## Architecture: multiple agents cooperating
 
 The system runs five concurrent agents, each in its own subprocess, coordinated by a central harness:
 
@@ -41,7 +41,7 @@ Every cycle:
 
 ---
 
-## Harness, Context & Memory Engineering
+## Harness, context and memory engineering
 
 This was the core engineering challenge — getting a consistent, believable, low-latency character without any agent framework to lean on. Every tool that exists in modern agentic stacks had to be built by hand.
 
@@ -111,7 +111,7 @@ When no chat arrives, the harness picks a topic from the character's interest li
 
 ---
 
-## Character Interaction
+## Character interaction
 
 Responses are shaped by two signals:
 
@@ -122,7 +122,7 @@ Moderators can send real-time commands (`!reload`, `!say`, `!pause`) that the ha
 
 ---
 
-## Control Panel
+## Control panel
 
 A desktop UI (Electron + WebSocket) gives the streamer full control without stopping the stream:
 
@@ -137,7 +137,7 @@ All changes propagate to the running harness in real time via WebSocket messages
 
 ---
 
-## Game Integration
+## Game integration
 
 Beyond conversation, the character can actively participate in games — giving it something to *do* on stream rather than just reacting to chat.
 
