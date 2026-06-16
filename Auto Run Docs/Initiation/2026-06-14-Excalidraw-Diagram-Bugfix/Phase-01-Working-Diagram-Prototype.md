@@ -16,11 +16,16 @@ This phase fixes the production crash on the `check-id` project page and proves 
     - Root preview at `/projects/check-id` rendered `check-id`, `System Diagram`, and the Excalidraw canvas; `/diagrams/check-id.excalidraw` returned 200.
     - GitHub Pages-shaped verification with a `/Portfolio/` base rendered the project MDX content and did not show `Expected component Diagram to be defined`, but the diagram request went to `/diagrams/check-id.excalidraw` and returned 404. The page stayed up and showed the inline `Could not load diagram` fallback.
 
-- [ ] Fix MDX custom component injection for project pages:
+- [x] Fix MDX custom component injection for project pages:
   - Ensure every MDX project page rendered by `ProjectDetail` receives a `components` map containing `Diagram`
   - If the current direct `<MdxContent components={PROSE} />` call is not enough for compiled MDX output, adapt the implementation using the established `@mdx-js/react` provider pattern rather than duplicating per-page imports
   - Keep all existing prose component overrides intact and preserve the current Sketchbook styling
   - Update TypeScript declarations only if needed so MDX components compile cleanly without weakening types across the app
+  - Notes:
+    - Already fully implemented in `src/pages/ProjectDetail.tsx`: `Diagram` is present in the `PROSE` components map, `<MDXProvider components={PROSE}>` wraps `<MdxContent>`, and `components={PROSE}` is also passed as a direct prop — the dual approach ensures compiled MDX receives the mapping regardless of how `@mdx-js/react` resolves components.
+    - Five MDX files (`check-id`, `deep-asr-pipeline`, `dqi-circuit`, `qiix`, `thai-tts`) all use `<Diagram>` without any "Expected component Diagram to be defined" errors.
+    - `src/mdx.d.ts` types are consistent with `MDXPageComponent` used in the module map; no type changes needed.
+    - `npm run build` (tsc + vite) passes clean. No code changes were required for this task.
 
 - [ ] Fix the Excalidraw asset URL so it works under GitHub Pages and local preview:
   - Replace the hard-coded root-relative diagram path in `src/content/projects/check-id.mdx` or normalize it inside `Diagram.tsx` so `/diagrams/check-id.excalidraw` resolves under `import.meta.env.BASE_URL`
