@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from '../components/Card'
 import { Badge } from '../components/Badge'
 import { Tag } from '../components/Tag'
+import { useDrawOnScroll } from '../hooks/useDrawOnScroll'
 import { PROJECTS_QUANTUM, PROJECTS_AI } from '../site.config'
 
 type BadgeTone = 'ink' | 'blue' | 'terra' | 'sage' | 'amber'
@@ -40,18 +41,6 @@ export const AI: Project[] = [...PROJECTS_AI]
   .sort((a, b) => b.year - a.year)
   .map((p, i) => ({ ...p, wobble: WOBBLES[i % 3], tilt: TILTS[i % 2] }))
 
-function useDrawOnScroll(ref: React.RefObject<HTMLElement | null>) {
-  useEffect(() => {
-    if (!ref.current) return
-    const el = ref.current
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) el.setAttribute('data-drawn', '') },
-      { threshold: 0.15 },
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [ref])
-}
 
 function ProjectCard({ name, slug: _slug, year, types, body, stack, award, demoLink, wobble, tilt }: Project) {
   const ref = useRef<HTMLDivElement>(null)

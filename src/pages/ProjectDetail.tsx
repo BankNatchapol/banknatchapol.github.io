@@ -1,6 +1,5 @@
 import React, { Suspense, useMemo } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { MDXProvider } from '@mdx-js/react'
 import { useParams } from 'react-router-dom'
 import { Badge } from '../components/Badge'
 import { Tag } from '../components/Tag'
@@ -191,9 +190,7 @@ export function ProjectDetail() {
         <Suspense fallback={
           <p style={{ color: 'var(--pencil-500)', fontStyle: 'italic' }}>Loading…</p>
         }>
-          <MDXProvider components={PROSE}>
-            <MdxContent components={PROSE} />
-          </MDXProvider>
+          <MdxContent components={PROSE} />
         </Suspense>
       </div>
     </div>

@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { Card } from '../components/Card'
+import { useDrawOnScroll } from '../hooks/useDrawOnScroll'
 import { RESEARCH_AREAS } from '../site.config'
 
 const WOBBLES = [0, 1, 2] as const
@@ -10,19 +11,6 @@ const AREAS = RESEARCH_AREAS.map((a, i) => ({
   wobble: WOBBLES[i % 3],
   tilt: TILTS[i % 3],
 }))
-
-function useDrawOnScroll(ref: React.RefObject<HTMLElement | null>) {
-  useEffect(() => {
-    if (!ref.current) return
-    const el = ref.current
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) el.setAttribute('data-drawn', '') },
-      { threshold: 0.15 },
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [ref])
-}
 
 function DrawCard({ wobble, tilt, title, body }: typeof AREAS[number]) {
   const ref = useRef<HTMLDivElement>(null)
