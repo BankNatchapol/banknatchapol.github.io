@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Component, type ErrorInfo, type ReactNode, useEffect, useState } from 'react'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DiagramJson = { elements: any[]; appState: Record<string, any>; files: Record<string, any> }
@@ -25,7 +25,41 @@ function resolvePublicAsset(src: string) {
   return `${baseUrl}${assetPath}`
 }
 
-export function Diagram({ src, caption, maxWidth = '1400px', maxHeight, scrollable, scrollHeight = '600px' }: DiagramProps) {
+class DiagramErrorBoundary extends Component<
+  { children: ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: ReactNode }) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError(): { hasError: boolean } {
+    return { hasError: true }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  componentDidCatch(_error: Error, _info: ErrorInfo) {}
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{
+          border: '2px dashed var(--paper-edge)', borderRadius: '8px',
+          padding: '32px', textAlign: 'center',
+          color: 'var(--pencil-500)', margin: '32px 0',
+        }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '13px' }}>
+            Could not load diagram
+          </span>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
+
+function DiagramInner({ src, caption, maxWidth = '1400px', maxHeight, scrollable, scrollHeight = '600px' }: DiagramProps) {
   const [svgUrl, setSvgUrl] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const assetSrc = resolvePublicAsset(src)
@@ -57,7 +91,7 @@ export function Diagram({ src, caption, maxWidth = '1400px', maxHeight, scrollab
         revoke = () => URL.revokeObjectURL(url)
         setSvgUrl(url)
       })
-      .catch((e) => setError(e.message))
+      .catch((e: unknown) => setError(e instanceof Error ? e.message : String(e)))
 
     return () => revoke?.()
   }, [assetSrc])
@@ -135,5 +169,13 @@ export function Diagram({ src, caption, maxWidth = '1400px', maxHeight, scrollab
         </figcaption>
       )}
     </figure>
+  )
+}
+
+export function Diagram(props: DiagramProps) {
+  return (
+    <DiagramErrorBoundary>
+      <DiagramInner {...props} />
+    </DiagramErrorBoundary>
   )
 }

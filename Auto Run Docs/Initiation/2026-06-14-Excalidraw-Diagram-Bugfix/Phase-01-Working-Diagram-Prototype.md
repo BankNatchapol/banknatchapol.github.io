@@ -38,11 +38,16 @@ This phase fixes the production crash on the `check-id` project page and proves 
     - All five `.excalidraw` files are present in `public/diagrams/` and land in `dist/diagrams/` after build. No asset movement required.
     - `npm run build` (tsc + vite) passes clean. No code changes were required for this task.
 
-- [ ] Make the diagram render robustly instead of taking down the whole project page:
+- [x] Make the diagram render robustly instead of taking down the whole project page:
   - Keep the existing loading state while the Excalidraw JSON is fetched
   - Ensure fetch failures show the existing inline “Could not load diagram” state rather than throwing an uncaught render error
   - If Excalidraw itself fails to lazy-load, add a small component-level error boundary or equivalent local fallback so the rest of the MDX page still renders
   - Avoid broad app-level error handling unless the local component cannot reasonably contain the failure
+  - Notes:
+    - Added `DiagramErrorBoundary` (class component) to `src/components/Diagram.tsx`. The inner functional component is now `DiagramInner`; the exported `Diagram` wraps it with the boundary.
+    - The boundary renders the same dashed-box “Could not load diagram” fallback for any synchronous React render error (e.g. Excalidraw module throws during import initialization), keeping the rest of the MDX page intact.
+    - Hardened the async `.catch` handler from `setError(e.message)` to `setError(e instanceof Error ? e.message : String(e))` so non-Error throws (e.g. a rejected string) are also surfaced cleanly rather than setting state to `undefined`.
+    - `npm run build` (tsc + vite) passes clean.
 
 - [ ] Run production-style verification and fix any failures:
   - Run the TypeScript/build command from `package.json`
