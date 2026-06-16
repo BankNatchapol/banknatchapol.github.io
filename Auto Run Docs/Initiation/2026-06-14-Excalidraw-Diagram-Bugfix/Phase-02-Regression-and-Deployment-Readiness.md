@@ -4,11 +4,12 @@ This phase turns the diagram fix into a durable portfolio behavior. It adds focu
 
 ## Tasks
 
-- [ ] Add focused automated coverage for MDX project rendering:
+- [x] Add focused automated coverage for MDX project rendering:
   - Inspect the repo for the existing test setup before adding dependencies; reuse any established test runner, browser test pattern, or script conventions
   - If no test setup exists, add the smallest practical React/Vite-compatible setup for route-level rendering tests
   - Cover `ProjectDetail` rendering with a known project slug and verify custom MDX components are provided without throwing
   - Cover an unknown project slug and verify the existing “Project not found” fallback still renders
+  - **Done:** No existing test setup found (playwright was installed as a dep but had no test files). Added Vitest + @testing-library/react + jsdom (3 devDependencies). Created `vitest.config.ts` (extends vite config so MDX plugin is reused), updated `tsconfig.node.json` to include the new config, added `”test”: “vitest run”` script to `package.json`. Tests in `src/__tests__/ProjectDetail.test.tsx` cover: (1) known slug `check-id` — project name/year render immediately, Suspense resolves to mocked MDX content, `Diagram` component is confirmed present in the `components` prop; (2) unknown slug — “Project not found” h1 and the slug display in the `<code>` element both render. Both tests pass; `tsc -b` is clean.
 
 - [ ] Add focused coverage for `Diagram` URL handling and failure states:
   - Test or otherwise verify that root-relative public asset paths are resolved through `import.meta.env.BASE_URL`
