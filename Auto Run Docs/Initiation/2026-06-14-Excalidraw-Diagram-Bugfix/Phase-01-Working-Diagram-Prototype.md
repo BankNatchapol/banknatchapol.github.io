@@ -27,11 +27,16 @@ This phase fixes the production crash on the `check-id` project page and proves 
     - `src/mdx.d.ts` types are consistent with `MDXPageComponent` used in the module map; no type changes needed.
     - `npm run build` (tsc + vite) passes clean. No code changes were required for this task.
 
-- [ ] Fix the Excalidraw asset URL so it works under GitHub Pages and local preview:
+- [x] Fix the Excalidraw asset URL so it works under GitHub Pages and local preview:
   - Replace the hard-coded root-relative diagram path in `src/content/projects/check-id.mdx` or normalize it inside `Diagram.tsx` so `/diagrams/check-id.excalidraw` resolves under `import.meta.env.BASE_URL`
   - Prefer a reusable helper in `Diagram.tsx` if that keeps future diagram MDX files simple and prevents repeated base-path mistakes
   - Preserve support for absolute external URLs and already-correct relative paths if the component may need them later
   - Verify `public/diagrams/check-id.excalidraw` is still the source asset and do not move it unless the existing Vite public asset pattern requires it
+  - Notes:
+    - Already fully implemented. `Diagram.tsx` contains `resolvePublicAsset(src)` (committed in `8e09bb1`) that normalizes root-relative paths by prepending `import.meta.env.BASE_URL`, passes absolute URLs (http/https, data:, blob:) through unchanged, and skips already-prefixed paths.
+    - The repo is `BankNatchapol/banknatchapol.github.io` — the root GitHub Pages site deployed at `https://banknatchapol.github.io/`. `vite.config.ts` correctly uses `base: '/'`, so `BASE_URL = '/'` at build time, and `/diagrams/check-id.excalidraw` resolves correctly to `https://banknatchapol.github.io/diagrams/check-id.excalidraw`.
+    - All five `.excalidraw` files are present in `public/diagrams/` and land in `dist/diagrams/` after build. No asset movement required.
+    - `npm run build` (tsc + vite) passes clean. No code changes were required for this task.
 
 - [ ] Make the diagram render robustly instead of taking down the whole project page:
   - Keep the existing loading state while the Excalidraw JSON is fetched
