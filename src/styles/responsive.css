@@ -54,3 +54,24 @@
     padding-right: 20px !important;
   }
 }
+
+/* Hero — stack vertically on mobile */
+@media (max-width: 640px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  .hero-avatar {
+    order: -1;
+    display: flex !important;
+    justify-content: center;
+  }
+}
+
+/* Hero skills — single column on mobile */
+@media (max-width: 640px) {
+  .hero-skills {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -18,7 +18,7 @@ export function Hero() {
     }}>
       {/* Name + bio + avatar */}
       <div style={{ maxWidth: 'var(--content-wide)', margin: '0 auto' }}>
-      <div style={{
+      <div className="hero-grid" style={{
         display: 'grid',
         gridTemplateColumns: 'minmax(0,1fr) auto',
         gap: '64px', alignItems: 'center',
@@ -110,7 +110,7 @@ export function Hero() {
             ))}
           </div>
         </div>
-        <div style={{ position: 'relative' }}>
+        <div className="hero-avatar" style={{ position: 'relative' }}>
           <Avatar
             src={PERSONAL.photo || undefined}
             alt={PERSONAL.photoAlt}
@@ -131,7 +131,7 @@ export function Hero() {
 
       {/* Skills — wider than name/bio block */}
       <div style={{ maxWidth: '1440px', margin: '0 auto' }}>
-      <div style={{
+      <div className="hero-skills" style={{
         marginTop: '64px',
         paddingTop: '40px',
         borderTop: '2px dashed var(--paper-edge)',
