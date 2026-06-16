@@ -75,3 +75,16 @@
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Research cards — collapse to 1 column on narrow screens */
+@media (max-width: 860px) {
+  .research-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .research-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

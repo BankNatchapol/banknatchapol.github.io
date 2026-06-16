@@ -44,7 +44,7 @@ export function Research() {
           fontSize: 'clamp(40px, 6vw, 60px)', lineHeight: 1,
           margin: '8px 0 0', color: 'var(--ink-900)',
         }}>What I work on</h2>
-        <div style={{
+        <div className="research-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
           gap: '32px', marginTop: '48px',
