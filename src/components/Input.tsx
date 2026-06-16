@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useId } from 'react'
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string
@@ -8,7 +8,8 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export function Input({ label, hint, id, invalid = false, style = {}, wrapStyle = {}, ...rest }: InputProps) {
-  const fid = id ?? `sk-${Math.random().toString(36).slice(2, 8)}`
+  const autoId = useId()
+  const fid = id ?? autoId
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', ...wrapStyle }}>
       {label && (

@@ -1,3 +1,4 @@
+import { SectionLabel } from '../components/SectionLabel'
 import { EXPERIENCE_PROFESSIONAL, EXPERIENCE_EDUCATION, EXPERIENCE_RESEARCH } from '../site.config'
 
 const DOT_COLORS = [
@@ -61,10 +62,7 @@ export function Experience() {
   return (
     <section id="experience" style={{ borderTop: '2px solid var(--paper-edge)', padding: '120px 40px' }}>
       <div style={{ maxWidth: '720px', margin: '0 auto' }}>
-        <div style={{
-          fontFamily: 'var(--font-label)', fontSize: '13px',
-          letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--pencil-500)',
-        }}>05 — Experience</div>
+        <SectionLabel>05 — Experience</SectionLabel>
         <h2 style={{
           fontFamily: 'var(--font-display)', fontWeight: 700,
           fontSize: 'clamp(40px, 6vw, 60px)', lineHeight: 1,

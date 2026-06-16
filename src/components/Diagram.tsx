@@ -1,4 +1,4 @@
-import { Component, type ErrorInfo, type ReactNode, useEffect, useState } from 'react'
+import { Component, type ReactNode, useEffect, useState } from 'react'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type DiagramJson = { elements: any[]; appState: Record<string, any>; files: Record<string, any> }
@@ -37,9 +37,6 @@ class DiagramErrorBoundary extends Component<
   static getDerivedStateFromError(): { hasError: boolean } {
     return { hasError: true }
   }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  componentDidCatch(_error: Error, _info: ErrorInfo) {}
 
   render() {
     if (this.state.hasError) {

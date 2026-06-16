@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from '../components/Card'
 import { Badge } from '../components/Badge'
+import { SectionLabel } from '../components/SectionLabel'
 import { Tag } from '../components/Tag'
 import { useDrawOnScroll } from '../hooks/useDrawOnScroll'
 import { PROJECTS_QUANTUM, PROJECTS_AI } from '../site.config'
@@ -169,10 +170,7 @@ export function Projects() {
     <section id="projects" style={{ borderTop: '2px solid var(--paper-edge)', padding: '120px 40px' }}>
       {/* Section title at normal content width */}
       <div style={{ maxWidth: 'var(--content)', margin: '0 auto' }}>
-        <div style={{
-          fontFamily: 'var(--font-label)', fontSize: '13px',
-          letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--pencil-500)',
-        }}>02 — Projects</div>
+        <SectionLabel>02 — Projects</SectionLabel>
         <h2 style={{
           fontFamily: 'var(--font-display)', fontWeight: 700,
           fontSize: 'clamp(40px, 6vw, 60px)', lineHeight: 1,

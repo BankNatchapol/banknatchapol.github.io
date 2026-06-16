@@ -1,4 +1,5 @@
 import { Badge } from '../components/Badge'
+import { SectionLabel } from '../components/SectionLabel'
 import { PUBLICATIONS as PAPERS } from '../site.config'
 
 export function Publications() {
@@ -8,10 +9,7 @@ export function Publications() {
       background: 'var(--paper-0)', padding: '120px 40px',
     }}>
       <div style={{ maxWidth: '780px', margin: '0 auto' }}>
-        <div style={{
-          fontFamily: 'var(--font-label)', fontSize: '13px',
-          letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--pencil-500)',
-        }}>03 — Publications</div>
+        <SectionLabel>03 — Publications</SectionLabel>
         <h2 style={{
           fontFamily: 'var(--font-display)', fontWeight: 700,
           fontSize: 'clamp(40px, 6vw, 60px)', lineHeight: 1,

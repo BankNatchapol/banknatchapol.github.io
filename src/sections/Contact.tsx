@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Card } from '../components/Card'
 import { Input } from '../components/Input'
+import { SectionLabel } from '../components/SectionLabel'
 import { Textarea } from '../components/Textarea'
 import { Button } from '../components/Button'
 import { PERSONAL } from '../site.config'
@@ -26,10 +27,7 @@ export function Contact() {
       background: 'var(--paper-0)', padding: '120px 40px',
     }}>
       <div style={{ maxWidth: '560px', margin: '0 auto' }}>
-        <div style={{
-          fontFamily: 'var(--font-label)', fontSize: '13px',
-          letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--pencil-500)',
-        }}>06 — Contact</div>
+        <SectionLabel>06 — Contact</SectionLabel>
         <h2 style={{
           fontFamily: 'var(--font-display)', fontWeight: 700,
           fontSize: 'clamp(40px, 6vw, 60px)', lineHeight: 1,

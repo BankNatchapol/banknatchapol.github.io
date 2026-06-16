@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useId } from 'react'
 
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string
@@ -9,7 +9,8 @@ interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
 }
 
 export function Textarea({ label, hint, id, rows = 4, ruled = true, invalid = false, style = {}, wrapStyle = {}, ...rest }: TextareaProps) {
-  const fid = id ?? `sk-${Math.random().toString(36).slice(2, 8)}`
+  const autoId = useId()
+  const fid = id ?? autoId
   const ruledBg = ruled
     ? 'repeating-linear-gradient(var(--paper-0) 0 27px, var(--paper-edge) 27px 28px)'
     : 'var(--paper-0)'
