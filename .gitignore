@@ -10,6 +10,9 @@ node_modules
 dist
 dist-ssr
 
+# Local generated docs
+Auto Run Docs/
+
 # Local env files
 *.local
 
